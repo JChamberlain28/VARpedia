@@ -1,0 +1,47 @@
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color:  rgb(049,055,060);
+    }
+    
+
+
+.tab-label {
+    -fx-text-base-color: rgb(255,255,255);
+}
+
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
+    -fx-background-color: rgb(049,055,060);
+    -fx-border-color: transparent;
+
+}
+
+.combo-box .list-cell{
+	-fx-text-fill: rgb(255,255,255);
+	
+}
+
+
+.table-view *.scroll-bar:horizontal *.increment-button,
+.table-view *.scroll-bar:horizontal *.decrement-button {
+    -fx-background-color: null;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.table-view *.scroll-bar:horizontal *.increment-arrow,
+.table-view *.scroll-bar:horizontal *.decrement-arrow {
+    -fx-background-color: null;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-shape: null;
+}
+
+
+
+ .table-view .placeholder .label {
+     -fx-text-fill: white;
+ }
+

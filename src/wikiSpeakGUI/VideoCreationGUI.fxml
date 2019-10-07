@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="513.0" prefWidth="810.0" style="-fx-background-color: rgb(027, 031, 034);" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.VideoCreationController">
+   <children>
+      <ImageView fx:id="loadingIcon" fitHeight="26.0" fitWidth="28.0" layoutX="180.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@loading.gif" />
+         </image>
+      </ImageView>
+      <Button fx:id="submitCreationButton" layoutX="647.0" layoutY="461.0" mnemonicParsing="false" onAction="#handleSubmitCreation" style="-fx-background-color: rgb(069,075,080);" text="Submit Creation" textFill="WHITE" />
+      <TextField fx:id="nameInput" layoutX="405.0" layoutY="461.0" prefHeight="26.0" prefWidth="230.0" />
+      <Text fill="WHITE" layoutX="39.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please select the number of images to display in your creation" />
+      <Button fx:id="imageNoButton" layoutX="108.0" layoutY="32.0" mnemonicParsing="false" onAction="#handleGetImage" style="-fx-background-color: rgb(069,075,080);" text="Submit" textFill="WHITE" />
+      <ComboBox fx:id="noOfImages" layoutX="39.0" layoutY="32.0" prefHeight="26.0" prefWidth="65.0" />
+      <Text fill="WHITE" layoutX="405.0" layoutY="458.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creation Name:" />
+      <Button fx:id="backButton" layoutX="39.0" layoutY="461.0" mnemonicParsing="false" onAction="#handleBackButton" style="-fx-background-color: rgb(069,075,080);" text="Back" textFill="WHITE" />
+      <TableView fx:id="imageView" layoutX="39.0" layoutY="76.0" prefHeight="353.0" prefWidth="732.0">
+        <columns>
+          <TableColumn fx:id="imageCol" prefWidth="731.0" text="Images to add to creation" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
