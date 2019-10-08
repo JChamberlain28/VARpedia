@@ -1,50 +1,64 @@
 package wikiSpeakGUI;
 
 import java.util.List;
+
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
-import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.scene.control.Button;
 
 public class UpdateCreationListTask extends Task<Void> {
 
+	private ObservableList<Creation> creationList = FXCollections.observableArrayList();
+	private ObservableList<Creation> generatingList = FXCollections.observableArrayList();
 
-	private TableView<String> _listToUpdate;
+	private TableView<Creation> _listToUpdate;
 	private String[] lines;
 	private Button _delButton;
 	private Button _playButton;
 	private Text _creationNoText;
 	private List<String> _currentlyGenerating;
+	private TableColumn<Creation, String> nameCol;
+	private TableColumn<Creation, String> ratingCol;
+	private TableColumn<Creation, String> creationDateCol;
+	private TableColumn<Creation, String> viewDateCol;
 
 
 
 
 
 
-	public UpdateCreationListTask(TableView<String> listToUpdate, Button delButton, Button playButton, Text creationNoText, List<String> currentlyGenerating) {
-		
+	public UpdateCreationListTask(TableView<Creation> listToUpdate, TableColumn<Creation, String> col1, TableColumn<Creation, String> col2,
+			TableColumn<Creation, String> col3, TableColumn<Creation, String> col4, Button delButton, Button playButton,
+			Text creationNoText, List<String> currentlyGenerating) {
+
 		_listToUpdate = listToUpdate;
 		_delButton = delButton;
 		_playButton = playButton;
 		_creationNoText = creationNoText;
 		_currentlyGenerating = currentlyGenerating;
+		this.nameCol = col1;
+		this.ratingCol = col2;
+		this.creationDateCol = col3;
+		this.viewDateCol = col4;
 
 	}
 
 	@Override
 	protected Void call() {
 		CommandFactory listFileCommand = new CommandFactory();
-		
-		
-		
+
+
+
 		// stores current creations in an array
 		List<String> listFileResult = listFileCommand.sendCommand("./listCreations.sh", true);
 
 		lines = listFileResult.get(0).split("\\r?\\n");
-
-
 
 		return null;
 	}
@@ -56,29 +70,36 @@ public class UpdateCreationListTask extends Task<Void> {
 
 			@Override
 			public void run() {
-				
-				// adds each creation to the ListView
-				_listToUpdate.getItems().clear();		
+
+				// adds each creation to the TableView observable list
+
 				for (String i : _currentlyGenerating) {
-					_listToUpdate.getItems().add(i + " (Unavailable)");
+					Creation creation = new Creation(i + " (Unavailable)");
+					generatingList.add(creation);					
 				}
-				
+
 				for (String i : lines) {
-					// prevents no creations text being displayed when there are creations
-					// being generating
-					if (!(_currentlyGenerating.isEmpty())) {
-						if (!(i.equals("(No creations currently exist)"))) {
-							_listToUpdate.getItems().add(i);
-						}
-					}
-					else {
-						_listToUpdate.getItems().add(i);
+					// prevents (No creations currently exist) being a creation
+					System.out.println(i);
+					if (!(i.equals("(No creations currently exist)"))) {
+						Creation creation = new Creation(i);
+						creationList.add(creation);
+
 					}
 
 
 				}
 
-				
+
+				nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+				ratingCol.setCellValueFactory(new PropertyValueFactory<>("rating"));
+				creationDateCol.setCellValueFactory(new PropertyValueFactory<>("creationDate"));
+				viewDateCol.setCellValueFactory(new PropertyValueFactory<>("lastViewed"));
+
+				creationList.addAll(generatingList);
+				_listToUpdate.setItems(creationList);
+
+
 
 				// update number of creations Text
 				int noOfCreations;
@@ -89,20 +110,21 @@ public class UpdateCreationListTask extends Task<Void> {
 					noOfCreations = lines.length;
 				}
 				_creationNoText.setText("Number of creations: " + noOfCreations);
-				
-				// auto selects the first item in the list (default selection)
-				_listToUpdate.getSelectionModel().select(0);
 
+				// auto selects the first item in the table (default selection)
+				if (creationList.size() != 0) {
+					_listToUpdate.getSelectionModel().select(0);
+					
+					_delButton.setDisable(false);
+					_playButton.setDisable(false);
 
+				}
 				// disable play or delete button when no creations exist
-				if (_listToUpdate.getSelectionModel().getSelectedItems().get(0).equals("(No creations currently exist)")) {
+				else {
 					_delButton.setDisable(true);
 					_playButton.setDisable(true);
 				}
-				else {
-					_delButton.setDisable(false);
-					_playButton.setDisable(false);
-				}
+
 
 
 

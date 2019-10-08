@@ -7,7 +7,7 @@ public class Creation {
 	private String creationDate = "null";
 	private String lastViewed = "null";
 
-	public void creation(String name) {
+	public Creation(String name) {
 		this.name = name;
 	}
 

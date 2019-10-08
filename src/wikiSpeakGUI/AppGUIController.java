@@ -3,6 +3,7 @@ package wikiSpeakGUI;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -12,7 +13,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -41,7 +44,19 @@ public class AppGUIController {
 
 
 	@FXML
-	private TableView<String> creationList;
+	private TableView<Creation> creationList;
+	
+	@FXML
+	private TableColumn<Creation, String> name;
+
+	@FXML
+	private TableColumn<Creation, String> confidenceRating;
+
+	@FXML
+	private TableColumn<Creation, String> creationDate;
+
+	@FXML
+	private TableColumn<Creation, String> lastViewed;
 
 
 	@FXML
@@ -77,6 +92,7 @@ public class AppGUIController {
 				+ " -fx-text-fill: rgb(255,255,255); -fx-focus-color: rgb(255,255,255);");
 		creationList.setStyle("-fx-control-inner-background: rgb(049,055,060); "
 				+ "-fx-text-fill: rgb(255,255,255); -fx-focus-color: rgb(255,255,255);");
+		creationList.setPlaceholder(new Label("No creations to display, click create to start"));
 		updateCreationList();
 
 		// block characters that are not accepted by wikit command
@@ -100,7 +116,7 @@ public class AppGUIController {
 
 
 
-	// sets ListViews to default selection when triggered (first item)
+	// sets TableView to default selection when triggered (first item)
 	@FXML
 	private void creationListDefaultSelect(Event event) {
 		creationList.getSelectionModel().select(0);
@@ -186,7 +202,7 @@ public class AppGUIController {
 	private void handlePlayButton(Event event) {
 
 		// get selected creation name to play
-		String selection = creationList.getSelectionModel().getSelectedItem();
+		String selection = creationList.getSelectionModel().getSelectedItem().getName();
 
 		if (selection.contains(" (Unavailable)")){
 			Alert popup = new Alert(AlertType.INFORMATION);
@@ -216,7 +232,7 @@ public class AppGUIController {
 
 
 		// get selected creation name to delete
-		String selection = creationList.getSelectionModel().getSelectedItem();
+		String selection = creationList.getSelectionModel().getSelectedItem().getName();
 
 		if (selection.contains(" (Unavailable)")){
 			Alert popup = new Alert(AlertType.INFORMATION);
@@ -268,7 +284,7 @@ public class AppGUIController {
 
 	// helper function to update all lists
 	public void updateCreationList() {
-		Thread updateCreationList = new Thread(new UpdateCreationListTask(creationList, deleteButton, playButton, creationNoText, VideoCreationController.getCurrentlyGenerating()));
+		Thread updateCreationList = new Thread(new UpdateCreationListTask(creationList, name, confidenceRating, creationDate, lastViewed, deleteButton, playButton, creationNoText, VideoCreationController.getCurrentlyGenerating()));
 		updateCreationList.start();
 	}
 

@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="513.0" prefWidth="810.0" style="-fx-background-color: rgb(027, 031, 034);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.AppGUIController">
+<AnchorPane prefHeight="513.0" prefWidth="810.0" style="-fx-background-color: rgb(027, 031, 034);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.AppGUIController">
    <children>
       <TabPane prefHeight="513.0" prefWidth="810.0" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -35,10 +35,10 @@
                         <Button fx:id="deleteButton" layoutX="408.0" layoutY="431.0" mnemonicParsing="false" onAction="#handleDeleteButton" style="-fx-background-color: rgb(256,050,080);" text="Delete Creation" textFill="WHITE" />
                         <TableView fx:id="creationList" layoutX="28.0" layoutY="64.0" prefHeight="355.0" prefWidth="755.0">
                           <columns>
-                            <TableColumn prefWidth="323.0" text="Name" />
-                            <TableColumn prefWidth="149.0" text="Confidence Rating" />
-                              <TableColumn prefWidth="144.0" text="Creation Date" />
-                              <TableColumn prefWidth="138.0" text="Last Viewed" />
+                            <TableColumn fx:id="name" prefWidth="323.0" text="Name" />
+                            <TableColumn fx:id="confidenceRating" prefWidth="149.0" text="Confidence Rating" />
+                              <TableColumn fx:id="creationDate" prefWidth="144.0" text="Creation Date" />
+                              <TableColumn fx:id="lastViewed" prefWidth="138.0" text="Last Viewed" />
                           </columns>
                         </TableView>
                      </children></AnchorPane>
