@@ -243,7 +243,7 @@ public class AudioCreationController {
 
 
 
-				if (selectedAudio.getItems().size() < 0) {
+				if (selectedAudio.getItems().size() > 0) {
 					previewButton.setDisable(false);
 					nextButton.setDisable(false);
 				}
