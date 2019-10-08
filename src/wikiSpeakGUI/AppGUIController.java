@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -40,7 +41,7 @@ public class AppGUIController {
 
 
 	@FXML
-	private ListView<String> creationList;
+	private TableView<String> creationList;
 
 
 	@FXML

@@ -4,13 +4,14 @@ import java.util.List;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 import javafx.scene.text.Text;
 import javafx.scene.control.Button;
 
 public class UpdateCreationListTask extends Task<Void> {
 
 
-	private ListView<String> _listToUpdate;
+	private TableView<String> _listToUpdate;
 	private String[] lines;
 	private Button _delButton;
 	private Button _playButton;
@@ -22,7 +23,7 @@ public class UpdateCreationListTask extends Task<Void> {
 
 
 
-	public UpdateCreationListTask(ListView<String> listToUpdate, Button delButton, Button playButton, Text creationNoText, List<String> currentlyGenerating) {
+	public UpdateCreationListTask(TableView<String> listToUpdate, Button delButton, Button playButton, Text creationNoText, List<String> currentlyGenerating) {
 		
 		_listToUpdate = listToUpdate;
 		_delButton = delButton;
