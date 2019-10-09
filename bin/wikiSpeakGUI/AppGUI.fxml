@@ -13,27 +13,33 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="513.0" prefWidth="810.0" style="-fx-background-color: rgb(027, 031, 034);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.AppGUIController">
+<AnchorPane prefHeight="595.0" prefWidth="1043.0" style="-fx-background-color: rgb(027, 031, 034);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.AppGUIController">
    <children>
-      <TabPane prefHeight="513.0" prefWidth="810.0" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="595.0" prefWidth="1043.0" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab onSelectionChanged="#creationListDefaultSelect" style="-fx-background-color: rgb(027, 031, 034);" text="Play / Delete">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="426.0" prefWidth="728.0" style="-fx-background-color: rgb(027, 031, 034);">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="533.0" prefWidth="1029.0" style="-fx-background-color: rgb(027, 031, 034);">
                      <children>
                         <Text fill="WHITE" layoutX="27.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select creation to play / delete:" wrappingWidth="534.7294921875">
                            <font>
-                              <Font size="17.0" />
+                              <Font size="22.0" />
                            </font>
                         </Text>
-                        <Button fx:id="playButton" layoutX="281.0" layoutY="431.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePlayButton" prefHeight="26.0" prefWidth="121.0" style="-fx-background-color: rgb(069,075,080);" text="Play Creation" textFill="WHITE" />
+                        <Button fx:id="playButton" layoutX="367.0" layoutY="503.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePlayButton" prefHeight="36.0" prefWidth="148.0" style="-fx-background-color: rgb(069,075,080);" text="Play Creation" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Button>
                         <Text fx:id="creationNoText" fill="WHITE" layoutX="27.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of creations:" wrappingWidth="534.7294921875">
                            <font>
-                              <Font size="14.0" />
+                              <Font size="18.0" />
                            </font>
                         </Text>
-                        <Button fx:id="deleteButton" layoutX="408.0" layoutY="431.0" mnemonicParsing="false" onAction="#handleDeleteButton" style="-fx-background-color: rgb(256,050,080);" text="Delete Creation" textFill="WHITE" />
-                        <TableView fx:id="creationList" layoutX="28.0" layoutY="64.0" prefHeight="355.0" prefWidth="755.0">
+                        <Button fx:id="deleteButton" layoutX="529.0" layoutY="503.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="36.0" prefWidth="148.0" style="-fx-background-color: rgb(256,050,080);" text="Delete Creation" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Button>
+                        <TableView fx:id="creationList" layoutX="28.0" layoutY="64.0" prefHeight="420.0" prefWidth="989.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="27.0">
                           <columns>
                             <TableColumn fx:id="name" prefWidth="323.0" text="Name" />
                             <TableColumn fx:id="confidenceRating" prefWidth="149.0" text="Confidence Rating" />
