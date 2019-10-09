@@ -8,23 +8,42 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="513.0" prefWidth="810.0" style="-fx-background-color: rgb(027, 031, 034);" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.VideoCreationController">
+<AnchorPane prefHeight="595.0" prefWidth="1043.0" style="-fx-background-color: rgb(027, 031, 034);" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.VideoCreationController">
    <children>
-      <ImageView fx:id="loadingIcon" fitHeight="26.0" fitWidth="28.0" layoutX="180.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="loadingIcon" fitHeight="40.0" fitWidth="40.0" layoutX="199.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@loading.gif" />
          </image>
       </ImageView>
-      <Button fx:id="submitCreationButton" layoutX="647.0" layoutY="461.0" mnemonicParsing="false" onAction="#handleSubmitCreation" style="-fx-background-color: rgb(069,075,080);" text="Submit Creation" textFill="WHITE" />
-      <TextField fx:id="nameInput" layoutX="405.0" layoutY="461.0" prefHeight="26.0" prefWidth="230.0" />
-      <Text fill="WHITE" layoutX="39.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please select the number of images to display in your creation" />
-      <Button fx:id="imageNoButton" layoutX="108.0" layoutY="32.0" mnemonicParsing="false" onAction="#handleGetImage" style="-fx-background-color: rgb(069,075,080);" text="Submit" textFill="WHITE" />
-      <ComboBox fx:id="noOfImages" layoutX="39.0" layoutY="32.0" prefHeight="26.0" prefWidth="65.0" />
-      <Text fill="WHITE" layoutX="405.0" layoutY="458.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creation Name:" />
-      <Button fx:id="backButton" layoutX="39.0" layoutY="461.0" mnemonicParsing="false" onAction="#handleBackButton" style="-fx-background-color: rgb(069,075,080);" text="Back" textFill="WHITE" />
-      <TableView fx:id="imageView" layoutX="39.0" layoutY="76.0" prefHeight="353.0" prefWidth="732.0">
+      <Button fx:id="submitCreationButton" layoutX="852.0" layoutY="542.0" mnemonicParsing="false" onAction="#handleSubmitCreation" style="-fx-background-color: rgb(069,075,080);" text="Submit Creation" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <TextField fx:id="nameInput" layoutX="607.0" layoutY="538.0" prefHeight="41.0" prefWidth="230.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Text fill="WHITE" layoutX="39.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please select the number of images to display in your creation">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Button fx:id="imageNoButton" layoutX="109.0" layoutY="54.0" mnemonicParsing="false" onAction="#handleGetImage" style="-fx-background-color: rgb(069,075,080);" text="Submit" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <ComboBox fx:id="noOfImages" layoutX="39.0" layoutY="49.0" prefHeight="41.0" prefWidth="65.0" />
+      <Text fill="WHITE" layoutX="607.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creation Name:">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Button fx:id="backButton" layoutX="39.0" layoutY="542.0" mnemonicParsing="false" onAction="#handleBackButton" style="-fx-background-color: rgb(069,075,080);" text="Back" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <TableView fx:id="imageView" layoutX="31.0" layoutY="101.0" prefHeight="384.0" prefWidth="965.0" AnchorPane.leftAnchor="39.0" AnchorPane.rightAnchor="39.0">
         <columns>
           <TableColumn fx:id="imageCol" prefWidth="731.0" text="Images to add to creation" />
         </columns>

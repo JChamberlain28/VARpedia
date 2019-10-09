@@ -10,39 +10,63 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="513.0" prefWidth="810.0" style="-fx-background-color: rgb(027, 031, 034);" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.AudioCreationController">
+<AnchorPane prefHeight="595.0" prefWidth="1043.0" style="-fx-background-color: rgb(027, 031, 034);" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.AudioCreationController">
    <children>
-      <Button fx:id="nextButton" layoutX="733.0" layoutY="458.0" mnemonicParsing="false" onAction="#handleNextButton" style="-fx-background-color: rgb(069,075,080);" text="Next" textFill="WHITE" />
-      <Button fx:id="cancelButton" layoutX="28.0" layoutY="458.0" mnemonicParsing="false" onAction="#handleBackToMainView" style="-fx-background-color: rgb(069,075,080);" text="Cancel" textFill="WHITE" />
-      <TextArea fx:id="numberedTextArea" layoutX="28.0" layoutY="83.0" prefHeight="285.0" prefWidth="428.0" />
-      <Button fx:id="speakButton" layoutX="391.0" layoutY="49.0" mnemonicParsing="false" onAction="#handleSpeakPress" style="-fx-background-color: rgb(069,075,080);" text="Speak" textFill="WHITE" />
-      <Button fx:id="addButton" layoutX="477.0" layoutY="386.0" mnemonicParsing="false" onAction="#handleAddPress" style="-fx-background-color: rgb(069,075,080);" text="add" textFill="WHITE" />
-      <ListView fx:id="selectedAudio" layoutX="477.0" layoutY="55.0" prefHeight="313.0" prefWidth="304.0" />
-      <Button fx:id="delButton" layoutX="528.0" layoutY="386.0" mnemonicParsing="false" onAction="#handleDelPress" style="-fx-background-color: rgb(069,075,080);" text="delete" textFill="WHITE" />
-      <Button fx:id="upButton" layoutX="718.0" layoutY="386.0" mnemonicParsing="false" onAction="#upPress" style="-fx-background-color: rgb(069,075,080);" text="↑" textFill="WHITE">
+      <Button fx:id="nextButton" layoutX="953.0" layoutY="542.0" mnemonicParsing="false" onAction="#handleNextButton" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Next" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font size="16.0" />
+         </font></Button>
+      <Button fx:id="cancelButton" layoutX="28.0" layoutY="542.0" mnemonicParsing="false" onAction="#handleBackToMainView" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Cancel" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <TextArea fx:id="numberedTextArea" layoutX="28.0" layoutY="150.0" prefHeight="351.0" prefWidth="577.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextArea>
+      <Button fx:id="speakButton" layoutX="234.0" layoutY="75.0" mnemonicParsing="false" onAction="#handleSpeakPress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Speak" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button fx:id="addButton" layoutX="629.0" layoutY="445.0" mnemonicParsing="false" onAction="#handleAddPress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="add" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Button>
+      <ListView fx:id="selectedAudio" layoutX="626.0" layoutY="105.0" prefHeight="313.0" prefWidth="357.0" />
+      <Button fx:id="delButton" layoutX="697.0" layoutY="445.0" mnemonicParsing="false" onAction="#handleDelPress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="delete" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Button>
+      <Button fx:id="upButton" layoutX="900.0" layoutY="445.0" mnemonicParsing="false" onAction="#upPress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="↑" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="downButton" layoutX="752.0" layoutY="386.0" mnemonicParsing="false" onAction="#downPress" style="-fx-background-color: rgb(069,075,080);" text="↓" textFill="WHITE">
+      <Button fx:id="downButton" layoutX="945.0" layoutY="445.0" mnemonicParsing="false" onAction="#downPress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="↓" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <ComboBox fx:id="voiceSelect" layoutX="28.0" layoutY="386.0" prefHeight="26.0" prefWidth="193.0" />
-      <Button fx:id="previewButton" layoutX="594.0" layoutY="386.0" mnemonicParsing="false" onAction="#previewPress" style="-fx-background-color: rgb(069,075,080);" text="Preview" textFill="WHITE" />
-      <Text fill="WHITE" layoutX="28.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Highlight text and click speak to hear" wrappingWidth="345.7294921875" />
+      <ComboBox fx:id="voiceSelect" layoutX="28.0" layoutY="72.0" prefHeight="41.0" prefWidth="193.0" />
+      <Button fx:id="previewButton" layoutX="781.0" layoutY="542.0" mnemonicParsing="false" onAction="#previewPress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Preview" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Button>
+      <Text fill="WHITE" layoutX="28.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Highlight text and click speak to hear" wrappingWidth="345.7294921875">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
       <Text fill="WHITE" layoutX="28.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit:" wrappingWidth="345.7294921875">
          <font>
-            <Font size="17.0" />
+            <Font size="18.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="477.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Audio:" wrappingWidth="192.7294921875">
+      <Text fill="WHITE" layoutX="626.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Audio:" wrappingWidth="192.7294921875">
          <font>
-            <Font size="17.0" />
+            <Font size="18.0" />
          </font>
       </Text>
-      <ImageView fx:id="combineAudioLoading" fitHeight="26.0" fitWidth="28.0" layoutX="690.0" layoutY="458.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="combineAudioLoading" fitHeight="40.0" fitWidth="40.0" layoutX="900.0" layoutY="540.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@loading.gif" />
          </image>

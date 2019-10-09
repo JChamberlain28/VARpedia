@@ -6,6 +6,7 @@
 
 .tab-label {
     -fx-text-base-color: rgb(255,255,255);
+    -fx-font-size: 14pt;
 }
 
 
