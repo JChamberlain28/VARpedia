@@ -26,18 +26,18 @@
                               <Font size="22.0" />
                            </font>
                         </Text>
-                        <Button fx:id="playButton" layoutX="363.0" layoutY="500.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePlayButton" prefHeight="36.0" prefWidth="155.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Play Creation" textFill="WHITE">
+                        <Button fx:id="playButton" layoutX="344.0" layoutY="501.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePlayButton" prefHeight="36.0" prefWidth="176.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Play Creation" textFill="WHITE">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="System Bold" size="16.0" />
                            </font></Button>
                         <Text fx:id="creationNoText" fill="WHITE" layoutX="27.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of creations:" wrappingWidth="534.7294921875">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Text>
-                        <Button fx:id="deleteButton" layoutX="525.0" layoutY="500.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="36.0" prefWidth="155.0" style="-fx-background-color: rgb(256,050,080); -fx-border-width: 2px; -fx-border-color: white;" text="Delete Creation" textFill="WHITE">
+                        <Button fx:id="deleteButton" layoutX="523.0" layoutY="501.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="36.0" prefWidth="176.0" style="-fx-background-color: rgb(256,050,080); -fx-border-width: 2px; -fx-border-color: white;" text="Delete Creation" textFill="WHITE">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="System Bold" size="16.0" />
                            </font></Button>
                         <TableView fx:id="creationList" layoutX="28.0" layoutY="64.0" prefHeight="420.0" prefWidth="989.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="27.0">
                           <columns>
@@ -54,11 +54,11 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: rgb(027, 031, 034);">
                      <children>
-                        <Button fx:id="wikitButton" layoutX="639.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleWikiSearch" prefHeight="36.0" prefWidth="167.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Search Wikipedia" textFill="WHITE">
+                        <Button fx:id="wikitButton" layoutX="588.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleWikiSearch" prefHeight="36.0" prefWidth="189.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Search Wikipedia" textFill="WHITE">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="System Bold" size="16.0" />
                            </font></Button>
-                        <TextField fx:id="wikitInput" layoutX="29.0" layoutY="63.0" prefHeight="41.0" prefWidth="592.0" AnchorPane.leftAnchor="28.0">
+                        <TextField fx:id="wikitInput" layoutX="29.0" layoutY="63.0" prefHeight="41.0" prefWidth="548.0" AnchorPane.leftAnchor="28.0">
                            <font>
                               <Font size="18.0" />
                            </font></TextField>
@@ -67,9 +67,9 @@
                               <Font size="18.0" />
                            </font>
                         </Text>
-                        <Button fx:id="continueButton" layoutX="472.0" layoutY="496.0" mnemonicParsing="false" onAction="#handleContinueButton" prefHeight="36.0" prefWidth="99.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Continue" textFill="WHITE">
+                        <Button fx:id="continueButton" layoutX="464.0" layoutY="496.0" mnemonicParsing="false" onAction="#handleContinueButton" prefHeight="36.0" prefWidth="116.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Continue" textFill="WHITE">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="System Bold" size="16.0" />
                            </font></Button>
                         <Text fill="WHITE" layoutX="28.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Result:" AnchorPane.leftAnchor="28.0">
                            <font>
@@ -84,6 +84,11 @@
                               <Image url="@loading.gif" />
                            </image>
                         </ImageView>
+                        <Button fx:id="wikitButton1" layoutX="786.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleWikiSearch" prefHeight="36.0" prefWidth="229.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Search from Favorites" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
                </content>

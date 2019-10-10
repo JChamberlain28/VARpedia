@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -27,16 +29,20 @@ public class VideoCreationController {
 	private String _tempDir;
 	private List<String> _audioGenResult;
 	private SceneSwitcher ss = new SceneSwitcher();
+	private BooleanBinding bb = null;
+
+	
 
 	// stores creations that have not finished generating, to prevent another creation with
 	// the same name being created in the meantime
 	private static List<String> generationList = new ArrayList<String>();
 
+	
+	@FXML
+	private AnchorPane loadingPane;
 	@FXML
 	private TextField nameInput;
 
-	@FXML
-	private ComboBox<String> noOfImages;
 
 	@FXML
 	private TableView<CellImage> imageView;
@@ -50,12 +56,11 @@ public class VideoCreationController {
 
 	@FXML
 	private Button backButton;
-
-	@FXML
-	private ImageView loadingIcon;
 	
-	@FXML
-	private Button imageNoButton;
+	private Thread _imageDownloadThread = null;
+	
+	
+
 
 
 
@@ -64,17 +69,11 @@ public class VideoCreationController {
 	@FXML
 	private void initialize() {
 		
-		loadingIcon.setVisible(false);
-		submitCreationButton.setDisable(true);
 		imageCol.setStyle( "-fx-alignment: CENTER;");
 		nameInput.setStyle("-fx-control-inner-background: rgb(049,055,060); "
 				+ "-fx-text-fill: rgb(255,255,255); -fx-focus-color: rgb(255,255,255);");
 		imageView.setStyle("-fx-control-inner-background: rgb(049,055,060); "
 				+ "-fx-text-fill: rgb(255,255,255); -fx-focus-color: rgb(255,255,255);");
-		noOfImages.setStyle("-fx-background-color: rgb(049,055,060); -fx-control-inner-background: rgb(049,055,060); "
-				+ "-fx-text-fill: rgb(255,255,255); -fx-focus-color: rgb(255,255,255);");
-		noOfImages.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
-		noOfImages.getSelectionModel().select(0);
 
 		imageView.setPlaceholder(new Label("No images to display"));
 
@@ -88,31 +87,38 @@ public class VideoCreationController {
 				}
 			}
 		});
+		
+
+		
+		
+		bb = new BooleanBinding() {
+		    {
+		        super.bind(nameInput.textProperty());
+		    }
+
+		    @Override
+		    protected boolean computeValue() {
+		        return ((nameInput.getText().trim().isEmpty())||(imageView.getItems().size() == 0));
+		    }
+		};
 
 
-
+		submitCreationButton.disableProperty().bind(bb);
+		
 
 	}
 
-	public void passInfo(String wikitTerm, String tempDir, List<String> audioGenResult) {
+	public void passInfo(String wikitTerm, String tempDir, List<String> audioGenResult, Thread imageDownloadThread) {
 		_wikitTerm = wikitTerm;
 		_tempDir = tempDir;
 		_audioGenResult = audioGenResult;
+		_imageDownloadThread  = imageDownloadThread;
+		runTasksWaitingOnInfo();
 	}
 
 
 
-	@FXML
-	private void handleGetImage() {
-		submitCreationButton.setDisable(true);
-		imageNoButton.setDisable(true);
-		loadingIcon.setVisible(true);
-		String noOfImagesSelect = noOfImages.getSelectionModel().getSelectedItem();
-		Thread thread = new Thread(new GetImagesTask(_wikitTerm, submitCreationButton, noOfImagesSelect, imageView,
-				imageCol, _tempDir, loadingIcon, imageNoButton));
-		thread.setDaemon(true);
-		thread.start();
-	}
+
 
 
 	@FXML
@@ -205,5 +211,13 @@ public class VideoCreationController {
 	// helper method to allow methods from other classes access the names of currently generating creations
 	public static List<String> getCurrentlyGenerating(){
 		return generationList;
+	}
+	
+	
+	private void runTasksWaitingOnInfo(){
+		Thread updateImageListThread = new Thread(new UpdateImageListTask(_imageDownloadThread, loadingPane, imageView,
+				imageCol, _tempDir));
+		updateImageListThread.setDaemon(true);
+		updateImageListThread.start();
 	}
 }
