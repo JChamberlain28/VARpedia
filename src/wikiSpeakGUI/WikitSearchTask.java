@@ -3,6 +3,7 @@ package wikiSpeakGUI;
 
 import java.util.List;
 import javafx.application.Platform;
+import javafx.beans.binding.BooleanBinding;
 import javafx.concurrent.Task;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -20,14 +21,17 @@ public class WikitSearchTask extends Task<Void> {
 
 	List<String> output;
 	private ImageView _wikitLoading;
+	private BooleanBinding _bb;
 
 
-	public WikitSearchTask(Button wikitButton, Button wikitContinue, String search, TextArea result, ImageView wikitLoading) {
+	public WikitSearchTask(Button wikitButton, Button wikitContinue, 
+			String search, TextArea result, ImageView wikitLoading, BooleanBinding bb) {
 		_wikitButton = wikitButton;
 		_searchTerm = search;
 		_resultField = result;
 		_wikitContinue = wikitContinue;
 		_wikitLoading = wikitLoading;
+		_bb = bb;
 	}
 
 	@Override
@@ -51,7 +55,8 @@ public class WikitSearchTask extends Task<Void> {
 				// informs user if search term not found
 				if (output.get(0).equals(_searchTerm + " not found :^(")) {
 
-					_wikitButton.setDisable(false); _resultField.setText("");
+					_wikitButton.setDisable(false); 
+					_resultField.setText("");
 
 					Alert popup = new Alert(AlertType.INFORMATION);
 					popup.setTitle("Term not found");
@@ -62,6 +67,7 @@ public class WikitSearchTask extends Task<Void> {
 				_wikitContinue.setDisable(false);
 
 				}
+				_wikitButton.disableProperty().bind(_bb);
 				_wikitLoading.setVisible(false);
 
 

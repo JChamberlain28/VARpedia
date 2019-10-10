@@ -30,6 +30,7 @@ public class AudioCreationController {
 	private static String savedText;
 	private SceneSwitcher ss = new SceneSwitcher();
 	private int count=savedAudio.size();
+	private Thread _threadToPassToVidController = null;
 
 
 
@@ -118,10 +119,13 @@ public class AudioCreationController {
 
 	// Allows other AppGUIController to pass info to this controller
 	// and display the text in the create scene.
-	public void passInfo(String numberedText, String tempDir, String wikitTerm) {
+	public void passInfo(String numberedText, String tempDir, String wikitTerm, Thread thread) {
 		_numberedText = numberedText;
 		_tempDir = tempDir;
 		_wikitTerm = wikitTerm;
+		_threadToPassToVidController = thread;
+		
+		// dependant on passed info
 		numberedTextArea.setText(_numberedText);
 		selectedAudio.getItems().clear();
 		savedAudio.clear();
@@ -178,7 +182,7 @@ public class AudioCreationController {
 					combineAudioLoading.setVisible(false);
 					//changes scene when audio finished generating
 					VideoCreationController videoCreationController = (VideoCreationController)ss.newScene("VideoCreationGUI.fxml", event);
-					videoCreationController.passInfo(_wikitTerm, _tempDir, audioGenResult);
+					videoCreationController.passInfo(_wikitTerm, _tempDir, audioGenResult, _threadToPassToVidController);
 				});
 
 			});

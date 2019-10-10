@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -26,8 +27,12 @@ import javafx.scene.text.Text;
 public class AppGUIController {
 
 
-	SceneSwitcher ss = new SceneSwitcher();
-	String searchTerm = null;
+	private SceneSwitcher ss = new SceneSwitcher();
+	private String searchTerm = null;
+	private BooleanBinding bb = null;
+	private Thread GetTermImages = null;
+	
+	
 
 	// create section widgets
 	@FXML
@@ -45,7 +50,7 @@ public class AppGUIController {
 
 	@FXML
 	private TableView<Creation> creationList;
-	
+
 	@FXML
 	private TableColumn<Creation, String> name;
 
@@ -105,6 +110,21 @@ public class AppGUIController {
 				}
 			}
 		});
+		
+		
+		bb = new BooleanBinding() {
+		    {
+		        super.bind(wikitInput.textProperty());
+		    }
+
+		    @Override
+		    protected boolean computeValue() {
+		        return ((wikitInput.getText().trim().isEmpty()));
+		    }
+		};
+
+		
+		wikitButton.disableProperty().bind(bb);
 
 	}
 
@@ -156,15 +176,15 @@ public class AppGUIController {
 		numberedDescriptionOutput = command.sendCommand("cat " +  String.format("%s/description.txt ", tempFolder), true);
 
 
-
+		GetTermImages = new Thread(new GetImagesTask(searchTerm, tempFolder));
+		GetTermImages.start();
 
 		// switch scene to create view (casting to create controller as type of object known)
 		AudioCreationController createController = (AudioCreationController)ss.newScene("AudioCreationGUI.fxml", event);
 
 
 		// pass numbered description to be displayed in create view
-		createController.passInfo(numberedDescriptionOutput.get(0), tempFolder, searchTerm);
-
+		createController.passInfo(numberedDescriptionOutput.get(0), tempFolder, searchTerm, GetTermImages);
 
 
 
@@ -182,18 +202,10 @@ public class AppGUIController {
 
 		wikitLoading.setVisible(true);
 		searchTerm = wikitInput.getText();
-
-		if( searchTerm.trim().length() == 0) {
-			Alert popup = new Alert(AlertType.INFORMATION);
-			popup.setTitle("Input Error");
-			popup.setHeaderText("Please enter a search term");
-			popup.show();
-		}
-		else {
-			wikitButton.setDisable(true);
-			Thread wikiSearchThread = new Thread(new WikitSearchTask(wikitButton, continueButton, searchTerm, wikitResult, wikitLoading));
-			wikiSearchThread.start();
-		}
+		wikitButton.disableProperty().unbind();
+		wikitButton.setDisable(true);
+		Thread wikiSearchThread = new Thread(new WikitSearchTask(wikitButton, continueButton, searchTerm, wikitResult, wikitLoading, bb));
+		wikiSearchThread.start();
 
 	}
 
