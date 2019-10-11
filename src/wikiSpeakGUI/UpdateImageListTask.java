@@ -9,19 +9,21 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 
 public class UpdateImageListTask extends Task<Void>{
 
 
-	private TableView<CellImage> _imageView;
+	private TableView<CellPane> _imageView;
 	private String _tempDir;
-	private TableColumn<CellImage, ImageView> _colForUpdate;
+	private TableColumn<CellPane, HBox> _colForUpdate;
 	private List<String> _imageNameList;
 	private Thread _threadToWaitOn;
 	private AnchorPane _itemToHide;
@@ -29,8 +31,8 @@ public class UpdateImageListTask extends Task<Void>{
 
 
 
-	public UpdateImageListTask(Thread threadToWaitOn, AnchorPane itemToHide, TableView<CellImage> imageView,
-			TableColumn<CellImage, ImageView> colForUpdate, String tempDir) {
+	public UpdateImageListTask(Thread threadToWaitOn, AnchorPane itemToHide, TableView<CellPane> imageView,
+			TableColumn<CellPane, HBox> colForUpdate, String tempDir) {
 
 		_threadToWaitOn = threadToWaitOn;
 		_itemToHide = itemToHide;
@@ -67,27 +69,31 @@ public class UpdateImageListTask extends Task<Void>{
 
 			@Override
 			public void run() {
-				ObservableList<CellImage> imageItems = FXCollections.observableArrayList();
+				ObservableList<CellPane> imageItems = FXCollections.observableArrayList();
 
 				for(String imageName : _imageNameList) {
 
 					// empty file to get directory of javaFX application
 					File file = new File("");
 
-					Image ImageObject = new Image((file.toURI().toString()) + _tempDir + "/" + imageName);
+					Image ImageObject = new TrackedImage((file.toURI().toString()) + _tempDir + "/" + imageName);
 					ImageView imageView = new ImageView(ImageObject);
 					imageView.setFitHeight(180);
 					imageView.setPreserveRatio(true);
 
-					// instantiates custom image class used for setting TableView cell value type
-					CellImage cell = new CellImage(imageView);
+					// instantiates custom layout pane class used for setting TableView cell value type
+					CheckBox checkBox = new CheckBox();
+					HBox hbox = new HBox(5, imageView, checkBox);
+					CellPane cell = new CellPane(hbox);
+
+					
 					imageItems.addAll(cell);
 
 
 
 				}
 
-				_colForUpdate.setCellValueFactory(new PropertyValueFactory<CellImage, ImageView>("image"));
+				_colForUpdate.setCellValueFactory(new PropertyValueFactory<CellPane, HBox>("pane"));
 				_imageView.setItems(imageItems);
 				_itemToHide.setVisible(false);
 

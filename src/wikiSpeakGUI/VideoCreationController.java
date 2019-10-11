@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -18,6 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -45,10 +47,10 @@ public class VideoCreationController {
 
 
 	@FXML
-	private TableView<CellImage> imageView;
+	private TableView<CellPane> imageView;
 
 	@FXML
-	private TableColumn<CellImage, ImageView> imageCol;
+	private TableColumn<CellPane, HBox> imageCol;
 
 
 	@FXML
@@ -104,6 +106,8 @@ public class VideoCreationController {
 
 
 		submitCreationButton.disableProperty().bind(bb);
+
+		
 		
 
 	}
@@ -195,11 +199,13 @@ public class VideoCreationController {
 
 		// start creation generation in the background and return to main app GUI
 		if (!abort) {
+			
 
+			
 
 			AppGUIController appGUIController = (AppGUIController)ss.newScene("AppGUI.fxml", event);
 
-			Thread generateCreation= new Thread(new GenerateVideoTask(_audioGenResult, name, _tempDir, _wikitTerm, appGUIController));
+			Thread generateCreation= new Thread(new GenerateVideoTask(_audioGenResult, name, _tempDir, _wikitTerm, appGUIController, imageView));
 			generateCreation.setDaemon(true);
 			generateCreation.start();
 
