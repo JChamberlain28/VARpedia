@@ -80,7 +80,6 @@ public class UpdateCreationListTask extends Task<Void> {
 
 				for (String i : lines) {
 					// prevents (No creations currently exist) being a creation
-					System.out.println(i);
 					if (!(i.equals("(No creations currently exist)"))) {
 						Creation creation = new Creation(i);
 						creationList.add(creation);

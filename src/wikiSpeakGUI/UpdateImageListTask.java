@@ -9,6 +9,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -78,12 +79,13 @@ public class UpdateImageListTask extends Task<Void>{
 
 					Image ImageObject = new TrackedImage((file.toURI().toString()) + _tempDir + "/" + imageName);
 					ImageView imageView = new ImageView(ImageObject);
-					imageView.setFitHeight(180);
+					imageView.setFitHeight(200);
 					imageView.setPreserveRatio(true);
 
 					// instantiates custom layout pane class used for setting TableView cell value type
 					CheckBox checkBox = new CheckBox();
-					HBox hbox = new HBox(5, imageView, checkBox);
+					HBox hbox = new HBox(50, imageView, checkBox);
+					hbox.setAlignment(Pos.CENTER);
 					CellPane cell = new CellPane(hbox);
 
 					

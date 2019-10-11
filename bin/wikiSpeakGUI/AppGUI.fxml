@@ -42,9 +42,9 @@
                         <TableView fx:id="creationList" layoutX="28.0" layoutY="64.0" prefHeight="420.0" prefWidth="989.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="27.0">
                           <columns>
                             <TableColumn fx:id="name" prefWidth="323.0" text="Name" />
-                            <TableColumn fx:id="confidenceRating" prefWidth="149.0" text="Confidence Rating" />
-                              <TableColumn fx:id="creationDate" prefWidth="144.0" text="Creation Date" />
-                              <TableColumn fx:id="lastViewed" prefWidth="138.0" text="Last Viewed" />
+                            <TableColumn fx:id="confidenceRating" prefWidth="236.0" text="Confidence Rating" />
+                              <TableColumn fx:id="creationDate" prefWidth="222.0" text="Creation Date" />
+                              <TableColumn fx:id="lastViewed" prefWidth="207.0" text="Last Viewed" />
                           </columns>
                         </TableView>
                      </children></AnchorPane>

@@ -11,7 +11,7 @@
          <children>
             <MediaView fx:id="mv" fitHeight="510.0" fitWidth="630.0" layoutX="207.0" layoutY="13.0" />
          </children></AnchorPane>
-      <Button fx:id="playPauseB" layoutX="504.0" layoutY="549.0" mnemonicParsing="false" onAction="#pausePress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="❚❚" textFill="WHITE">
+      <Button fx:id="playPauseB" layoutX="504.0" layoutY="549.0" mnemonicParsing="false" onAction="#pausePress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="❚❚" textFill="WHITE" AnchorPane.leftAnchor="504.0" AnchorPane.rightAnchor="486.0">
          <font>
             <Font size="16.0" />
          </font></Button>
