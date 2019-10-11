@@ -45,4 +45,12 @@
  .table-view .placeholder .label {
      -fx-text-fill: white;
  }
+ 
+  .table-view {
+     -fx-font-size: 12pt;
+ }
+ 
+   .list-view {
+     -fx-font-size: 14pt;
+ }
 
