@@ -94,6 +94,7 @@ public class AudioCreationController {
 		voiceSelect.getItems().add("Akl_NZ(male) Voice");
 		voiceSelect.getItems().add("Akl_NZ(female) Voice");
 		voiceSelect.getSelectionModel().selectFirst();
+		
 		numberedTextArea.setText(savedText);
 
 		//loads saved audio chunks
@@ -132,7 +133,9 @@ public class AudioCreationController {
 		// dependant on passed info
 		numberedTextArea.setText(_numberedText);
 		selectedAudio.getItems().clear();
+		audioSentences.clear();
 		savedAudio.clear();
+		count=0;
 	}
 
 	@FXML
@@ -169,7 +172,8 @@ public class AudioCreationController {
 				order = order + _tempDir + "/audio" + audioSentences.indexOf(selectedAudio.getItems().get(i)) + ".wav ";
 				savedAudio.add(selectedAudio.getItems().get(i));
 			}
-
+			
+			System.out.println(order);
 			String cmd = "sox "+order+" "+ _tempDir +"/audio.wav";
 			savedText=numberedTextArea.getText();
 
