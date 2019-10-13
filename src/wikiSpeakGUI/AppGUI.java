@@ -51,6 +51,7 @@ public class AppGUI extends Application{
 		CommandFactory command = new CommandFactory();
 
 		command.sendCommand("mkdir -p creations" , false);
+		command.sendCommand("mkdir -p creations/metadata" , false);
 
 		primaryStage.setTitle("VARpedia");
 
