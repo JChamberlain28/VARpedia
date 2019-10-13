@@ -2,7 +2,9 @@ package wikiSpeakGUI;
 
 import java.io.IOException;
 import java.text.DateFormat;
+
 import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -14,12 +16,16 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -28,6 +34,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class AppGUIController {
 
@@ -43,6 +51,12 @@ public class AppGUIController {
 	// create section widgets
 	@FXML
 	private Button continueButton;
+	
+	@FXML
+	private Button favButton;
+	
+	@FXML
+	private CheckBox addFav;
 
 	@FXML
 	private Button wikitButton;
@@ -236,12 +250,18 @@ public class AppGUIController {
 		// switch scene to create view (casting to create controller as type of object known)
 		AudioCreationController createController = (AudioCreationController)ss.newScene("AudioCreationGUI.fxml", event);
 
-
 		// pass numbered description to be displayed in create view
 		createController.passInfo(numberedDescriptionOutput.get(0), tempFolder, searchTerm, GetTermImages);
 
-
-
+		if(addFav.isSelected()) {
+			CommandFactory command = new CommandFactory();
+			List<String> lol = command.sendCommand("cat favourites.txt | grep "+wikitInput.getText() +" ", false);
+			if(lol.get(0).equals(wikitInput.getText()+" ")) {
+				
+			}else {
+				command.sendCommand("echo \""+wikitInput.getText() +" \" >> favourites.txt", false);
+			}
+		}
 	}
 
 
@@ -249,7 +269,27 @@ public class AppGUIController {
 
 
 
+	@FXML
+	private void handleFavSearch(ActionEvent event) { 
+		try {
+			favSelectionController lol = new favSelectionController();
+			lol.setParent(this);
+			FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("favSelection.fxml"));
+			Parent root = (Parent)fxmlloader.load();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
+	}
+	
+	public void Search(String search) { 
+		wikitInput.setText(search);
+		wikitButton.fire();
+	}
 
 	@FXML
 	private void handleWikiSearch(ActionEvent event) { 

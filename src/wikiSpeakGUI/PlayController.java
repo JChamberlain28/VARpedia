@@ -1,21 +1,31 @@
 package wikiSpeakGUI;
 
 import java.io.File;
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.media.MediaPlayer.Status;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class PlayController {
+	
+	private static String creation;
 	private static String _filePath ="";
 	File fileUrl = new File(_filePath).getAbsoluteFile(); 
 	@FXML private Button playPauseB;
 	@FXML private Button forwardB;
 	@FXML private Button backwardsB;
+	@FXML private Button rateButton;
 	@FXML private MediaView mv;
 	@FXML private Button backToMenu;
 	private MediaPlayer mp;
@@ -72,6 +82,7 @@ public class PlayController {
 	// pass the selected creation from the AppGUIController to the PlayController
 	public void passInfo(String nameOfCreation) {
 		_filePath = "creations/"+ nameOfCreation + ".mp4"; 
+		creation = nameOfCreation;
 
 	}
 	
@@ -81,6 +92,23 @@ public class PlayController {
 	private void handleBackToMainView(ActionEvent event) {
 		mp.stop();
 		ss.newScene("AppGUI.fxml", event);
+	}
+	
+	@FXML
+	// Changes scene to main scene
+	private void ratePressed(ActionEvent event) {
+		try {
+			rateCreationController rate = new rateCreationController();
+			rate.passInfo(creation);
+			FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("rateCreation.fxml"));
+			Parent root = (Parent)fxmlloader.load();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

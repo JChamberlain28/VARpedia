@@ -5,7 +5,7 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="595.0" prefWidth="1043.0" style="-fx-background-color: rgb(027, 031, 034);" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.PlayController">
+<AnchorPane prefHeight="595.0" prefWidth="1043.0" style="-fx-background-color: rgb(027, 031, 034);" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.PlayController">
    <children>
       <AnchorPane prefHeight="535.0" prefWidth="1043.0">
          <children>
@@ -27,5 +27,6 @@
          <font>
             <Font size="16.0" />
          </font></Button>
+      <Button fx:id="rateButton" layoutX="912.0" layoutY="544.0" mnemonicParsing="false" onAction="#ratePressed" prefHeight="36.0" prefWidth="86.0" text="Rate" />
    </children>
 </AnchorPane>
