@@ -173,7 +173,6 @@ public class AudioCreationController {
 				savedAudio.add(selectedAudio.getItems().get(i));
 			}
 			
-			System.out.println(order);
 			String cmd = "sox "+order+" "+ _tempDir +"/audio.wav";
 			savedText=numberedTextArea.getText();
 

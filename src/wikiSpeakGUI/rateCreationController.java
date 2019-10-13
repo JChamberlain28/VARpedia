@@ -37,9 +37,8 @@ public class rateCreationController {
 	// Changes scene to main scene
 	private void ratePress(ActionEvent event) {
 		int rate = (int)rating.getValue();
-		System.out.println(creation);
 		CommandFactory command = new CommandFactory();
-		command.sendCommand("echo \"" + rate +"/5\" > creations/metadata/"+creation+"/confidenceRating.txt", false);
+		command.sendCommand("echo \"" + rate +"/5\" > \"creations/metadata/"+creation+"/confidenceRating.txt\"", false);
 
 		Stage stage = (Stage) cancelButton.getScene().getWindow();
 		stage.close();

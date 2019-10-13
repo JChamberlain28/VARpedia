@@ -111,6 +111,7 @@ public class AppGUIController {
 		continueButton.setDisable(true);
 		wikitResult.setWrapText(true);
 		wikitResult.setEditable(false);
+
 		wikitResult.setStyle("-fx-control-inner-background: rgb(049,055,060); "
 				+ "-fx-text-fill: rgb(255,255,255); -fx-focus-color: rgb(255,255,255);");
 		wikitInput.setStyle("-fx-control-inner-background: rgb(049,055,060);"
@@ -151,17 +152,15 @@ public class AppGUIController {
 					Date creationDate = null;
 					Date viewedDate = null;
 					try {
-						System.out.println(item.getCreationDate());
 						creationDate = format.parse(item.getCreationDate());
 						viewedDate = format.parse(item.getLastViewed());
 					} catch (ParseException e) {
-						// TODO Auto-generated catch block
+						
 						e.printStackTrace();
 					}
 					
 					long timeElapsed = viewedDate.getTime() - creationDate.getTime();
 					long daysElapsed = timeElapsed / (24 * 60 * 60 * 1000);
-					System.out.println(daysElapsed + "<- here");
 					
 					// highlight creations red that havent been viewed in 5 days
 					if (daysElapsed >= 5) {
@@ -255,8 +254,8 @@ public class AppGUIController {
 
 		if(addFav.isSelected()) {
 			CommandFactory command = new CommandFactory();
-			List<String> lol = command.sendCommand("cat favourites.txt | grep "+wikitInput.getText() +" ", false);
-			if(lol.get(0).equals(wikitInput.getText()+" ")) {
+			List<String> output = command.sendCommand("cat favourites.txt | grep "+wikitInput.getText() +" ", false);
+			if(output.get(0).equals(wikitInput.getText()+" ")) {
 				
 			}else {
 				command.sendCommand("echo \""+wikitInput.getText() +" \" >> favourites.txt", false);
@@ -272,8 +271,8 @@ public class AppGUIController {
 	@FXML
 	private void handleFavSearch(ActionEvent event) { 
 		try {
-			favSelectionController lol = new favSelectionController();
-			lol.setParent(this);
+			favSelectionController controller = new favSelectionController();
+			controller.setParent(this);
 			FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("favSelection.fxml"));
 			Parent root = (Parent)fxmlloader.load();
 			Stage stage = new Stage();
@@ -298,7 +297,8 @@ public class AppGUIController {
 		searchTerm = wikitInput.getText();
 		wikitButton.disableProperty().unbind();
 		wikitButton.setDisable(true);
-		Thread wikiSearchThread = new Thread(new WikitSearchTask(wikitButton, continueButton, searchTerm, wikitResult, wikitLoading, bb));
+		favButton.setDisable(true);
+		Thread wikiSearchThread = new Thread(new WikitSearchTask(wikitButton, continueButton, favButton, searchTerm, wikitResult, wikitLoading, bb));
 		wikiSearchThread.start();
 
 	}

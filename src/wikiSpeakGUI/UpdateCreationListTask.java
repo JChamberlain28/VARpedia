@@ -87,21 +87,20 @@ public class UpdateCreationListTask extends Task<Void> {
 				
 				
 				
-				List<Integer> rowsToHighlight = new ArrayList<Integer>();
-				int tablePos = 0;
+
 				for (String i : lines) {
 					// prevents (No creations currently exist) being a creation
 					if (!(i.equals("(No creations currently exist)"))) {
 						CommandFactory cf = new CommandFactory();
 						
 						
-						List<String> ratingFileRead = cf.sendCommand("cat creations/metadata/" + i + "/confidenceRating.txt", false);
+						List<String> ratingFileRead = cf.sendCommand("cat \"creations/metadata/" + i + "/confidenceRating.txt\"", false);
 
 						
-						List<String> dateFileRead = cf.sendCommand("cat creations/metadata/" + i + "/creationDate.txt", false);
+						List<String> dateFileRead = cf.sendCommand("cat \"creations/metadata/" + i + "/creationDate.txt\"", false);
 
 						
-						List<String> lastViewedRead = cf.sendCommand("cat creations/metadata/" + i + "/lastViewed.txt", false);
+						List<String> lastViewedRead = cf.sendCommand("cat \"creations/metadata/" + i + "/lastViewed.txt\"", false);
 
 						
 						
@@ -114,7 +113,7 @@ public class UpdateCreationListTask extends Task<Void> {
 
 
 				}
-				System.out.println(rowsToHighlight);
+
 
 				nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 				ratingCol.setCellValueFactory(new PropertyValueFactory<>("rating"));

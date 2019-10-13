@@ -16,7 +16,7 @@ import javafx.util.Duration;
 
 public class favSelectionController {
 	
-	@FXML private Button cancelB;
+
 	@FXML private Button searchB;
 	@FXML private Button delB;
 	@FXML private ListView<String> favourites;
@@ -24,10 +24,14 @@ public class favSelectionController {
 	
 	public void initialize(){
 		CommandFactory command = new CommandFactory();
-		List<String> lol = command.sendCommand("cat favourites.txt" , false);
-		String[] split = lol.get(0).split(" ");
+		List<String> output = command.sendCommand("cat favourites.txt" , false);
+		String[] split = output.get(0).split(" ");
 		favourites.getItems().addAll(split);
 		favourites.getSelectionModel().selectFirst();
+		if (output.get(0).equals("")){
+			searchB.setDisable(true);
+			delB.setDisable(true);
+		}
 		
 	}
 	
@@ -35,15 +39,15 @@ public class favSelectionController {
 		parent = p;
 	}
 	
-	@FXML
-	private void cancelPress(ActionEvent event) {
-		Stage stage = (Stage) cancelB.getScene().getWindow();
-		stage.close();
-	}
+
 	
 	@FXML
 	private void delPress(ActionEvent event) {
 		favourites.getItems().remove(favourites.getSelectionModel().getSelectedIndex());
+		if (favourites.getItems().size() == 0){
+			searchB.setDisable(true);
+			delB.setDisable(true);
+		}
 		CommandFactory command = new CommandFactory();
 		command.sendCommand("rm favourites.txt" , false);
 		command.sendCommand("touch favourites.txt" , false);
@@ -56,7 +60,7 @@ public class favSelectionController {
 	@FXML
 	// Changes scene to main scene
 	private void searchPress(ActionEvent event) {
-		Stage stage = (Stage) cancelB.getScene().getWindow();
+		Stage stage = (Stage) searchB.getScene().getWindow();
 		stage.close();
 		parent.Search(favourites.getSelectionModel().getSelectedItem());
 	}

@@ -11,17 +11,17 @@ import com.flickr4java.flickr.*;
 import com.flickr4java.flickr.photos.*;
 
 public class FlickrAPI {
-	
+
 	public static String getAPIKey(String key) throws Exception {
-		
+
 
 		String config = System.getProperty("user.dir") 
 				+ System.getProperty("file.separator")+ "flickr-api-keys.txt"; 
-		
+
 
 		File file = new File(config); 
 		BufferedReader br = new BufferedReader(new FileReader(file)); 
-		
+
 		String line;
 		while ( (line = br.readLine()) != null ) {
 			if (line.trim().startsWith(key)) {
@@ -39,32 +39,30 @@ public class FlickrAPI {
 			String sharedSecret = getAPIKey("sharedSecret");
 
 			Flickr flickr = new Flickr(apiKey, sharedSecret, new REST());
-			
+
 			int resultsPerPage = numOfImages;
 			int page = 0;
-			
-	        PhotosInterface photos = flickr.getPhotosInterface();
-	        SearchParameters params = new SearchParameters();
-	        params.setSort(SearchParameters.RELEVANCE);
-	        params.setMedia("photos"); 
-	        params.setText(query);
-	        
-	        PhotoList<Photo> results = photos.search(params, resultsPerPage, page);
-	        
-	        for (Photo photo: results) {
-	        	try {
-	        		BufferedImage image = photos.getImage(photo,Size.LARGE);
-		        	String filename = photo.getId()+".jpg";
-		        	File outputfile = new File(tempDir,filename);
-		        	ImageIO.write(image, "jpg", outputfile);
-	        	} catch (FlickrException fe) {
-	        		fe.printStackTrace();
-				}
-	        }
+
+			PhotosInterface photos = flickr.getPhotosInterface();
+			SearchParameters params = new SearchParameters();
+			params.setSort(SearchParameters.RELEVANCE);
+			params.setMedia("photos"); 
+			params.setText(query);
+
+			PhotoList<Photo> results = photos.search(params, resultsPerPage, page);
+
+			for (Photo photo: results) {
+
+				BufferedImage image = photos.getImage(photo,Size.LARGE);
+				String filename = photo.getId()+".jpg";
+				File outputfile = new File(tempDir,filename);
+				ImageIO.write(image, "jpg", outputfile);
+
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+
+
 	}
 }

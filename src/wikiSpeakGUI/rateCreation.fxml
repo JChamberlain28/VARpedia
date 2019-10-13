@@ -6,15 +6,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="255.0" prefWidth="461.0" style="-fx-background-color: rgb(027, 031, 034);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.rateCreationController">
+<AnchorPane prefHeight="255.0" prefWidth="461.0" style="-fx-background-color: rgb(027, 031, 034);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.rateCreationController">
    <children>
       <Text fill="WHITE" layoutX="82.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rate this Creation">
          <font>
             <Font size="33.0" />
          </font>
       </Text>
-      <Button fx:id="rateB" layoutX="273.0" layoutY="197.0" mnemonicParsing="false" onAction="#ratePress" text="Rate" />
-      <Button fx:id="cancelButton" layoutX="135.0" layoutY="197.0" mnemonicParsing="false" onAction="#cancelPress" text="Cancel" />
+      <Button fx:id="rateB" layoutX="337.0" layoutY="197.0" mnemonicParsing="false" onAction="#ratePress" prefHeight="36.0" prefWidth="86.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Rate" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Button>
+      <Button fx:id="cancelButton" layoutX="39.0" layoutY="197.0" mnemonicParsing="false" onAction="#cancelPress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Cancel" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Button>
       <Slider fx:id="rating" blockIncrement="1.0" layoutX="29.0" layoutY="71.0" majorTickUnit="1.0" max="5.0" minorTickCount="0" prefHeight="114.0" prefWidth="404.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
    </children>
 </AnchorPane>

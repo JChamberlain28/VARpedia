@@ -22,16 +22,19 @@ public class WikitSearchTask extends Task<Void> {
 	List<String> output;
 	private ImageView _wikitLoading;
 	private BooleanBinding _bb;
+	private Button _favButton;
 
 
-	public WikitSearchTask(Button wikitButton, Button wikitContinue, 
+	public WikitSearchTask(Button wikitButton, Button wikitContinue, Button favButton,
 			String search, TextArea result, ImageView wikitLoading, BooleanBinding bb) {
 		_wikitButton = wikitButton;
 		_searchTerm = search;
+		_favButton = favButton;
 		_resultField = result;
 		_wikitContinue = wikitContinue;
 		_wikitLoading = wikitLoading;
 		_bb = bb;
+		
 	}
 
 	@Override
@@ -56,15 +59,18 @@ public class WikitSearchTask extends Task<Void> {
 				if (output.get(0).equals(_searchTerm + " not found :^(")) {
 
 					_wikitButton.setDisable(false); 
+					_favButton.setDisable(false);
 					_resultField.setText("");
 
 					Alert popup = new Alert(AlertType.INFORMATION);
 					popup.setTitle("Term not found");
 					popup.setHeaderText("Please try another term"); popup.show();
 
-				} else { _wikitButton.setDisable(false); 
+				} else { 
+				_wikitButton.setDisable(false); 
 				_resultField.setText(output.get(0));
 				_wikitContinue.setDisable(false);
+				_favButton.setDisable(false);
 
 				}
 				_wikitButton.disableProperty().bind(_bb);
