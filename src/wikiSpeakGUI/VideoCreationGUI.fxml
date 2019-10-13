@@ -37,7 +37,7 @@
           <TableColumn fx:id="imageCol" prefWidth="964.0" text="Images" />
         </columns>
       </TableView>
-      <AnchorPane fx:id="loadingPane" prefHeight="595.0" prefWidth="1043.0" style="-fx-background-color: rgb(027, 031, 034);" visible="false">
+      <AnchorPane fx:id="loadingPane" prefHeight="595.0" prefWidth="1043.0" style="-fx-background-color: rgb(027, 031, 034);">
          <children>
             <ImageView fx:id="loadingIcon1" fitHeight="80.0" fitWidth="80.0" layoutX="508.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true">
                <image>

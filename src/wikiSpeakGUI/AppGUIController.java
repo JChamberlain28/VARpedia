@@ -147,19 +147,18 @@ public class AppGUIController {
 		        	setStyle("-fx-control-inner-background: rgb(180, 115, 000); -fx-selection-bar: orange; -fx-selection-bar-non-focused: orange;");
 		        }
 				else {
-					// check if date between viewing and creation is more than 5 days
+					// check if date between last viewing and now is more than 5 days
 					SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-					Date creationDate = null;
 					Date viewedDate = null;
+					Date currentDate = new Date();
 					try {
-						creationDate = format.parse(item.getCreationDate());
 						viewedDate = format.parse(item.getLastViewed());
 					} catch (ParseException e) {
 						
 						e.printStackTrace();
 					}
 					
-					long timeElapsed = viewedDate.getTime() - creationDate.getTime();
+					long timeElapsed = currentDate.getTime() - viewedDate.getTime();
 					long daysElapsed = timeElapsed / (24 * 60 * 60 * 1000);
 					
 					// highlight creations red that havent been viewed in 5 days
