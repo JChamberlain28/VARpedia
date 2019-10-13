@@ -3,12 +3,15 @@ package wikiSpeakGUI;
 public class Creation {
 	
 	private String name;
-	private String rating = "null";
-	private String creationDate = "null";
-	private String lastViewed = "null";
+	private String rating;
+	private String creationDate;
+	private String lastViewed;
 
-	public Creation(String name) {
+	public Creation(String name, String rating, String creationDate, String lastViewed) {
 		this.name = name;
+		this.rating = rating;
+		this.creationDate = creationDate;
+		this.lastViewed = lastViewed;
 	}
 
 	public String getName() {

@@ -1,6 +1,9 @@
 package wikiSpeakGUI;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +34,7 @@ public class AppGUIController {
 	private String searchTerm = null;
 	private BooleanBinding bb = null;
 	private Thread GetTermImages = null;
+	CommandFactory cf = new CommandFactory();
 	
 	
 
@@ -151,8 +155,6 @@ public class AppGUIController {
 	@FXML
 	private void handleContinueButton(ActionEvent event) {
 
-		// get command object for sending bash commands
-		CommandFactory command = new CommandFactory();
 
 
 
@@ -161,19 +163,19 @@ public class AppGUIController {
 		List<String> mktempResult = null;
 		List<String> numberedDescriptionOutput = null;
 
-		mktempResult = command.sendCommand("mktemp -d TempCreation-XXXXX", false);
+		mktempResult = cf.sendCommand("mktemp -d TempCreation-XXXXX", false);
 
 
 		String tempFolder = mktempResult.get(0);
 
 
 		// process description so each sentence is on a new line.
-		command.sendCommand("cat .description.txt " + " | sed 's/\\([.!?]\\) \\([[:upper:]]\\)/\\1\\n\\2/g' > " + String.format("%s/description.txt ", tempFolder), false);
+		cf.sendCommand("cat .description.txt " + " | sed 's/\\([.!?]\\) \\([[:upper:]]\\)/\\1\\n\\2/g' > " + String.format("%s/description.txt ", tempFolder), false);
 
 
 		// retrieve description with line numbers.
 		// send command 2nd parameter determines if each array item (sentence) should be separated by a new line
-		numberedDescriptionOutput = command.sendCommand("cat " +  String.format("%s/description.txt ", tempFolder), true);
+		numberedDescriptionOutput = cf.sendCommand("cat " +  String.format("%s/description.txt ", tempFolder), true);
 
 
 		GetTermImages = new Thread(new GetImagesTask(searchTerm, tempFolder));
@@ -212,7 +214,8 @@ public class AppGUIController {
 
 	@FXML
 	private void handlePlayButton(Event event) {
-
+			
+		
 		// get selected creation name to play
 		String selection = creationList.getSelectionModel().getSelectedItem().getName();
 
@@ -227,6 +230,11 @@ public class AppGUIController {
 			PlayController pc = new PlayController();
 			pc.passInfo(selection);
 
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			Date date = new Date();
+			
+			// store creation date
+			cf.sendCommand("echo " + dateFormat.format(date) + "> \"creations/metadata/" + selection + "/lastViewed.txt\"", false);
 
 			// switch to play scene
 			ss.newScene("PlayGUI.fxml",event);
@@ -269,10 +277,10 @@ public class AppGUIController {
 
 			Optional<ButtonType> result = popup.showAndWait();
 			if (result.get() == buttonTypeYes){
-				CommandFactory deleteCommand = new CommandFactory();
 
 
-				deleteCommand.sendCommand("rm \"creations/" + selection + ".mp4\"", false);
+				cf.sendCommand("rm \"creations/" + selection + ".mp4\"", false);
+				cf.sendCommand("rm -rf \"creations/metadata/" + selection + "\"", false);
 
 
 				updateCreationList();

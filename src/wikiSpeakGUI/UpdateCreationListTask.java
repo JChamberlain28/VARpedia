@@ -74,14 +74,27 @@ public class UpdateCreationListTask extends Task<Void> {
 				// adds each creation to the TableView observable list
 
 				for (String i : _currentlyGenerating) {
-					Creation creation = new Creation(i + " (Unavailable)");
+					Creation creation = new Creation(i + " (Unavailable)", "0/5", "", "");
 					generatingList.add(creation);					
 				}
 
 				for (String i : lines) {
 					// prevents (No creations currently exist) being a creation
 					if (!(i.equals("(No creations currently exist)"))) {
-						Creation creation = new Creation(i);
+						CommandFactory cf = new CommandFactory();
+						
+						
+						List<String> ratingFileRead = cf.sendCommand("cat creations/metadata/" + i + "/confidenceRating.txt", false);
+
+						
+						List<String> dateFileRead = cf.sendCommand("cat creations/metadata/" + i + "/creationDate.txt", false);
+
+						
+						List<String> lastViewedRead = cf.sendCommand("cat creations/metadata/" + i + "/lastViewed.txt", false);
+
+						
+						
+						Creation creation = new Creation(i, ratingFileRead.get(0), dateFileRead.get(0), lastViewedRead.get(0));
 						creationList.add(creation);
 
 					}

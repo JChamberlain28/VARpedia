@@ -1,5 +1,8 @@
 package wikiSpeakGUI;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javafx.application.Platform;
@@ -71,6 +74,15 @@ public class GenerateVideoTask extends Task<Void>  {
 
 
 		generationScript.sendCommand("./generateVid.sh \"" + _creationName + "\" " + _tempDir + " \"" + _wikitTerm + "\" " + audioTime, false);
+		generationScript.sendCommand("mkdir -p \"creations/metadata/" + _creationName + "\"", false);
+		// get current date as creation date
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = new Date();
+		
+		// store creation date
+		generationScript.sendCommand("echo " + dateFormat.format(date) + "> \"creations/metadata/" + _creationName + "/creationDate.txt\"", false);
+		generationScript.sendCommand("echo 0/5 > \"creations/metadata/" + _creationName + "/confidenceRating.txt\"", false);
+		generationScript.sendCommand("echo Never Viewed > \"creations/metadata/" + _creationName + "/lastViewed.txt\"", false);
 		return null;
 	}
 
