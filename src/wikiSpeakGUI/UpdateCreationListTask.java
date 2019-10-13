@@ -1,5 +1,9 @@
 package wikiSpeakGUI;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javafx.application.Platform;
@@ -78,6 +82,13 @@ public class UpdateCreationListTask extends Task<Void> {
 					generatingList.add(creation);					
 				}
 
+				
+				
+				
+				
+				
+				List<Integer> rowsToHighlight = new ArrayList<Integer>();
+				int tablePos = 0;
 				for (String i : lines) {
 					// prevents (No creations currently exist) being a creation
 					if (!(i.equals("(No creations currently exist)"))) {
@@ -96,12 +107,14 @@ public class UpdateCreationListTask extends Task<Void> {
 						
 						Creation creation = new Creation(i, ratingFileRead.get(0), dateFileRead.get(0), lastViewedRead.get(0));
 						creationList.add(creation);
+						
+
 
 					}
 
 
 				}
-
+				System.out.println(rowsToHighlight);
 
 				nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 				ratingCol.setCellValueFactory(new PropertyValueFactory<>("rating"));
@@ -110,8 +123,7 @@ public class UpdateCreationListTask extends Task<Void> {
 
 				creationList.addAll(generatingList);
 				_listToUpdate.setItems(creationList);
-
-
+				
 
 				// update number of creations Text
 				int noOfCreations;

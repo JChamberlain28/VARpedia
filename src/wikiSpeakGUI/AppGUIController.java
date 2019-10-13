@@ -2,6 +2,7 @@ package wikiSpeakGUI;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -99,8 +101,7 @@ public class AppGUIController {
 				+ "-fx-text-fill: rgb(255,255,255); -fx-focus-color: rgb(255,255,255);");
 		wikitInput.setStyle("-fx-control-inner-background: rgb(049,055,060);"
 				+ " -fx-text-fill: rgb(255,255,255); -fx-focus-color: rgb(255,255,255);");
-		creationList.setStyle("-fx-control-inner-background: rgb(049,055,060); "
-				+ "-fx-text-fill: rgb(255,255,255); -fx-focus-color: rgb(255,255,255);");
+		creationList.setStyle("-fx-text-fill: white; -fx-control-inner-background: rgb(049,055,060); -fx-focus-color: rgb(255,255,255);");
 		creationList.setPlaceholder(new Label("No creations to display, click create to start"));
 		updateCreationList();
 
@@ -114,6 +115,57 @@ public class AppGUIController {
 				}
 			}
 		});
+		
+		
+		
+		
+		// set colouring of rows in creation table depending on if viewed or how long ago viewed
+		creationList.setRowFactory(tv -> new TableRow<Creation>() {
+		    @Override
+		    protected void updateItem(Creation item, boolean empty) {
+		        super.updateItem(item, empty);
+		        if (item == null || item.getLastViewed() == "" || item.getCreationDate() == "") {
+		        	setStyle("-fx-control-inner-background: rgb(049,055,060); "
+		    				+ " -fx-focus-color: rgb(255,255,255);");
+		        }
+		        else if (item.getLastViewed().equals("Never Viewed")) {
+		        	setStyle("-fx-control-inner-background: rgb(180, 115, 000); -fx-selection-bar: orange; -fx-selection-bar-non-focused: orange;");
+		        }
+				else {
+					// check if date between viewing and creation is more than 5 days
+					SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+					Date creationDate = null;
+					Date viewedDate = null;
+					try {
+						System.out.println(item.getCreationDate());
+						creationDate = format.parse(item.getCreationDate());
+						viewedDate = format.parse(item.getLastViewed());
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					long timeElapsed = viewedDate.getTime() - creationDate.getTime();
+					long daysElapsed = timeElapsed / (24 * 60 * 60 * 1000);
+					System.out.println(daysElapsed + "<- here");
+					
+					// highlight creations red that havent been viewed in 5 days
+					if (daysElapsed >= 5) {
+						setStyle("-fx-control-inner-background: rgb(180, 000, 000); -fx-selection-bar: red; -fx-selection-bar-non-focused: red;");
+					}
+					else {
+						setStyle("-fx-control-inner-background: rgb(049,055,060); "
+			    				+ " -fx-focus-color: rgb(255,255,255);");
+					}
+					
+				}
+		
+
+		    }
+		});
+		
+		
+		
 		
 		
 		bb = new BooleanBinding() {
@@ -290,6 +342,10 @@ public class AppGUIController {
 			}
 
 		}
+		
+		
+		
+
 
 	}
 
