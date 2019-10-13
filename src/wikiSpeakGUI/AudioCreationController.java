@@ -1,6 +1,5 @@
 package wikiSpeakGUI;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,12 +10,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
-import javafx.util.Callback;
 import javafx.scene.control.Alert.AlertType;
 
 public class AudioCreationController {

@@ -13,7 +13,7 @@
             <Font size="33.0" />
          </font>
       </Text>
-      <ListView fx:id="favourites" layoutX="58.0" layoutY="109.0" prefHeight="232.0" prefWidth="364.0" />
+      <ListView fx:id="favourites" layoutX="58.0" layoutY="109.0" prefHeight="232.0" prefWidth="364.0" stylesheets="@styles.css" />
       <Button fx:id="searchB" layoutX="334.0" layoutY="359.0" mnemonicParsing="false" onAction="#searchPress" style="-fx-border-color: white; -fx-border-width: 2px; -fx-background-color: rgb(069,075,080);" text="Search" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />

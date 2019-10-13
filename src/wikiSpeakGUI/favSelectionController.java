@@ -1,18 +1,12 @@
 package wikiSpeakGUI;
 
-import java.io.File;
 import java.util.List;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
-import javafx.scene.media.MediaPlayer.Status;
-import javafx.util.Duration;
 
 public class favSelectionController {
 	
@@ -23,6 +17,11 @@ public class favSelectionController {
 	private static AppGUIController parent;
 	
 	public void initialize(){
+		
+		favourites.setStyle("-fx-control-inner-background: rgb(049,055,060); "
+				+ "-fx-text-fill: rgb(255,255,255); -fx-focus-color: rgb(255,255,255);");
+		
+		
 		CommandFactory command = new CommandFactory();
 		List<String> output = command.sendCommand("cat favourites.txt" , false);
 		String[] split = output.get(0).split(" ");
