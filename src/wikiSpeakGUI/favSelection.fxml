@@ -14,7 +14,8 @@
          </font>
       </Text>
       <ListView fx:id="favourites" layoutX="58.0" layoutY="109.0" prefHeight="232.0" prefWidth="364.0" />
-      <Button fx:id="searchB" layoutX="286.0" layoutY="359.0" mnemonicParsing="false" onAction="#searchPress" text="Search" />
-      <Button fx:id="cancelB" layoutX="122.0" layoutY="359.0" mnemonicParsing="false" onAction="#cancelPress" text="Cancel" />
+      <Button fx:id="searchB" layoutX="277.0" layoutY="359.0" mnemonicParsing="false" onAction="#searchPress" text="Search" />
+      <Button fx:id="cancelB" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#cancelPress" text="Cancel" />
+      <Button fx:id="delB" layoutX="130.0" layoutY="359.0" mnemonicParsing="false" onAction="#delPress" text="Delete" />
    </children>
 </AnchorPane>

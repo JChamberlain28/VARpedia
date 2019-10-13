@@ -18,6 +18,7 @@ public class favSelectionController {
 	
 	@FXML private Button cancelB;
 	@FXML private Button searchB;
+	@FXML private Button delB;
 	@FXML private ListView<String> favourites;
 	private static AppGUIController parent;
 	
@@ -40,6 +41,17 @@ public class favSelectionController {
 		stage.close();
 	}
 	
+	@FXML
+	private void delPress(ActionEvent event) {
+		favourites.getItems().remove(favourites.getSelectionModel().getSelectedIndex());
+		CommandFactory command = new CommandFactory();
+		command.sendCommand("rm favourites.txt" , false);
+		command.sendCommand("touch favourites.txt" , false);
+		for(int i=0; i< favourites.getItems().size();i++) {
+			command.sendCommand("echo \""+ favourites.getItems().get(i)+" \" >> favourites.txt", false);
+		}
+		
+	}
 	
 	@FXML
 	// Changes scene to main scene

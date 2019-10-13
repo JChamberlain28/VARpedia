@@ -49,6 +49,9 @@ public class AppGUIController {
 	private Button continueButton;
 	
 	@FXML
+	private Button favButton;
+	
+	@FXML
 	private CheckBox addFav;
 
 	@FXML
