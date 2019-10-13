@@ -232,7 +232,6 @@ public class AppGUIController {
 
 	}
 	
-	@FXML
 	public void Search(String search) { 
 		wikitInput.setText(search);
 		wikitButton.fire();
