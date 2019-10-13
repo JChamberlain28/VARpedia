@@ -12,9 +12,9 @@
 
 <AnchorPane prefHeight="595.0" prefWidth="1043.0" style="-fx-background-color: rgb(027, 031, 034);" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.VideoCreationController">
    <children>
-      <Button fx:id="submitCreationButton" layoutX="852.0" layoutY="542.0" mnemonicParsing="false" onAction="#handleSubmitCreation" style="-fx-background-color: rgb(069,075,080);" text="Submit Creation" textFill="WHITE">
+      <Button fx:id="submitCreationButton" layoutX="852.0" layoutY="542.0" mnemonicParsing="false" onAction="#handleSubmitCreation" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Submit Creation" textFill="WHITE">
          <font>
-            <Font size="16.0" />
+            <Font name="System Bold" size="16.0" />
          </font></Button>
       <TextField fx:id="nameInput" layoutX="607.0" layoutY="538.0" prefHeight="41.0" prefWidth="230.0">
          <font>
@@ -28,7 +28,7 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-      <Button fx:id="backButton" layoutX="39.0" layoutY="542.0" mnemonicParsing="false" onAction="#handleBackButton" style="-fx-background-color: rgb(069,075,080);" text="Back" textFill="WHITE">
+      <Button fx:id="backButton" layoutX="39.0" layoutY="542.0" mnemonicParsing="false" onAction="#handleBackButton" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Back" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font></Button>
@@ -37,7 +37,7 @@
           <TableColumn fx:id="imageCol" prefWidth="964.0" text="Images" />
         </columns>
       </TableView>
-      <AnchorPane fx:id="loadingPane" prefHeight="595.0" prefWidth="1043.0" style="-fx-background-color: rgb(027, 031, 034);">
+      <AnchorPane fx:id="loadingPane" prefHeight="595.0" prefWidth="1043.0" style="-fx-background-color: rgb(027, 031, 034);" visible="false">
          <children>
             <ImageView fx:id="loadingIcon1" fitHeight="80.0" fitWidth="80.0" layoutX="508.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true">
                <image>
