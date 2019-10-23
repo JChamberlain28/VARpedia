@@ -69,7 +69,7 @@ public class AppGUI extends Application{
 		Scene scene = new Scene(layout);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-
+		primaryStage.setResizable(false);
 
 
 

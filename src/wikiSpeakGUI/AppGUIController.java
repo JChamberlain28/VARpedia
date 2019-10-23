@@ -278,6 +278,7 @@ public class AppGUIController {
 			stage.setScene(new Scene(root));
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.show();
+			stage.setResizable(false);;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
