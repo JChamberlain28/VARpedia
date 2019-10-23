@@ -253,11 +253,11 @@ public class AppGUIController {
 
 		if(addFav.isSelected()) {
 			CommandFactory command = new CommandFactory();
-			List<String> output = command.sendCommand("cat favourites.txt | grep "+wikitInput.getText() +" ", false);
-			if(output.get(0).equals(wikitInput.getText()+" ")) {
+			List<String> output = command.sendCommand("cat favourites.txt | grep "+wikitInput.getText() +"_", false);
+			if(output.get(0).equals(wikitInput.getText()+"_")) {
 				
 			}else {
-				command.sendCommand("echo \""+wikitInput.getText() +" \" >> favourites.txt", false);
+				command.sendCommand("echo \""+wikitInput.getText() +"_\" >> favourites.txt", false);
 			}
 		}
 	}

@@ -24,7 +24,7 @@ public class favSelectionController {
 		
 		CommandFactory command = new CommandFactory();
 		List<String> output = command.sendCommand("cat favourites.txt" , false);
-		String[] split = output.get(0).split(" ");
+		String[] split = output.get(0).split("_");
 		favourites.getItems().addAll(split);
 		favourites.getSelectionModel().selectFirst();
 		if (output.get(0).equals("")){
