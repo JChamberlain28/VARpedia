@@ -303,7 +303,7 @@ public class AudioCreationController {
 			popup.setHeaderText("Please selected between 1-40 words");
 			popup.show();
 		}else {
-
+			
 			//if selected text is same as a previous one adds white space to it to help distinguish 
 			while (selectedAudio.getItems().contains(selected)) {
 				selected = selected + " ";
@@ -338,6 +338,7 @@ public class AudioCreationController {
 						popup.show();
 					}else {
 						selectedAudio.getItems().add(sel);
+						selectedAudio.getSelectionModel().selectFirst();
 						previewButton.setDisable(false);
 						nextButton.setDisable(false);
 						delButton.setDisable(false);
