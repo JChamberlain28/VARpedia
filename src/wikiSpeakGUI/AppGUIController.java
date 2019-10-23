@@ -225,7 +225,7 @@ public class AppGUIController {
 
 		// make temp directory
 		List<String> mktempResult = null;
-		List<String> numberedDescriptionOutput = null;
+		List<String> descriptionOutput = null;
 
 		mktempResult = cf.sendCommand("mktemp -d TempCreation-XXXXX", false);
 
@@ -237,19 +237,15 @@ public class AppGUIController {
 		cf.sendCommand("cat .description.txt " + " | sed 's/\\([.!?]\\) \\([[:upper:]]\\)/\\1\\n\\2/g' > " + String.format("%s/description.txt ", tempFolder), false);
 
 
-		// retrieve description with line numbers.
+
 		// send command 2nd parameter determines if each array item (sentence) should be separated by a new line
-		numberedDescriptionOutput = cf.sendCommand("cat " +  String.format("%s/description.txt ", tempFolder), true);
-
-
-		GetTermImages = new Thread(new GetImagesTask(searchTerm, tempFolder));
-		GetTermImages.start();
+		descriptionOutput = cf.sendCommand("cat " +  String.format("%s/description.txt ", tempFolder), true);
 
 		// switch scene to create view (casting to create controller as type of object known)
 		AudioCreationController createController = (AudioCreationController)ss.newScene("AudioCreationGUI.fxml", event);
 
 		// pass numbered description to be displayed in create view
-		createController.passInfo(numberedDescriptionOutput.get(0), tempFolder, searchTerm, GetTermImages);
+		createController.passInfo(descriptionOutput.get(0), tempFolder, searchTerm, GetTermImages);
 
 		if(addFav.isSelected()) {
 			CommandFactory command = new CommandFactory();

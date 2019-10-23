@@ -71,9 +71,12 @@ public class AudioCreationController {
 
 	@FXML
 	private ImageView combineAudioLoading;
+	private Thread getTermImages;
 
 	@FXML
 	private void initialize() {
+		
+		
 		//formats the TextArea
 		combineAudioLoading.setVisible(false);
 		numberedTextArea.setWrapText(true);
@@ -132,11 +135,22 @@ public class AudioCreationController {
 		audioSentences.clear();
 		savedAudio.clear();
 		count=0;
+		
+		// start downloading images for creation in background
+		getTermImages = new Thread(new GetImagesTask(wikitTerm, tempDir));
+		getTermImages.start();
 	}
 
 	@FXML
 	// Changes scene to main scene
 	private void handleBackToMainView(ActionEvent event) {
+		
+		// stop method deprecated,
+		// however have not found effective alternative for halting image download
+		// without throwing unwanted file not found exception.
+		getTermImages.stop();
+		
+		
 		//removes the temp directory
 		audioSentences.clear();
 		Thread delDir = new Thread(new RemoveDirTask(_tempDir));

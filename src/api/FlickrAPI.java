@@ -3,7 +3,9 @@ package api;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
@@ -12,7 +14,7 @@ import com.flickr4java.flickr.photos.*;
 
 public class FlickrAPI {
 
-	public static String getAPIKey(String key) throws Exception {
+	public static String getAPIKey(String key) {
 
 
 		String config = System.getProperty("user.dir") 
@@ -20,18 +22,31 @@ public class FlickrAPI {
 
 
 		File file = new File(config); 
-		BufferedReader br = new BufferedReader(new FileReader(file)); 
-
-		String line;
-		while ( (line = br.readLine()) != null ) {
-			if (line.trim().startsWith(key)) {
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader(file));
+			
+			
+			String line;
+			try {
+				while ( (line = br.readLine()) != null ) {
+					if (line.trim().startsWith(key)) {
+						br.close();
+						return line.substring(line.indexOf("=")+1).trim();
+					}
+				}
 				br.close();
-				return line.substring(line.indexOf("=")+1).trim();
+				throw new RuntimeException("Couldn't find " + key +" in config file "+file.getName());
+			
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		}
-		br.close();
-		throw new RuntimeException("Couldn't find " + key +" in config file "+file.getName());
-	}
+	
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} 
+		return null;
+}
 
 	public static void downloadImages(String query, String tempDir, int numOfImages) {
 		try {
