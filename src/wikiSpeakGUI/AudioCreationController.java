@@ -129,16 +129,8 @@ public class AudioCreationController {
 		_wikitTerm = wikitTerm;
 		_threadToPassToVidController = thread;
 		
-		// dependant on passed info
-		numberedTextArea.setText(_numberedText);
-		selectedAudio.getItems().clear();
-		audioSentences.clear();
-		savedAudio.clear();
-		count=0;
-		
-		// start downloading images for creation in background
-		getTermImages = new Thread(new GetImagesTask(wikitTerm, tempDir));
-		getTermImages.start();
+		passInfoDependents();
+
 	}
 
 	@FXML
@@ -458,5 +450,21 @@ public class AudioCreationController {
 		}else {
 			return "-eval \"(voice_akl_nz_cw_cg_cg)\"";
 		}
+	}
+	
+	
+	
+	// calls code dependent on variables set in passInfo. Therefore run
+	// once these variables are available.
+	private void passInfoDependents() {
+		numberedTextArea.setText(_numberedText);
+		selectedAudio.getItems().clear();
+		audioSentences.clear();
+		savedAudio.clear();
+		count=0;
+		
+		// start downloading images for creation in background
+		getTermImages = new Thread(new GetImagesTask(_wikitTerm, _tempDir));
+		getTermImages.start();
 	}
 }

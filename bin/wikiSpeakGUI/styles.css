@@ -42,16 +42,22 @@
 
 
 
- .table-view .placeholder .label {
+.table-view .placeholder .label {
      -fx-text-fill: white;
  }
  
-  .table-view {
+ .table-view {
      -fx-font-size: 12pt;
  }
 
 
-   .list-view {
+ .list-view {
      -fx-font-size: 14pt;
+ }
+ 
+ 
+.slider .axis { 
+	-fx-tick-label-fill: white;
+	-fx-tick-label-font-size: 16pt;
  }
 
