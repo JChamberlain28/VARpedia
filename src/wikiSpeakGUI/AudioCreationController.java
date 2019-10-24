@@ -88,7 +88,6 @@ public class AudioCreationController {
 		//adds voice options in a drop down box
 		voiceSelect.getItems().add("Default Voice");
 		voiceSelect.getItems().add("Akl_NZ(male) Voice");
-		voiceSelect.getItems().add("Akl_NZ(female) Voice");
 		voiceSelect.getSelectionModel().selectFirst();
 		
 		numberedTextArea.setText(savedText);
@@ -439,10 +438,8 @@ public class AudioCreationController {
 		String selected = voiceSelect.getSelectionModel().getSelectedItem();
 		if (selected.equals("Default Voice")) {
 			return "-eval \"(voice_kal_diphone)\"";
-		}else if (selected.equals("Akl_NZ(male) Voice")) {
-			return "-eval \"(voice_akl_nz_jdt_diphone)\"";
 		}else {
-			return "-eval \"(voice_akl_nz_cw_cg_cg)\"";
+			return "-eval \"(voice_akl_nz_jdt_diphone)\"";
 		}
 	}
 }
