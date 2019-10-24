@@ -77,7 +77,7 @@ public class AppGUI extends Application{
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
 			public void handle(WindowEvent e) {
-
+				command.sendCommand("rm -r TempCreation-*" , false);
 				command.sendCommand("rm -f .description.txt", false);
 				Platform.exit();
 			}
