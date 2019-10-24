@@ -1,14 +1,19 @@
 package wikiSpeakGUI;
 
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
 import javafx.application.Platform;
+import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -28,17 +33,21 @@ public class UpdateImageListTask extends Task<Void>{
 	private Thread _threadToWaitOn;
 	private AnchorPane _itemToHide;
 	List<String> _imageNames;
+	private BooleanBinding _submitBinder;
+	private Button _submit;
 
 
 
 	public UpdateImageListTask(Thread threadToWaitOn, AnchorPane itemToHide, TableView<CellPane> imageView,
-			TableColumn<CellPane, HBox> colForUpdate, String tempDir) {
+			TableColumn<CellPane, HBox> colForUpdate, String tempDir, BooleanBinding submitBinder, Button submit) {
 
 		_threadToWaitOn = threadToWaitOn;
 		_itemToHide = itemToHide;
 		_imageView = imageView;
 		_tempDir = tempDir;
 		_colForUpdate = colForUpdate;
+		_submitBinder = submitBinder;
+		_submit = submit;
 
 	}
 
@@ -84,6 +93,30 @@ public class UpdateImageListTask extends Task<Void>{
 					// instantiates custom layout pane class used for setting TableView cell value type
 					CheckBox checkBox = new CheckBox();
 					HBox hbox = new HBox(50, imageView, checkBox);
+					
+					
+					// runs check to see if any image is selected upon changing state of a checkBox 
+					// (for greying out submit button when no images selected)
+					checkBox.setOnAction(new EventHandler<ActionEvent>() {
+					    @Override public void handle(ActionEvent e) {
+					    	boolean atLeastOneSel = false;
+					    	
+					    	for (CellPane cell : imageItems) {
+					    		CheckBox currentCheckBox = (CheckBox) cell.getPane().getChildren().get(1);
+					    		if (currentCheckBox.isSelected()) {
+					    			atLeastOneSel = true;
+					    		}
+					    	}
+					    	if (!atLeastOneSel) {
+					        _submit.disableProperty().unbind();
+					        _submit.setDisable(true);
+					    	}
+					        else {
+					        	_submit.disableProperty().bind(_submitBinder);
+					        }
+					    }
+					});
+					
 					hbox.setAlignment(Pos.CENTER);
 					CellPane cell = new CellPane(hbox);
 

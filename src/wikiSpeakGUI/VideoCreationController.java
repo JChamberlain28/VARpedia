@@ -4,13 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javafx.beans.Observable;
+import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -57,7 +64,7 @@ public class VideoCreationController {
 	private Button backButton;
 	
 	private Thread _imageDownloadThread = null;
-	
+
 	
 
 
@@ -87,22 +94,25 @@ public class VideoCreationController {
 			}
 		});
 		
-
-		
+		// disable submit button and make booleanBinding linked to name text field available.
+		// this binding is only bound to the button when at least one image is selected, as to prevent
+		// no images being included
+		submitCreationButton.setDisable(true);
 		
 		bb = new BooleanBinding() {
 		    {
+
 		        super.bind(nameInput.textProperty());
+
 		    }
 
 		    @Override
 		    protected boolean computeValue() {
-		        return ((nameInput.getText().trim().isEmpty())||(imageView.getItems().size() == 0));
+		    	
+		        return (nameInput.getText().trim().isEmpty());
 		    }
 		};
 
-
-		submitCreationButton.disableProperty().bind(bb);
 
 		
 		
@@ -219,7 +229,7 @@ public class VideoCreationController {
 	
 	private void runTasksWaitingOnInfo(){
 		Thread updateImageListThread = new Thread(new UpdateImageListTask(_imageDownloadThread, loadingPane, imageView,
-				imageCol, _tempDir));
+				imageCol, _tempDir, bb, submitCreationButton));
 		updateImageListThread.setDaemon(true);
 		updateImageListThread.start();
 	}
