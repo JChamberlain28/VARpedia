@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.event.Event;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,6 +28,7 @@ public class UpdateCreationListTask extends Task<Void> {
 	private TableColumn<Creation, String> ratingCol;
 	private TableColumn<Creation, String> creationDateCol;
 	private TableColumn<Creation, String> viewDateCol;
+	private AppGUIController _controller;
 
 
 
@@ -35,13 +37,14 @@ public class UpdateCreationListTask extends Task<Void> {
 
 	public UpdateCreationListTask(TableView<Creation> listToUpdate, TableColumn<Creation, String> col1, TableColumn<Creation, String> col2,
 			TableColumn<Creation, String> col3, TableColumn<Creation, String> col4, Button delButton, Button playButton,
-			Text creationNoText, List<String> currentlyGenerating) {
+			Text creationNoText, List<String> currentlyGenerating, AppGUIController controller) {
 
 		_listToUpdate = listToUpdate;
 		_delButton = delButton;
 		_playButton = playButton;
 		_creationNoText = creationNoText;
 		_currentlyGenerating = currentlyGenerating;
+		_controller = controller;
 		this.nameCol = col1;
 		this.ratingCol = col2;
 		this.creationDateCol = col3;
@@ -144,10 +147,8 @@ public class UpdateCreationListTask extends Task<Void> {
 					_playButton.setDisable(true);
 				}
 
-
-
-
-
+				// manually triggers sortBy handler to sort the newly updated list
+				_controller.sortByChange(new Event(null));
 			}
 
 		});

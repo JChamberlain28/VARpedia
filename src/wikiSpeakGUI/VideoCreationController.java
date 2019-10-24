@@ -187,6 +187,7 @@ public class VideoCreationController {
 			if (result.get() == buttonTypeYes){
 
 				command.sendCommand("rm \"creations/" + name + ".mp4\"", false);
+				command.sendCommand("rm -r \"creations/" + name + "\"", false);
 			} 
 			else {
 				abort = true;

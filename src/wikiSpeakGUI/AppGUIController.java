@@ -24,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
 import javafx.scene.control.TableColumn;
@@ -112,6 +113,10 @@ public class AppGUIController {
 	
 	@FXML
 	private AnchorPane fiveDayKey;
+	
+	@FXML
+	private ComboBox<String> sortBy;
+
 
 
 
@@ -124,6 +129,12 @@ public class AppGUIController {
 		continueButton.setDisable(true);
 		wikitResult.setWrapText(true);
 		wikitResult.setEditable(false);
+		
+		sortBy.setStyle("-fx-background-color: rgb(049,055,060); -fx-control-inner-background: rgb(049,055,060); "
+				+ "-fx-text-fill: rgb(255,255,255); -fx-focus-color: rgb(255,255,255);");
+		sortBy.getItems().addAll("Date Viewed", "Confidence");
+		sortBy.getSelectionModel().select(0);
+		sortByChange(new Event(null));
 
 		wikitResult.setStyle("-fx-control-inner-background: rgb(049,055,060); "
 				+ "-fx-text-fill: rgb(255,255,255); -fx-focus-color: rgb(255,255,255);");
@@ -131,6 +142,8 @@ public class AppGUIController {
 				+ " -fx-text-fill: rgb(255,255,255); -fx-focus-color: rgb(255,255,255);");
 		creationList.setStyle("-fx-text-fill: white; -fx-control-inner-background: rgb(049,055,060); -fx-focus-color: rgb(255,255,255);");
 		creationList.setPlaceholder(new Label("No creations to display, click create to start"));
+		
+
 		updateCreationList();
 
 		// block characters that are not accepted by wikit command
@@ -196,6 +209,7 @@ public class AppGUIController {
 		    }
 		});
 		
+
 		
 		
 		
@@ -210,19 +224,52 @@ public class AppGUIController {
 		        return ((wikitInput.getText().trim().isEmpty()));
 		    }
 		};
+		
+		
 
+		// edits default sorting so Never Viewed is always highest on the list
+		// for sort by date viewed
+		lastViewed.setComparator((date1, date2) -> {
+		
+		int result = 0;
+		if (date1.equals("Never Viewed")) {
+			result = -1;
+		}
+		else if (date2.equals("Never Viewed")) {
+			result = 1;
+		} else {
+			result = date1.compareTo(date2);
+		}
+		return result;
+		});
 		
 		wikitButton.disableProperty().bind(bb);
-
+		
 	}
-
-
 
 
 
 	// event handling
 
 
+	@FXML
+	public void sortByChange(Event event) {
+		if (creationList.getItems().size() != 0) {
+			if (sortBy.getSelectionModel().getSelectedItem().toString().equals("Date Viewed")) {
+				creationList.getSortOrder().clear();
+				creationList.getSortOrder().add(lastViewed);
+			} else {
+				creationList.getSortOrder().clear();
+				creationList.getSortOrder().add(confidenceRating);
+			}
+			
+			creationList.sort();
+		}
+	}
+	
+	
+	
+	
 
 	// sets TableView to default selection when triggered (first item)
 	@FXML
@@ -358,7 +405,6 @@ public class AppGUIController {
 	@FXML
 	private void handleDeleteButton(Event event) { 
 
-
 		// get selected creation name to delete
 		String selection = creationList.getSelectionModel().getSelectedItem().getName();
 
@@ -420,8 +466,9 @@ public class AppGUIController {
 
 	// helper function to update all lists
 	public void updateCreationList() {
-		Thread updateCreationList = new Thread(new UpdateCreationListTask(creationList, name, confidenceRating, creationDate, lastViewed, deleteButton, playButton, creationNoText, VideoCreationController.getCurrentlyGenerating()));
+		Thread updateCreationList = new Thread(new UpdateCreationListTask(creationList, name, confidenceRating, creationDate, lastViewed, deleteButton, playButton, creationNoText, VideoCreationController.getCurrentlyGenerating(), this));
 		updateCreationList.start();
+		//this.sortByChange(new Event(null));
 	}
 
 

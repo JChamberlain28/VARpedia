@@ -57,7 +57,7 @@ public class AppGUI extends Application{
 
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("AppGUI.fxml"));
-
+		AppGUIController controller = (AppGUIController) loader.getController();
 		Parent layout = null;
 		try {
 			layout = loader.load();
@@ -65,12 +65,10 @@ public class AppGUI extends Application{
 
 			e2.printStackTrace();
 		}
-
 		Scene scene = new Scene(layout);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		primaryStage.setResizable(false);
-
 
 
 		// remove .description.txt upon closing application to prevent left over files
