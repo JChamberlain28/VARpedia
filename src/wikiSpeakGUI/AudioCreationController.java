@@ -197,9 +197,9 @@ public class AudioCreationController {
 					}
 					command.sendCommand("sox -M " + _tempDir + "/finalMusic.wav " +_tempDir + "/audio.wav " +_tempDir +"/withMusic.wav", false);
 					command.sendCommand("rm "+ _tempDir +"/finalMusic.wav" , false);
-					command.sendCommand("sox "+_tempDir + "/withMusic.wav -c 1 "+_tempDir + "/audio.wav ", false);
-					
-					//command.sendCommand("mv "+_tempDir + "/withMusic.wav " +_tempDir + "/audio.wav ", false);
+					command.sendCommand("sox "+_tempDir + "/withMusic.wav -c 1 "+_tempDir + "/audioLow.wav ", false);
+					command.sendCommand("rm "+ _tempDir +"/audio.wav" , false);
+					command.sendCommand("sox "+_tempDir + "/audioLow.wav "+_tempDir + "/audio.wav vol 10 dB 2>/dev/null", false);
 				}
 				
 				nextButton.setDisable(false);
