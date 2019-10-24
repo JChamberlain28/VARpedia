@@ -71,8 +71,8 @@ public class FlickrAPI {
 				BufferedImage image = photos.getImage(photo,Size.LARGE);
 				String filename = photo.getId()+".jpg";
 				File outputfile = new File(tempDir,filename);
-				ImageIO.write(image, "jpg", outputfile);
-
+				ImageIO.write(image, "jpg", outputfile); // Causing exceptions!! ##
+				// clicked next very quick and empty list appeared, not (downloading images) ####
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

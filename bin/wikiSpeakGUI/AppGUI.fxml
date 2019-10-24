@@ -14,14 +14,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="595.0" prefWidth="1043.0" style="-fx-background-color: rgb(027, 031, 034);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.AppGUIController">
+<AnchorPane prefHeight="595.0" prefWidth="1043.0" style="-fx-background-color: rgb(027, 031, 034);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.AppGUIController">
    <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
       <TabPane prefHeight="595.0" prefWidth="1043.0" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab onSelectionChanged="#creationListDefaultSelect" style="-fx-background-color: rgb(027, 031, 034);" text="Play / Delete">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="533.0" prefWidth="1029.0" style="-fx-background-color: rgb(027, 031, 034);">
                      <children>
+                        <AnchorPane fx:id="fiveDayKey" layoutX="454.0" layoutY="9.0" prefHeight="26.0" prefWidth="29.0" style="-fx-background-color: red;" visible="false" />
                         <Text fill="WHITE" layoutX="27.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select creation to play / delete:" wrappingWidth="534.7294921875">
                            <font>
                               <Font size="22.0" />
@@ -31,7 +33,7 @@
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font></Button>
-                        <Text fx:id="creationNoText" fill="WHITE" layoutX="27.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of creations:" wrappingWidth="534.7294921875">
+                        <Text fx:id="creationNoText" fill="WHITE" layoutX="27.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of creations:" wrappingWidth="534.7294921875">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -40,7 +42,7 @@
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font></Button>
-                        <TableView fx:id="creationList" layoutX="28.0" layoutY="64.0" prefHeight="420.0" prefWidth="989.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="27.0">
+                        <TableView fx:id="creationList" layoutX="28.0" layoutY="77.0" prefHeight="407.0" prefWidth="989.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="27.0">
                           <columns>
                             <TableColumn fx:id="name" prefWidth="323.0" text="Name" />
                             <TableColumn fx:id="confidenceRating" prefWidth="236.0" text="Confidence Rating" />
@@ -48,6 +50,17 @@
                               <TableColumn fx:id="lastViewed" prefWidth="207.0" text="Last Viewed" />
                           </columns>
                         </TableView>
+                        <Text fx:id="fiveDayWarning" fill="WHITE" layoutX="494.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creation(s) not viewed in at least 5 days" visible="false" wrappingWidth="534.7294921875">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="notViewedWarning" fill="WHITE" layoutX="494.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creation(s) never viewed" visible="false" wrappingWidth="534.7294921875">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                        <AnchorPane fx:id="notViewedKey" layoutX="454.0" layoutY="43.0" prefHeight="26.0" prefWidth="29.0" style="-fx-background-color: orange;" visible="false" />
                      </children></AnchorPane>
             </content>
           </Tab>

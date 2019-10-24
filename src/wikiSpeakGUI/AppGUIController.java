@@ -32,6 +32,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -99,6 +100,18 @@ public class AppGUIController {
 
 	@FXML
 	private ImageView wikitLoading;
+	
+	@FXML
+	private Text notViewedWarning;
+	
+	@FXML
+	private AnchorPane notViewedKey;
+	
+	@FXML
+	private Text fiveDayWarning;
+	
+	@FXML
+	private AnchorPane fiveDayKey;
 
 
 
@@ -144,6 +157,9 @@ public class AppGUIController {
 		    				+ " -fx-focus-color: rgb(255,255,255);");
 		        }
 		        else if (item.getLastViewed().equals("Never Viewed")) {
+		        	// not viewed warning visible
+		        	notViewedWarning.setVisible(true);
+		        	notViewedKey.setVisible(true);
 		        	setStyle("-fx-control-inner-background: rgb(180, 115, 000); -fx-selection-bar: orange; -fx-selection-bar-non-focused: orange;");
 		        }
 				else {
@@ -163,6 +179,10 @@ public class AppGUIController {
 					
 					// highlight creations red that havent been viewed in 5 days
 					if (daysElapsed >= 5) {
+						// five day warning visible
+						fiveDayWarning.setVisible(true);
+						fiveDayKey.setVisible(true);
+						
 						setStyle("-fx-control-inner-background: rgb(180, 000, 000); -fx-selection-bar: red; -fx-selection-bar-non-focused: red;");
 					}
 					else {
@@ -369,7 +389,11 @@ public class AppGUIController {
 
 				cf.sendCommand("rm \"creations/" + selection + ".mp4\"", false);
 				cf.sendCommand("rm -rf \"creations/metadata/" + selection + "\"", false);
-
+	        	
+				fiveDayWarning.setVisible(false);
+				fiveDayKey.setVisible(false);
+				notViewedWarning.setVisible(false);
+	        	notViewedKey.setVisible(false);
 
 				updateCreationList();
 			} else {
