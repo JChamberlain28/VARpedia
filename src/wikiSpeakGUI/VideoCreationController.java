@@ -81,8 +81,8 @@ public class VideoCreationController {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				if (!newValue.matches("[^\\\\./$&:;]*")) {
-					nameInput.setText(newValue.replaceAll("[\\\\./$&:;]", ""));
+				if (!newValue.matches("[^\\\\./$&:;\"]*")) {
+					nameInput.setText(newValue.replaceAll("[\\\\./$&:;\"]", ""));
 				}
 			}
 		});
