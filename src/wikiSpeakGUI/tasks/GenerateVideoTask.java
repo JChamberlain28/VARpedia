@@ -1,4 +1,4 @@
-package wikiSpeakGUI;
+package wikiSpeakGUI.tasks;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -10,6 +10,11 @@ import javafx.concurrent.Task;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
+import wikiSpeakGUI.CellPane;
+import wikiSpeakGUI.CommandFactory;
+import wikiSpeakGUI.TrackedImage;
+import wikiSpeakGUI.controller.AppGUIController;
+import wikiSpeakGUI.controller.VideoCreationController;
 
 public class GenerateVideoTask extends Task<Void>  {
 

@@ -1,4 +1,4 @@
-package wikiSpeakGUI;
+package wikiSpeakGUI.controller;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import wikiSpeakGUI.CommandFactory;
 
 public class favSelectionController {
 	

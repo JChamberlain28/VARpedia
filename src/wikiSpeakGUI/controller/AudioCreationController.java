@@ -1,4 +1,4 @@
-package wikiSpeakGUI;
+package wikiSpeakGUI.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import wikiSpeakGUI.CommandFactory;
+import wikiSpeakGUI.SceneSwitcher;
+import wikiSpeakGUI.tasks.GetImagesTask;
+import wikiSpeakGUI.tasks.RemoveDirTask;
 import javafx.scene.control.Alert.AlertType;
 
 public class AudioCreationController {

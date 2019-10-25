@@ -1,6 +1,7 @@
-package wikiSpeakGUI;
+package wikiSpeakGUI.tasks;
 
 import javafx.concurrent.Task;
+import wikiSpeakGUI.CommandFactory;
 
 public class RemoveDirTask  extends Task<Void> {
 	

@@ -24,7 +24,7 @@ public class SceneSwitcher {
 		Object controller=null;
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource(FXML));
+			loader.setLocation(getClass().getResource("view/" + FXML));
 			Parent ViewParent;
 			ViewParent = loader.load();
 			controller = loader.getController();

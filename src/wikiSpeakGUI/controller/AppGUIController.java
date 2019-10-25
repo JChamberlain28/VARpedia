@@ -1,4 +1,4 @@
-package wikiSpeakGUI;
+package wikiSpeakGUI.controller;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -38,6 +38,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import wikiSpeakGUI.CommandFactory;
+import wikiSpeakGUI.Creation;
+import wikiSpeakGUI.SceneSwitcher;
+import wikiSpeakGUI.tasks.UpdateCreationListTask;
+import wikiSpeakGUI.tasks.WikitSearchTask;
 
 public class AppGUIController {
 
@@ -338,10 +343,13 @@ public class AppGUIController {
 	@FXML
 	private void handleFavSearch(ActionEvent event) { 
 		try {
-			favSelectionController controller = new favSelectionController();
+			
+			FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("../view/favSelection.fxml"));
+			Parent root = fxmlloader.load();
+			
+			favSelectionController controller = (favSelectionController) fxmlloader.getController();
 			controller.setParent(this);
-			FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("favSelection.fxml"));
-			Parent root = (Parent)fxmlloader.load();
+			
 			Stage stage = new Stage();
 			stage.setScene(new Scene(root));
 			stage.initModality(Modality.APPLICATION_MODAL);

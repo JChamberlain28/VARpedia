@@ -12,9 +12,10 @@ import javafx.event.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.stage.*;
+import wikiSpeakGUI.controller.AppGUIController;
 
 
-public class AppGUI extends Application{
+public class Main extends Application{
 
 
 	static String _jarDir;
@@ -23,7 +24,7 @@ public class AppGUI extends Application{
 	public static void main(String[] args) {
 
 		// get directory of jar
-		CodeSource codeSource = AppGUI.class.getProtectionDomain().getCodeSource();
+		CodeSource codeSource = Main.class.getProtectionDomain().getCodeSource();
 		File runnableJar = null;
 
 		try {
@@ -56,8 +57,7 @@ public class AppGUI extends Application{
 		primaryStage.setTitle("VARpedia");
 
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("AppGUI.fxml"));
-		AppGUIController controller = (AppGUIController) loader.getController();
+		loader.setLocation(getClass().getResource("view/AppGUI.fxml"));
 		Parent layout = null;
 		try {
 			layout = loader.load();

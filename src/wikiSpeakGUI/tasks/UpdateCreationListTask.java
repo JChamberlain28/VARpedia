@@ -1,4 +1,4 @@
-package wikiSpeakGUI;
+package wikiSpeakGUI.tasks;
 
 import java.util.List;
 
@@ -11,6 +11,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import wikiSpeakGUI.CommandFactory;
+import wikiSpeakGUI.Creation;
+import wikiSpeakGUI.controller.AppGUIController;
 import javafx.scene.control.Button;
 
 public class UpdateCreationListTask extends Task<Void> {

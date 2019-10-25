@@ -1,4 +1,4 @@
-package wikiSpeakGUI;
+package wikiSpeakGUI.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +24,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import wikiSpeakGUI.CellPane;
+import wikiSpeakGUI.CommandFactory;
+import wikiSpeakGUI.SceneSwitcher;
+import wikiSpeakGUI.tasks.GenerateVideoTask;
+import wikiSpeakGUI.tasks.UpdateImageListTask;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;

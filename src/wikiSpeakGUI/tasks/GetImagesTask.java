@@ -1,8 +1,9 @@
-package wikiSpeakGUI;
+package wikiSpeakGUI.tasks;
 
 
 import api.FlickrAPI;
 import javafx.concurrent.Task;
+import wikiSpeakGUI.CommandFactory;
 
 
 public class GetImagesTask extends Task<Void>{

@@ -1,4 +1,4 @@
-package wikiSpeakGUI;
+package wikiSpeakGUI.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +16,7 @@ import javafx.scene.media.MediaPlayer.Status;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import wikiSpeakGUI.SceneSwitcher;
 
 public class PlayController {
 	
@@ -100,7 +101,7 @@ public class PlayController {
 		try {
 			rateCreationController rate = new rateCreationController();
 			rate.passInfo(creation);
-			FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("rateCreation.fxml"));
+			FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("../view/rateCreation.fxml"));
 			Parent root = (Parent)fxmlloader.load();
 			Stage stage = new Stage();
 			stage.setScene(new Scene(root));

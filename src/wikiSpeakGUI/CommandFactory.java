@@ -36,7 +36,7 @@ public List<String> sendCommand(String command, boolean addNewLines) {
 			ProcessBuilder builder = new ProcessBuilder("/bin/bash", "-c", command);
 			
 			// set directory for commands to be executed in to runnable jar directory
-			builder.directory(new File(AppGUI._jarDir));
+			builder.directory(new File(Main._jarDir));
 			process = builder.start();
 			pastProcesses.add(process);
 			

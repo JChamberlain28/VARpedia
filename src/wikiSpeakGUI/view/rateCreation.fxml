@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="255.0" prefWidth="461.0" style="-fx-background-color: rgb(027, 031, 034);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.rateCreationController">
+<AnchorPane prefHeight="255.0" prefWidth="461.0" style="-fx-background-color: rgb(027, 031, 034);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.controller.rateCreationController">
    <children>
       <Text fill="WHITE" layoutX="41.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How confident are you?">
          <font>

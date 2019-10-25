@@ -1,4 +1,4 @@
-package wikiSpeakGUI;
+package wikiSpeakGUI.tasks;
 
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -22,6 +22,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import wikiSpeakGUI.CellPane;
+import wikiSpeakGUI.CommandFactory;
+import wikiSpeakGUI.TrackedImage;
 
 public class UpdateImageListTask extends Task<Void>{
 

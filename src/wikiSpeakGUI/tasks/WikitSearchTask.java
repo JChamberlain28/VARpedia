@@ -1,4 +1,4 @@
-package wikiSpeakGUI;
+package wikiSpeakGUI.tasks;
 
 
 import java.util.List;
@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import wikiSpeakGUI.CommandFactory;
 import javafx.scene.control.Alert.AlertType;
 
 public class WikitSearchTask extends Task<Void> {
