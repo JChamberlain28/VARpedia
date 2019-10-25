@@ -33,17 +33,17 @@
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>
-      <ListView fx:id="selectedAudio" layoutX="626.0" layoutY="105.0" prefHeight="313.0" prefWidth="357.0" />
+      <ListView fx:id="selectedAudio" layoutX="626.0" layoutY="105.0" prefHeight="313.0" prefWidth="346.0" />
       <Button fx:id="delButton" layoutX="697.0" layoutY="445.0" mnemonicParsing="false" onAction="#handleDelPress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="delete" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>
-      <Button fx:id="upButton" layoutX="900.0" layoutY="445.0" mnemonicParsing="false" onAction="#upPress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="↑" textFill="WHITE">
+      <Button fx:id="upButton" layoutX="985.0" layoutY="226.0" mnemonicParsing="false" onAction="#upPress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="↑" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="downButton" layoutX="945.0" layoutY="445.0" mnemonicParsing="false" onAction="#downPress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="↓" textFill="WHITE">
+      <Button fx:id="downButton" layoutX="985.0" layoutY="262.0" mnemonicParsing="false" onAction="#downPress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="↓" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

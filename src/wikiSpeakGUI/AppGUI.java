@@ -77,7 +77,11 @@ public class AppGUI extends Application{
 			public void handle(WindowEvent e) {
 
 				command.sendCommand("rm -f .description.txt", false);
+				for( Process p : CommandFactory.pastProcesses) {
+					p.destroy();
+				}
 				Platform.exit();
+				System.exit(0);
 			}
 		});
 

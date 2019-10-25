@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class SceneSwitcher {
 
-	
+
 	public SceneSwitcher() {
 		
 	}

@@ -13,6 +13,11 @@ import java.util.List;
 // format [stdOutput, stdError]
 public class CommandFactory {
 	
+	// used to kill bash processes on exiting system
+	public static List<Process> pastProcesses = new ArrayList<Process>();
+	
+	private Process process = null;
+	
 	public CommandFactory() {
 		
 	}
@@ -23,7 +28,6 @@ public List<String> sendCommand(String command, boolean addNewLines) {
 		
 		List<String> output = new ArrayList<String>();
 		List<String> error = new ArrayList<String>();
-		Process process = null;
 		InputStream stdout = null;
 		InputStream stderr = null;
 		
@@ -34,6 +38,8 @@ public List<String> sendCommand(String command, boolean addNewLines) {
 			// set directory for commands to be executed in to runnable jar directory
 			builder.directory(new File(AppGUI._jarDir));
 			process = builder.start();
+			pastProcesses.add(process);
+			
 			stdout = process.getInputStream();
 			stderr = process.getErrorStream();
 			
@@ -114,6 +120,12 @@ public List<String> sendCommand(String command, boolean addNewLines) {
 
 		
 		return result;	
+	}
+
+
+	// allows the process to be accessed in order to kill it if needed
+	public Process getProcess() {
+		return process;
 	}
 	
 }
