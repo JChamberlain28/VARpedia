@@ -91,7 +91,6 @@ public class AudioCreationController {
 		//adds voice options in a drop down box
 		voiceSelect.getItems().add("Default Voice");
 		voiceSelect.getItems().add("Akl_NZ(male) Voice");
-		voiceSelect.getItems().add("Akl_NZ(female) Voice");
 		voiceSelect.getSelectionModel().selectFirst();
 		
 		numberedTextArea.setText(savedText);
@@ -204,8 +203,9 @@ public class AudioCreationController {
 					}
 					command.sendCommand("sox -M " + _tempDir + "/finalMusic.wav " +_tempDir + "/audio.wav " +_tempDir +"/withMusic.wav", false);
 					command.sendCommand("rm "+ _tempDir +"/finalMusic.wav" , false);
-					command.sendCommand("sox "+_tempDir + "/withMusic.wav -c 1 "+_tempDir + "/audio.wav ", false);
-
+					command.sendCommand("sox "+_tempDir + "/withMusic.wav -c 1 "+_tempDir + "/audioLow.wav ", false);
+					command.sendCommand("rm "+ _tempDir +"/audio.wav" , false);
+					command.sendCommand("sox "+_tempDir + "/audioLow.wav "+_tempDir + "/audio.wav vol 10 dB 2>/dev/null", false);
 				}
 				
 				nextButton.setDisable(false);
@@ -444,10 +444,8 @@ public class AudioCreationController {
 		String selected = voiceSelect.getSelectionModel().getSelectedItem();
 		if (selected.equals("Default Voice")) {
 			return "-eval \"(voice_kal_diphone)\"";
-		}else if (selected.equals("Akl_NZ(male) Voice")) {
-			return "-eval \"(voice_akl_nz_jdt_diphone)\"";
 		}else {
-			return "-eval \"(voice_akl_nz_cw_cg_cg)\"";
+			return "-eval \"(voice_akl_nz_jdt_diphone)\"";
 		}
 	}
 	

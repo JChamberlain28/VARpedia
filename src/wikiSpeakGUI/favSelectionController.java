@@ -51,7 +51,7 @@ public class favSelectionController {
 		command.sendCommand("rm favourites.txt" , false);
 		command.sendCommand("touch favourites.txt" , false);
 		for(int i=0; i< favourites.getItems().size();i++) {
-			command.sendCommand("echo \""+ favourites.getItems().get(i)+" \" >> favourites.txt", false);
+			command.sendCommand("echo \""+ favourites.getItems().get(i)+"_\" >> favourites.txt", false);
 		}
 		
 	}
