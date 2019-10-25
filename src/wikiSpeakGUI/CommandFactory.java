@@ -123,9 +123,9 @@ public List<String> sendCommand(String command, boolean addNewLines) {
 	}
 
 
-	// allows the process to be accessed in order to kill it if needed
-	public Process getProcess() {
-		return process;
+	// allows the bash process to be killed before it has finished
+	public void killCurrentProcess() {
+		process.destroy();
 	}
 	
 }

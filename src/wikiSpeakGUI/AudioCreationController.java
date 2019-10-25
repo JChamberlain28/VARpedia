@@ -205,8 +205,7 @@ public class AudioCreationController {
 					command.sendCommand("sox -M " + _tempDir + "/finalMusic.wav " +_tempDir + "/audio.wav " +_tempDir +"/withMusic.wav", false);
 					command.sendCommand("rm "+ _tempDir +"/finalMusic.wav" , false);
 					command.sendCommand("sox "+_tempDir + "/withMusic.wav -c 1 "+_tempDir + "/audio.wav ", false);
-					
-					//command.sendCommand("mv "+_tempDir + "/withMusic.wav " +_tempDir + "/audio.wav ", false);
+
 				}
 				
 				nextButton.setDisable(false);
@@ -234,7 +233,7 @@ public class AudioCreationController {
 		if (numberedTextArea.getSelectedText().isEmpty()) {
 			Alert popup = new Alert(AlertType.INFORMATION);
 			popup.setTitle("Select a chuck to add");
-			popup.setHeaderText("No selected text detected. please select text to add");
+			popup.setHeaderText("No selected text detected. Please highlight some text");
 			popup.show();
 		}else if (words.length + 1> 40) {
 			Alert popup = new Alert(AlertType.INFORMATION);

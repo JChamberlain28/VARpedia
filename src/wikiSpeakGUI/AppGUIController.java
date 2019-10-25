@@ -161,6 +161,7 @@ public class AppGUIController {
 		
 		
 		// set colouring of rows in creation table depending on if viewed or how long ago viewed
+		// also controls what warnings are displayed regarding the reminder system
 		creationList.setRowFactory(tv -> new TableRow<Creation>() {
 		    @Override
 		    protected void updateItem(Creation item, boolean empty) {
@@ -252,6 +253,8 @@ public class AppGUIController {
 	// event handling
 
 
+	
+	// allows user to change the sort order of creations via a ComboBox
 	@FXML
 	public void sortByChange(Event event) {
 		if (creationList.getItems().size() != 0) {
@@ -311,9 +314,11 @@ public class AppGUIController {
 		// switch scene to create view (casting to create controller as type of object known)
 		AudioCreationController createController = (AudioCreationController)ss.newScene("AudioCreationGUI.fxml", event);
 
-		// pass numbered description to be displayed in create view
+		// pass formatted description to be displayed in create view
 		createController.passInfo(descriptionOutput.get(0), tempFolder, searchTerm, GetTermImages);
 
+		
+		// adds search term to favorites list if selected
 		if(addFav.isSelected()) {
 			CommandFactory command = new CommandFactory();
 			List<String> output = command.sendCommand("cat favourites.txt | grep "+wikitInput.getText() +"_", false);
@@ -348,6 +353,8 @@ public class AppGUIController {
 
 	}
 	
+	
+	// is called from favorites screen to search the selected favorites term
 	public void Search(String search) { 
 		wikitInput.setText(search);
 		wikitButton.fire();
@@ -468,7 +475,6 @@ public class AppGUIController {
 	public void updateCreationList() {
 		Thread updateCreationList = new Thread(new UpdateCreationListTask(creationList, name, confidenceRating, creationDate, lastViewed, deleteButton, playButton, creationNoText, VideoCreationController.getCurrentlyGenerating(), this));
 		updateCreationList.start();
-		//this.sortByChange(new Event(null));
 	}
 
 
