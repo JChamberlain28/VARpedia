@@ -75,6 +75,7 @@ public class AudioCreationController {
 
 	@FXML
 	private ImageView combineAudioLoading;
+	private static Boolean downloadInProgress;
 	private Thread getTermImages;
 	private CommandFactory speakCmd= new CommandFactory();
 
@@ -107,19 +108,6 @@ public class AudioCreationController {
 		}
 
 		savedAudio.clear();
-
-		//disables buttons 
-		if((selectedAudio.getItems().size() == 0)) {
-			previewButton.setDisable(true);
-			nextButton.setDisable(true);
-			delButton.setDisable(true);
-			upButton.setDisable(true);
-			downButton.setDisable(true);	
-			
-			
-			
-
-		}
 	}
 
 
@@ -144,8 +132,9 @@ public class AudioCreationController {
 		// stop method deprecated,
 		// however have not found effective alternative for halting image download
 		// without throwing unwanted file not found exception.
-		getTermImages.stop();
-		
+		if(downloadInProgress) {
+			getTermImages.stop();
+		}
 		// if speech playback is happening, stop its process
 		if ((speakButton.getText().equals("Stop")) || (previewButton.getText().equals("Stop"))) {
 			speakCmd.killCurrentProcess();
@@ -218,6 +207,7 @@ public class AudioCreationController {
 				}
 				
 				nextButton.setDisable(false);
+				downloadInProgress=false;
 				Platform.runLater(() -> {
 					combineAudioLoading.setVisible(false);
 					//changes scene when audio finished generating
@@ -277,6 +267,8 @@ public class AudioCreationController {
 							popup.setHeaderText("Voice cannot pronounce the selected text");
 							popup.setContentText("Please try another voice or text selection");
 							popup.show();
+							speakButton.setDisable(false);
+							cancelButton.setDisable(false);
 						});
 					}else {
 						Platform.runLater(()-> {
@@ -484,6 +476,13 @@ public class AudioCreationController {
 		audioSentences.clear();
 		savedAudio.clear();
 		count=0;
+		downloadInProgress=true;
+		
+		previewButton.setDisable(true);
+		nextButton.setDisable(true);
+		delButton.setDisable(true);
+		upButton.setDisable(true);
+		downButton.setDisable(true);
 		
 		// start downloading images for creation in background
 		getTermImages = new Thread(new GetImagesTask(_wikitTerm, _tempDir));
