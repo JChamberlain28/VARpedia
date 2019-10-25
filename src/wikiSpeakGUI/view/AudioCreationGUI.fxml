@@ -49,7 +49,7 @@
          </font>
       </Button>
       <ComboBox fx:id="voiceSelect" layoutX="28.0" layoutY="72.0" prefHeight="41.0" prefWidth="193.0" />
-      <Button fx:id="previewButton" layoutX="781.0" layoutY="542.0" mnemonicParsing="false" onAction="#previewPress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Preview" textFill="WHITE">
+      <Button fx:id="previewButton" layoutX="845.0" layoutY="445.0" mnemonicParsing="false" onAction="#previewPress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Preview All" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>
@@ -72,7 +72,7 @@
             <Image url="@loading.gif" />
          </image>
       </ImageView>
-      <CheckBox fx:id="music" layoutX="558.0" layoutY="540.0" mnemonicParsing="false" stylesheets="@styles.css" text="Backgroud Music" textFill="WHITE">
+      <CheckBox fx:id="music" layoutX="629.0" layoutY="537.0" mnemonicParsing="false" stylesheets="@styles.css" text="Backgroud Music" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></CheckBox>

@@ -145,7 +145,11 @@ public class AudioCreationController {
 		// however have not found effective alternative for halting image download
 		// without throwing unwanted file not found exception.
 		getTermImages.stop();
-		speakCmd.killCurrentProcess();
+		
+		// if speech playback is happening, stop its process
+		if ((speakButton.getText().equals("Stop")) || (previewButton.getText().equals("Stop"))) {
+			speakCmd.killCurrentProcess();
+		}
 		
 		//removes the temp directory
 		audioSentences.clear();
@@ -421,7 +425,7 @@ public class AudioCreationController {
 	private void previewPress(ActionEvent event){ 
 		
 		//thread that plays all audio files in the audio list to preview creation
-		if(previewButton.getText().equals("Preview")) {
+		if(previewButton.getText().equals("Preview All")) {
 			Thread preview = new Thread(() -> {
 				//disable buttons
 				previewButton.setDisable(true);
