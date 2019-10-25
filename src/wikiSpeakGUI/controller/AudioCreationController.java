@@ -459,7 +459,7 @@ public class AudioCreationController {
 			preview.start();
 		}else {
 			speakCmd.killCurrentProcess();
-			previewButton.setText("Preview");
+			previewButton.setText("Preview All");
 		}
 		
 	}
