@@ -27,6 +27,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import wikiSpeakGUI.CellPane;
 import wikiSpeakGUI.CommandFactory;
+import wikiSpeakGUI.Main;
 import wikiSpeakGUI.SceneSwitcher;
 import wikiSpeakGUI.tasks.GenerateVideoTask;
 import wikiSpeakGUI.tasks.UpdateImageListTask;
@@ -247,7 +248,7 @@ public class VideoCreationController {
 		 */
 		DialogPane dialogPane = popup.getDialogPane();
 		dialogPane.getStylesheets().add(
-				getClass().getResource("../view/styles.css").toExternalForm());
+				Main.class.getResource("/wikiSpeakGUI/view/styles.css").toExternalForm());
 		dialogPane.getStyleClass().add("dialog-pane");
 		/*
 		 * attribute ends

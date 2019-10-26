@@ -3,6 +3,8 @@ package wikiSpeakGUI.controller;
 import java.io.File;
 import java.io.IOException;
 
+import com.sun.tools.javac.launcher.Main;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -101,7 +103,7 @@ public class PlayController {
 		try {
 			rateCreationController rate = new rateCreationController();
 			rate.passInfo(creation);
-			FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("../view/rateCreation.fxml"));
+			FXMLLoader fxmlloader = new FXMLLoader(Main.class.getResource("/wikiSpeakGUI/view/rateCreation.fxml"));
 			Parent root = (Parent)fxmlloader.load();
 			Stage stage = new Stage();
 			stage.setScene(new Scene(root));
