@@ -15,10 +15,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="595.0" prefWidth="1043.0" style="-fx-background-color: rgb(027, 031, 034);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.controller.AppGUIController">
+<AnchorPane prefHeight="780.0" prefWidth="1242.0" style="-fx-background-color: rgb(027, 031, 034);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.controller.AppGUIController">
    <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-      <TabPane prefHeight="595.0" prefWidth="1043.0" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="780.0" prefWidth="1243.0" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab onSelectionChanged="#creationListDefaultSelect" style="-fx-background-color: rgb(027, 031, 034);" text="Play / Delete">
             <content>
@@ -27,28 +26,28 @@
                         <AnchorPane fx:id="fiveDayKey" layoutX="454.0" layoutY="9.0" prefHeight="26.0" prefWidth="29.0" style="-fx-background-color: red;" visible="false" />
                         <Text fill="WHITE" layoutX="27.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select creation to play / delete:" wrappingWidth="534.7294921875">
                            <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Text>
+                        <Button fx:id="playButton" layoutX="454.0" layoutY="672.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePlayButton" prefHeight="43.0" prefWidth="209.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Play Creation" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Button>
+                        <Text fx:id="creationNoText" fill="WHITE" layoutX="25.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of creations:" wrappingWidth="534.7294921875">
+                           <font>
                               <Font size="22.0" />
                            </font>
                         </Text>
-                        <Button fx:id="playButton" layoutX="344.0" layoutY="501.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePlayButton" prefHeight="36.0" prefWidth="176.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Play Creation" textFill="WHITE">
+                        <Button fx:id="deleteButton" layoutX="670.0" layoutY="672.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="43.0" prefWidth="209.0" style="-fx-background-color: rgb(256,050,080); -fx-border-width: 2px; -fx-border-color: white;" text="Delete Creation" textFill="WHITE">
                            <font>
-                              <Font name="System Bold" size="16.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font></Button>
-                        <Text fx:id="creationNoText" fill="WHITE" layoutX="27.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of creations:" wrappingWidth="534.7294921875">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Text>
-                        <Button fx:id="deleteButton" layoutX="523.0" layoutY="501.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="36.0" prefWidth="176.0" style="-fx-background-color: rgb(256,050,080); -fx-border-width: 2px; -fx-border-color: white;" text="Delete Creation" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font></Button>
-                        <TableView fx:id="creationList" layoutX="28.0" layoutY="77.0" prefHeight="407.0" prefWidth="989.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="27.0">
+                        <TableView fx:id="creationList" layoutX="28.0" layoutY="105.0" prefHeight="524.0" prefWidth="1189.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="27.0">
                           <columns>
-                            <TableColumn fx:id="name" prefWidth="323.0" text="Name" />
-                            <TableColumn fx:id="confidenceRating" prefWidth="236.0" text="Confidence Rating" />
-                              <TableColumn fx:id="creationDate" prefWidth="222.0" text="Creation Date" />
-                              <TableColumn fx:id="lastViewed" prefWidth="207.0" text="Last Viewed" />
+                            <TableColumn fx:id="name" prefWidth="460.0" text="Name" />
+                            <TableColumn fx:id="confidenceRating" prefWidth="254.0" text="Confidence Rating" />
+                              <TableColumn fx:id="creationDate" prefWidth="225.0" text="Creation Date" />
+                              <TableColumn fx:id="lastViewed" prefWidth="249.0" text="Last Viewed" />
                           </columns>
                         </TableView>
                         <Text fx:id="fiveDayWarning" fill="WHITE" layoutX="494.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creation(s) not viewed in at least 5 days" visible="false" wrappingWidth="534.7294921875">
@@ -62,12 +61,12 @@
                            </font>
                         </Text>
                         <AnchorPane fx:id="notViewedKey" layoutX="454.0" layoutY="43.0" prefHeight="26.0" prefWidth="29.0" style="-fx-background-color: orange;" visible="false" />
-                        <Text fill="WHITE" layoutX="27.0" layoutY="527.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sort by:" wrappingWidth="100.7294921875">
+                        <Text fill="WHITE" layoutX="22.0" layoutY="700.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sort by:" wrappingWidth="100.7294921875">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </Text>
-                        <ComboBox fx:id="sortBy" layoutX="121.0" layoutY="499.0" onAction="#sortByChange" prefHeight="41.0" prefWidth="193.0" />
+                        <ComboBox fx:id="sortBy" layoutX="123.0" layoutY="673.0" onAction="#sortByChange" prefHeight="41.0" prefWidth="193.0" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -75,44 +74,44 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: rgb(027, 031, 034);">
                      <children>
-                        <Button fx:id="wikitButton" layoutX="588.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleWikiSearch" prefHeight="36.0" prefWidth="189.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Search Wikipedia" textFill="WHITE">
+                        <Button fx:id="wikitButton" layoutX="678.0" layoutY="62.0" mnemonicParsing="false" onAction="#handleWikiSearch" prefHeight="43.0" prefWidth="235.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Search Wikipedia" textFill="WHITE">
                            <font>
-                              <Font name="System Bold" size="16.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font></Button>
-                        <TextField fx:id="wikitInput" layoutX="29.0" layoutY="63.0" prefHeight="41.0" prefWidth="548.0" AnchorPane.leftAnchor="28.0">
+                        <TextField fx:id="wikitInput" layoutX="29.0" layoutY="63.0" prefHeight="41.0" prefWidth="636.0" AnchorPane.leftAnchor="28.0">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="22.0" />
                            </font></TextField>
                         <Text fill="WHITE" layoutX="29.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter a term for your creation to be about" wrappingWidth="534.7294921875" AnchorPane.leftAnchor="28.0">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="22.0" />
                            </font>
                         </Text>
-                        <Button fx:id="continueButton" layoutX="464.0" layoutY="496.0" mnemonicParsing="false" onAction="#handleContinueButton" prefHeight="36.0" prefWidth="116.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Continue" textFill="WHITE">
+                        <Button fx:id="continueButton" layoutX="551.0" layoutY="691.0" mnemonicParsing="false" onAction="#handleContinueButton" prefHeight="43.0" prefWidth="142.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Continue" textFill="WHITE">
                            <font>
-                              <Font name="System Bold" size="16.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font></Button>
-                        <Text fill="WHITE" layoutX="28.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Result:" AnchorPane.leftAnchor="28.0">
+                        <Text fill="WHITE" layoutX="28.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Result:" AnchorPane.leftAnchor="28.0">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font></Text>
-                        <TextArea fx:id="wikitResult" layoutX="28.0" layoutY="145.0" prefHeight="338.0" prefWidth="987.0" style="-fx-background-color: rgb(049,055,060); -fx-text-fill: rgb(255,255,255);" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="28.0">
+                        <TextArea fx:id="wikitResult" layoutX="28.0" layoutY="145.0" prefHeight="525.0" prefWidth="1187.0" style="-fx-background-color: rgb(049,055,060); -fx-text-fill: rgb(255,255,255);" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="28.0">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="22.0" />
                            </font></TextArea>
-                        <ImageView fx:id="wikitLoading" fitHeight="40.0" fitWidth="40.0" layoutX="975.0" layoutY="494.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="wikitLoading" fitHeight="40.0" fitWidth="40.0" layoutX="1175.0" layoutY="692.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@loading.gif" />
                            </image>
                         </ImageView>
-                        <Button fx:id="favButton" layoutX="786.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleFavSearch" prefHeight="36.0" prefWidth="229.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Search from Favorites" textFill="WHITE">
+                        <Button fx:id="favButton" layoutX="921.0" layoutY="62.0" mnemonicParsing="false" onAction="#handleFavSearch" prefHeight="43.0" prefWidth="294.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Search from Favorites" textFill="WHITE">
                            <font>
-                              <Font name="System Bold" size="16.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Button>
-                        <CheckBox fx:id="addFav" layoutX="599.0" layoutY="490.0" mnemonicParsing="false" text="add to Favourites" textFill="WHITE">
+                        <CheckBox fx:id="addFav" layoutX="720.0" layoutY="690.0" mnemonicParsing="false" stylesheets="@styles.css" text="add to Favourites" textFill="WHITE">
                            <font>
-                              <Font name="System Bold" size="16.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </CheckBox>
                      </children>

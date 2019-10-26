@@ -11,8 +11,11 @@ import javafx.application.Platform;
 import javafx.event.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import javafx.stage.*;
 import wikiSpeakGUI.controller.AppGUIController;
+import wikiSpeakGUI.controller.VideoCreationController;
 
 
 public class Main extends Application{
@@ -87,6 +90,7 @@ public class Main extends Application{
 
 
 	}
+
 
 
 

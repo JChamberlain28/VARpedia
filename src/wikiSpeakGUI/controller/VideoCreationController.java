@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -162,21 +163,12 @@ public class VideoCreationController {
 		List<String> nameCheckResult = command.sendCommand("./nameCheck.sh \"" + name + "\"", false);
 
 
-		// error checking
+		// error checking					
 
-		// checks supplied creation name has valid file name (informs user if invalid)
-		// (as some characters are blocked, only case this triggers is no name or white space only)
-		if (nameCheckResult.get(0).equals("Invalid Name") || (name == null)) {
-			abort = true;
-			Alert popup = new Alert(AlertType.INFORMATION);
-			popup.setTitle("Invalid Name");
-			popup.setHeaderText("The name \"" + name + "\" is invalid");
-			popup.showAndWait();
-			abort = true;
-		}	
+
 
 		// Informs user if creation with same name exists
-		else if ((nameCheckResult.get(0).equals("Exists"))) {
+		if ((nameCheckResult.get(0).equals("Exists"))) {
 			Alert popup = new Alert(AlertType.CONFIRMATION);
 			popup.setTitle("Creation Exists");
 			popup.setHeaderText("A creation with the name \"" + name + "\" aleardy exists");
@@ -185,7 +177,8 @@ public class VideoCreationController {
 			ButtonType buttonTypeNo = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
 
 			popup.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
-
+			setBigFont(popup);
+			
 			Optional<ButtonType> result = popup.showAndWait();
 
 			// deletes file so the new creation can be made
@@ -204,6 +197,7 @@ public class VideoCreationController {
 			Alert popup = new Alert(AlertType.ERROR);
 			popup.setTitle("Invalid name");
 			popup.setHeaderText("A creation with the name \"" + name + "\" is still generating, please use another name");
+			setBigFont(popup);
 			popup.show();
 			abort = true;
 		}
@@ -238,5 +232,27 @@ public class VideoCreationController {
 				imageCol, _tempDir, bb, submitCreationButton));
 		updateImageListThread.setDaemon(true);
 		updateImageListThread.start();
+	}
+	
+	
+	// helper function to change alert font size. (repeated in each class that uses alerts)
+	// repetition required as it did not make sense for all controllers to extend a class containing it.
+	// It also didn't make sense to have a separate class just for this function
+	public void setBigFont(Alert popup) {
+		
+		
+		/* Code adapted by Jack Chamberlain
+		 * Original Author: José Pereda
+		 * Source: https://stackoverflow.com/questions/28417140/styling-default-javafx-dialogs/28421229#28421229
+		 */
+		DialogPane dialogPane = popup.getDialogPane();
+		dialogPane.getStylesheets().add(
+				getClass().getResource("../view/styles.css").toExternalForm());
+		dialogPane.getStyleClass().add("dialog-pane");
+		/*
+		 * attribute ends
+		 */
+		
+		
 	}
 }

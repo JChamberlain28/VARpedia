@@ -47,18 +47,18 @@
  }
  
  .table-view {
-     -fx-font-size: 12pt;
+     -fx-font-size: 16pt;
  }
 
 
  .list-view {
-     -fx-font-size: 14pt;
+     -fx-font-size: 16pt;
  }
  
  
 .slider .axis { 
 	-fx-tick-label-fill: white;
-	-fx-tick-label-font-size: 16pt;
+	-fx-tick-label-font-size: 22pt;
  }
 
 
@@ -74,7 +74,7 @@
 }
 
 .check-box:selected .mark {
-    -fx-padding: 7.5px;
+    -fx-padding: 9.5px;
     -fx-background-color: black;
 }
 /* Code adapted ends */
@@ -92,7 +92,13 @@
 .combo-box {
     -fx-border-color: white;
     -fx-border-width: 1px;
-    -fx-font-size: 12pt;
+    -fx-font-size: 14pt;
 }
 
 
+/* attribute */
+.dialog-pane{
+
+    -fx-font-size: 20px;
+}
+/* attribute */

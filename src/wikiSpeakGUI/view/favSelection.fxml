@@ -8,19 +8,19 @@
 
 <AnchorPane prefHeight="425.0" prefWidth="461.0" style="-fx-background-color: rgb(027, 031, 034);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.controller.favSelectionController">
    <children>
-      <Text fill="WHITE" layoutX="144.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Favourites">
+      <Text fill="WHITE" layoutX="131.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Favourites">
          <font>
-            <Font size="33.0" />
+            <Font size="38.0" />
          </font>
       </Text>
       <ListView fx:id="favourites" layoutX="37.0" layoutY="109.0" prefHeight="232.0" prefWidth="385.0" stylesheets="@styles.css" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="37.0" />
-      <Button fx:id="searchB" layoutX="334.0" layoutY="359.0" mnemonicParsing="false" onAction="#searchPress" style="-fx-border-color: white; -fx-border-width: 2px; -fx-background-color: rgb(069,075,080);" text="Search" textFill="WHITE">
+      <Button fx:id="searchB" layoutX="306.0" layoutY="359.0" mnemonicParsing="false" onAction="#searchPress" style="-fx-border-color: white; -fx-border-width: 2px; -fx-background-color: rgb(069,075,080);" text="Search" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="System Bold" size="20.0" />
          </font></Button>
-      <Button fx:id="delB" layoutX="37.0" layoutY="359.0" mnemonicParsing="false" onAction="#delPress" prefHeight="32.0" prefWidth="84.0" style="-fx-border-color: white; -fx-border-width: 2px; -fx-background-color: rgb(069,075,080);" text="Delete" textFill="WHITE">
+      <Button fx:id="delB" layoutX="37.0" layoutY="359.0" mnemonicParsing="false" onAction="#delPress" prefHeight="43.0" prefWidth="110.0" style="-fx-border-color: white; -fx-border-width: 2px; -fx-background-color: rgb(069,075,080);" text="Delete" textFill="WHITE">
          <font>
-            <Font size="16.0" />
+            <Font name="System Bold" size="20.0" />
          </font></Button>
    </children>
 </AnchorPane>

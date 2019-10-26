@@ -1,6 +1,7 @@
 package wikiSpeakGUI.controller;
 
 import java.io.IOException;
+import wikiSpeakGUI.Main;
 import java.text.DateFormat;
 
 import java.text.ParseException;
@@ -10,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -25,6 +27,7 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 
 import javafx.scene.control.TableColumn;
@@ -52,16 +55,16 @@ public class AppGUIController {
 	private BooleanBinding bb = null;
 	private Thread GetTermImages = null;
 	CommandFactory cf = new CommandFactory();
-	
-	
+
+
 
 	// create section widgets
 	@FXML
 	private Button continueButton;
-	
+
 	@FXML
 	private Button favButton;
-	
+
 	@FXML
 	private CheckBox addFav;
 
@@ -106,19 +109,19 @@ public class AppGUIController {
 
 	@FXML
 	private ImageView wikitLoading;
-	
+
 	@FXML
 	private Text notViewedWarning;
-	
+
 	@FXML
 	private AnchorPane notViewedKey;
-	
+
 	@FXML
 	private Text fiveDayWarning;
-	
+
 	@FXML
 	private AnchorPane fiveDayKey;
-	
+
 	@FXML
 	private ComboBox<String> sortBy;
 
@@ -134,7 +137,7 @@ public class AppGUIController {
 		continueButton.setDisable(true);
 		wikitResult.setWrapText(true);
 		wikitResult.setEditable(false);
-		
+
 		sortBy.setStyle("-fx-background-color: rgb(049,055,060); -fx-control-inner-background: rgb(049,055,060); "
 				+ "-fx-text-fill: rgb(255,255,255); -fx-focus-color: rgb(255,255,255);");
 		sortBy.getItems().addAll("Date Viewed", "Confidence");
@@ -147,7 +150,7 @@ public class AppGUIController {
 				+ " -fx-text-fill: rgb(255,255,255); -fx-focus-color: rgb(255,255,255);");
 		creationList.setStyle("-fx-text-fill: white; -fx-control-inner-background: rgb(049,055,060); -fx-focus-color: rgb(255,255,255);");
 		creationList.setPlaceholder(new Label("No creations to display, click create to start"));
-		
+
 
 		updateCreationList();
 
@@ -161,26 +164,26 @@ public class AppGUIController {
 				}
 			}
 		});
-		
-		
-		
-		
+
+
+
+
 		// set colouring of rows in creation table depending on if viewed or how long ago viewed
 		// also controls what warnings are displayed regarding the reminder system
 		creationList.setRowFactory(tv -> new TableRow<Creation>() {
-		    @Override
-		    protected void updateItem(Creation item, boolean empty) {
-		        super.updateItem(item, empty);
-		        if (item == null || item.getLastViewed() == "" || item.getCreationDate() == "") {
-		        	setStyle("-fx-control-inner-background: rgb(049,055,060); "
-		    				+ " -fx-focus-color: rgb(255,255,255);");
-		        }
-		        else if (item.getLastViewed().equals("Never Viewed")) {
-		        	// not viewed warning visible
-		        	notViewedWarning.setVisible(true);
-		        	notViewedKey.setVisible(true);
-		        	setStyle("-fx-control-inner-background: rgb(180, 115, 000); -fx-selection-bar: orange; -fx-selection-bar-non-focused: orange;");
-		        }
+			@Override
+			protected void updateItem(Creation item, boolean empty) {
+				super.updateItem(item, empty);
+				if (item == null || item.getLastViewed() == "" || item.getCreationDate() == "") {
+					setStyle("-fx-control-inner-background: rgb(049,055,060); "
+							+ " -fx-focus-color: rgb(255,255,255);");
+				}
+				else if (item.getLastViewed().equals("Never Viewed")) {
+					// not viewed warning visible
+					notViewedWarning.setVisible(true);
+					notViewedKey.setVisible(true);
+					setStyle("-fx-control-inner-background: rgb(180, 115, 000); -fx-selection-bar: orange; -fx-selection-bar-non-focused: orange;");
+				}
 				else {
 					// check if date between last viewing and now is more than 5 days
 					SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -189,68 +192,68 @@ public class AppGUIController {
 					try {
 						viewedDate = format.parse(item.getLastViewed());
 					} catch (ParseException e) {
-						
+
 						e.printStackTrace();
 					}
-					
+
 					long timeElapsed = currentDate.getTime() - viewedDate.getTime();
 					long daysElapsed = timeElapsed / (24 * 60 * 60 * 1000);
-					
+
 					// highlight creations red that havent been viewed in 5 days
 					if (daysElapsed >= 5) {
 						// five day warning visible
 						fiveDayWarning.setVisible(true);
 						fiveDayKey.setVisible(true);
-						
+
 						setStyle("-fx-control-inner-background: rgb(180, 000, 000); -fx-selection-bar: red; -fx-selection-bar-non-focused: red;");
 					}
 					else {
 						setStyle("-fx-control-inner-background: rgb(049,055,060); "
-			    				+ " -fx-focus-color: rgb(255,255,255);");
+								+ " -fx-focus-color: rgb(255,255,255);");
 					}
-					
+
 				}
-		
 
-		    }
+
+			}
 		});
-		
 
-		
-		
-		
-		
+
+
+
+
+
 		bb = new BooleanBinding() {
-		    {
-		        super.bind(wikitInput.textProperty());
-		    }
+			{
+				super.bind(wikitInput.textProperty());
+			}
 
-		    @Override
-		    protected boolean computeValue() {
-		        return ((wikitInput.getText().trim().isEmpty()));
-		    }
+			@Override
+			protected boolean computeValue() {
+				return ((wikitInput.getText().trim().isEmpty()));
+			}
 		};
-		
-		
+
+
 
 		// edits default sorting so Never Viewed is always highest on the list
 		// for sort by date viewed
 		lastViewed.setComparator((date1, date2) -> {
-		
-		int result = 0;
-		if (date1.equals("Never Viewed")) {
-			result = -1;
-		}
-		else if (date2.equals("Never Viewed")) {
-			result = 1;
-		} else {
-			result = date1.compareTo(date2);
-		}
-		return result;
+
+			int result = 0;
+			if (date1.equals("Never Viewed")) {
+				result = -1;
+			}
+			else if (date2.equals("Never Viewed")) {
+				result = 1;
+			} else {
+				result = date1.compareTo(date2);
+			}
+			return result;
 		});
-		
+
 		wikitButton.disableProperty().bind(bb);
-		
+
 	}
 
 
@@ -258,7 +261,7 @@ public class AppGUIController {
 	// event handling
 
 
-	
+
 	// allows user to change the sort order of creations via a ComboBox
 	@FXML
 	public void sortByChange(Event event) {
@@ -270,14 +273,14 @@ public class AppGUIController {
 				creationList.getSortOrder().clear();
 				creationList.getSortOrder().add(confidenceRating);
 			}
-			
+
 			creationList.sort();
 		}
 	}
-	
-	
-	
-	
+
+
+
+
 
 	// sets TableView to default selection when triggered (first item)
 	@FXML
@@ -322,13 +325,13 @@ public class AppGUIController {
 		// pass formatted description to be displayed in create view
 		createController.passInfo(descriptionOutput.get(0), tempFolder, searchTerm, GetTermImages);
 
-		
+
 		// adds search term to favorites list if selected
 		if(addFav.isSelected()) {
 			CommandFactory command = new CommandFactory();
 			List<String> output = command.sendCommand("cat favourites.txt | grep "+wikitInput.getText() +"_", false);
 			if(output.get(0).equals(wikitInput.getText()+"_")) {
-				
+
 			}else {
 				command.sendCommand("echo \""+wikitInput.getText() +"_\" >> favourites.txt", false);
 			}
@@ -343,13 +346,13 @@ public class AppGUIController {
 	@FXML
 	private void handleFavSearch(ActionEvent event) { 
 		try {
-			
+
 			FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("../view/favSelection.fxml"));
 			Parent root = fxmlloader.load();
-			
+
 			favSelectionController controller = (favSelectionController) fxmlloader.getController();
 			controller.setParent(this);
-			
+
 			Stage stage = new Stage();
 			stage.setScene(new Scene(root));
 			stage.initModality(Modality.APPLICATION_MODAL);
@@ -360,8 +363,8 @@ public class AppGUIController {
 		}
 
 	}
-	
-	
+
+
 	// is called from favorites screen to search the selected favorites term
 	public void Search(String search) { 
 		wikitInput.setText(search);
@@ -384,8 +387,8 @@ public class AppGUIController {
 
 	@FXML
 	private void handlePlayButton(Event event) {
-			
-		
+
+
 		// get selected creation name to play
 		String selection = creationList.getSelectionModel().getSelectedItem().getName();
 
@@ -393,6 +396,9 @@ public class AppGUIController {
 			Alert popup = new Alert(AlertType.INFORMATION);
 			popup.setTitle("Creation Unavailable");
 			popup.setHeaderText("Creation currently genarating");
+
+			setBigFont(popup);
+
 			popup.show();
 		} 
 		else {
@@ -402,7 +408,7 @@ public class AppGUIController {
 
 			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			Date date = new Date();
-			
+
 			// store creation date
 			cf.sendCommand("echo " + dateFormat.format(date) + "> \"creations/metadata/" + selection + "/lastViewed.txt\"", false);
 
@@ -427,6 +433,9 @@ public class AppGUIController {
 			Alert popup = new Alert(AlertType.INFORMATION);
 			popup.setTitle("Creation Unavailable");
 			popup.setHeaderText("Creation currently genarating");
+
+			setBigFont(popup);
+
 			popup.show();
 		} 
 		else {
@@ -444,17 +453,19 @@ public class AppGUIController {
 
 			popup.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
 
+			setBigFont(popup);
+
 			Optional<ButtonType> result = popup.showAndWait();
 			if (result.get() == buttonTypeYes){
 
 
 				cf.sendCommand("rm \"creations/" + selection + ".mp4\"", false);
 				cf.sendCommand("rm -rf \"creations/metadata/" + selection + "\"", false);
-	        	
+
 				fiveDayWarning.setVisible(false);
 				fiveDayKey.setVisible(false);
 				notViewedWarning.setVisible(false);
-	        	notViewedKey.setVisible(false);
+				notViewedKey.setVisible(false);
 
 				updateCreationList();
 			} else {
@@ -463,9 +474,9 @@ public class AppGUIController {
 			}
 
 		}
-		
-		
-		
+
+
+
 
 
 	}
@@ -487,7 +498,26 @@ public class AppGUIController {
 
 
 
-
+	// helper function to change alert font size. (repeated in each class that uses alerts)
+	// repetition required as it did not make sense for all controllers to extend a class containing it.
+	// It also didn't make sense to have a separate class just for this function
+	public void setBigFont(Alert popup) {
+		
+		
+		/* Code adapted by Jack Chamberlain
+		 * Original Author: José Pereda
+		 * Source: https://stackoverflow.com/questions/28417140/styling-default-javafx-dialogs/28421229#28421229
+		 */
+		DialogPane dialogPane = popup.getDialogPane();
+		dialogPane.getStylesheets().add(
+				getClass().getResource("../view/styles.css").toExternalForm());
+		dialogPane.getStyleClass().add("dialog-pane");
+		/*
+		 * attribute ends
+		 */
+		
+		
+	}
 
 
 

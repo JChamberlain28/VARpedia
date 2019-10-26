@@ -13,13 +13,13 @@
             <Font size="33.0" />
          </font>
       </Text>
-      <Button fx:id="rateB" layoutX="337.0" layoutY="197.0" mnemonicParsing="false" onAction="#ratePress" prefHeight="36.0" prefWidth="86.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Rate" textFill="WHITE">
+      <Button fx:id="rateB" layoutX="338.0" layoutY="197.0" mnemonicParsing="false" onAction="#ratePress" prefHeight="43.0" prefWidth="95.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Rate" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="System Bold" size="20.0" />
          </font></Button>
-      <Button fx:id="cancelButton" layoutX="39.0" layoutY="197.0" mnemonicParsing="false" onAction="#cancelPress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Cancel" textFill="WHITE">
+      <Button fx:id="cancelButton" layoutX="29.0" layoutY="197.0" mnemonicParsing="false" onAction="#cancelPress" prefHeight="43.0" prefWidth="117.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Cancel" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="System Bold" size="20.0" />
          </font></Button>
       <Slider fx:id="rating" blockIncrement="1.0" layoutX="29.0" layoutY="71.0" majorTickUnit="1.0" max="5.0" minorTickCount="0" prefHeight="114.0" prefWidth="404.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" stylesheets="@styles.css" />
    </children>

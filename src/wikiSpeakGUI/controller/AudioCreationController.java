@@ -10,10 +10,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import wikiSpeakGUI.CommandFactory;
+import wikiSpeakGUI.Main;
 import wikiSpeakGUI.SceneSwitcher;
 import wikiSpeakGUI.tasks.GetImagesTask;
 import wikiSpeakGUI.tasks.RemoveDirTask;
@@ -169,6 +171,7 @@ public class AudioCreationController {
 			Alert popup = new Alert(AlertType.INFORMATION);
 			popup.setTitle("No audio selected");
 			popup.setHeaderText("Please add some audio to create an creation");
+			setBigFont(popup);
 			popup.show();
 		}else {
 			String order = "";
@@ -244,11 +247,13 @@ public class AudioCreationController {
 				Alert popup = new Alert(AlertType.INFORMATION);
 				popup.setTitle("Select a chuck to add");
 				popup.setHeaderText("No selected text detected. Please highlight some text");
+				setBigFont(popup);
 				popup.show();
 			}else if (words.length + 1> 40) {
 				Alert popup = new Alert(AlertType.INFORMATION);
 				popup.setTitle("Too many words selected");
 				popup.setHeaderText("Please selected between 1-40 words");
+				setBigFont(popup);
 				popup.show();
 			}else {
 				speakButton.setDisable(true);
@@ -276,6 +281,7 @@ public class AudioCreationController {
 							popup.setTitle("Voice Error");
 							popup.setHeaderText("Voice cannot pronounce the selected text");
 							popup.setContentText("Please try another voice or text selection");
+							setBigFont(popup);
 							popup.show();
 						});
 					}else {
@@ -318,11 +324,13 @@ public class AudioCreationController {
 			Alert popup = new Alert(AlertType.INFORMATION);
 			popup.setTitle("Select a chuck to add");
 			popup.setHeaderText("No selected text detected. please select text to add");
+			setBigFont(popup);
 			popup.show();
 		} else if (words.length > 40) {
 			Alert popup = new Alert(AlertType.INFORMATION);
 			popup.setTitle("Too many words selected");
 			popup.setHeaderText("Please selected between 1-40 words");
+			setBigFont(popup);
 			popup.show();
 		}else {
 			
@@ -357,6 +365,7 @@ public class AudioCreationController {
 						popup.setTitle("Voice Error");
 						popup.setHeaderText("Voice cannot pronounce the selected text");
 						popup.setContentText("Please try another voice or text selection");
+						setBigFont(popup);
 						popup.show();
 					}else {
 						selectedAudio.getItems().add(sel);
@@ -489,4 +498,31 @@ public class AudioCreationController {
 		getTermImages = new Thread(new GetImagesTask(_wikitTerm, _tempDir));
 		getTermImages.start();
 	}
+	
+	
+	
+	
+	
+	
+	// helper function to change alert font size. (repeated in each class that uses alerts)
+	// repetition required as it did not make sense for all controllers to extend a class containing it.
+	// It also didn't make sense to have a separate class just for this function
+	public void setBigFont(Alert popup) {
+		
+		
+		/* Code adapted by Jack Chamberlain
+		 * Original Author: José Pereda
+		 * Source: https://stackoverflow.com/questions/28417140/styling-default-javafx-dialogs/28421229#28421229
+		 */
+		DialogPane dialogPane = popup.getDialogPane();
+		dialogPane.getStylesheets().add(
+				getClass().getResource("../view/styles.css").toExternalForm());
+		dialogPane.getStyleClass().add("dialog-pane");
+		/*
+		 * attribute ends
+		 */
+		
+		
+	}
+
 }
