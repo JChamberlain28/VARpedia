@@ -14,6 +14,7 @@ public class favSelectionController {
 
 	@FXML private Button searchB;
 	@FXML private Button delB;
+	@FXML private Button cancelB;
 	@FXML private ListView<String> favourites;
 	private static AppGUIController parent;
 	
@@ -58,11 +59,18 @@ public class favSelectionController {
 	}
 	
 	@FXML
-	// Changes scene to main scene
+	// Changes scene to main scene and searches for term selected
 	private void searchPress(ActionEvent event) {
 		Stage stage = (Stage) searchB.getScene().getWindow();
 		stage.close();
 		parent.Search(favourites.getSelectionModel().getSelectedItem());
+	}
+	
+	@FXML
+	// Changes scene to main scene
+	private void cancelPress(ActionEvent event) {
+		Stage stage = (Stage) searchB.getScene().getWindow();
+		stage.close();
 	}
 	
 }

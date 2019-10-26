@@ -157,11 +157,7 @@ public class AudioCreationController {
 		CommandFactory command = new CommandFactory();
 		//error handler for creation without any audio selected
 		if (selectedAudio.getItems().size()==0) {
-			Alert popup = new Alert(AlertType.INFORMATION);
-			popup.setTitle("No audio selected");
-			popup.setHeaderText("Please add some audio to create an creation");
-			setBigFont(popup);
-			popup.show();
+			alert("No audio selected", "Please add some audio to create an creation", "");
 		}else {
 			String order = "";
 			//gets the order the audio files need to be combined in
@@ -234,17 +230,9 @@ public class AudioCreationController {
 			String[] words = sel.split(" ");
 			//error handling for when no text selected for speak or when too much text selected
 			if (numberedTextArea.getSelectedText().isEmpty()) {
-				Alert popup = new Alert(AlertType.INFORMATION);
-				popup.setTitle("Select a chuck to add");
-				popup.setHeaderText("No selected text detected. Please highlight some text");
-				setBigFont(popup);
-				popup.show();
+				alert("Select a chuck to add", "No selected text detected. Please highlight some text", "");
 			}else if (words.length + 1> 40) {
-				Alert popup = new Alert(AlertType.INFORMATION);
-				popup.setTitle("Too many words selected");
-				popup.setHeaderText("Please selected between 1-40 words");
-				setBigFont(popup);
-				popup.show();
+				alert("Too many words selected", "Please selected between 1-40 words", "");
 			}else {
 				speakButton.setDisable(true);
 				//removes symbols that might cause errors
@@ -267,12 +255,7 @@ public class AudioCreationController {
 							+ " && " + "file " + _tempDir +"/speakAudio.wav", false);
 					if(fileCreateCheck.get(0).equals(_tempDir + "/speakAudio.wav: empty")) {
 						Platform.runLater(() -> {
-							Alert popup = new Alert(AlertType.INFORMATION);
-							popup.setTitle("Voice Error");
-							popup.setHeaderText("Voice cannot pronounce the selected text");
-							popup.setContentText("Please try another voice or text selection");
-							setBigFont(popup);
-							popup.show();
+							alert("Voice Error", "Voice cannot pronounce the selected text", "Please try another voice or text selection");
 							speakButton.setDisable(false);
 							cancelButton.setDisable(false);
 						});
@@ -313,17 +296,9 @@ public class AudioCreationController {
 		String[] words = selected.split(" ");
 		//error handling for when no text selected for add or when too much text selected
 		if (numberedTextArea.getSelectedText().isEmpty()) {
-			Alert popup = new Alert(AlertType.INFORMATION);
-			popup.setTitle("Select a chuck to add");
-			popup.setHeaderText("No selected text detected. please select text to add");
-			setBigFont(popup);
-			popup.show();
+			alert("Select a chuck to add", "No selected text detected. please select text to add", "");
 		} else if (words.length > 40) {
-			Alert popup = new Alert(AlertType.INFORMATION);
-			popup.setTitle("Too many words selected");
-			popup.setHeaderText("Please selected between 1-40 words");
-			setBigFont(popup);
-			popup.show();
+			alert("Too many words selected", "Please selected between 1-40 words", "");
 		}else {
 			
 			//if selected text is same as a previous one adds white space to it to help distinguish 
@@ -352,13 +327,7 @@ public class AudioCreationController {
 				Platform.runLater(() ->{
 					//error handler in case the selected text is not able to generate a audio file
 					if(fileCreateCheck.get(0).equals(_tempDir + "/" + name+".wav: empty")) {
-
-						Alert popup = new Alert(AlertType.INFORMATION);
-						popup.setTitle("Voice Error");
-						popup.setHeaderText("Voice cannot pronounce the selected text");
-						popup.setContentText("Please try another voice or text selection");
-						setBigFont(popup);
-						popup.show();
+						alert("Voice Error", "Voice cannot pronounce the selected text", "Please try another voice or text selection");
 					}else {
 						selectedAudio.getItems().add(sel);
 						selectedAudio.getSelectionModel().selectFirst();
@@ -496,6 +465,15 @@ public class AudioCreationController {
 		// start downloading images for creation in background
 		getTermImages = new Thread(new GetImagesTask(_wikitTerm, _tempDir));
 		getTermImages.start();
+	}
+	
+	private void alert(String title, String header, String content) {
+		Alert popup = new Alert(AlertType.INFORMATION);
+		popup.setTitle(title);
+		popup.setHeaderText(header);
+		popup.setContentText(content);
+		setBigFont(popup);
+		popup.show();
 	}
 	
 	
