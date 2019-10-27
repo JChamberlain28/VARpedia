@@ -7,9 +7,11 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.concurrent.Task;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import wikiSpeakGUI.CommandFactory;
+import wikiSpeakGUI.Main;
 import javafx.scene.control.Alert.AlertType;
 
 public class WikitSearchTask extends Task<Void> {
@@ -65,7 +67,10 @@ public class WikitSearchTask extends Task<Void> {
 
 					Alert popup = new Alert(AlertType.INFORMATION);
 					popup.setTitle("Term not found");
-					popup.setHeaderText("Please try another term"); popup.show();
+					popup.setHeaderText("Please try another term"); 
+					setBigFont(popup);
+					popup.show();
+					
 
 				} else { 
 				_wikitButton.setDisable(false); 
@@ -82,5 +87,26 @@ public class WikitSearchTask extends Task<Void> {
 
 		});
 	}
+	
+	// helper function to change alert font size. (repeated in each class that uses alerts)
+		// repetition required as it did not make sense for all controllers to extend a class containing it.
+		// It also didn't make sense to have a separate class just for this function
+		public void setBigFont(Alert popup) {
+			
+			
+			/* Code adapted by Jack Chamberlain
+			 * Original Author: José Pereda
+			 * Source: https://stackoverflow.com/questions/28417140/styling-default-javafx-dialogs/28421229#28421229
+			 */
+			DialogPane dialogPane = popup.getDialogPane();
+			dialogPane.getStylesheets().add(
+					Main.class.getResource("/wikiSpeakGUI/view/styles.css").toExternalForm());
+			dialogPane.getStyleClass().add("dialog-pane");
+			/*
+			 * attribute ends
+			 */
+			
+			
+		}
 
 }

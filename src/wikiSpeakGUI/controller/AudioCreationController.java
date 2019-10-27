@@ -493,7 +493,7 @@ public class AudioCreationController {
 		 */
 		DialogPane dialogPane = popup.getDialogPane();
 		dialogPane.getStylesheets().add(
-				getClass().getResource("../view/styles.css").toExternalForm());
+				Main.class.getResource("/wikiSpeakGUI/view/styles.css").toExternalForm());
 		dialogPane.getStyleClass().add("dialog-pane");
 		/*
 		 * attribute ends

@@ -347,7 +347,7 @@ public class AppGUIController {
 	private void handleFavSearch(ActionEvent event) { 
 		try {
 
-			FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("../view/favSelection.fxml"));
+			FXMLLoader fxmlloader = new FXMLLoader(Main.class.getResource("/wikiSpeakGUI/view/favSelection.fxml"));
 			Parent root = fxmlloader.load();
 
 			favSelectionController controller = (favSelectionController) fxmlloader.getController();
@@ -357,7 +357,7 @@ public class AppGUIController {
 			stage.setScene(new Scene(root));
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.show();
-			stage.setResizable(false);;
+			stage.setResizable(false);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -510,7 +510,7 @@ public class AppGUIController {
 		 */
 		DialogPane dialogPane = popup.getDialogPane();
 		dialogPane.getStylesheets().add(
-				getClass().getResource("../view/styles.css").toExternalForm());
+				Main.class.getResource("/wikiSpeakGUI/view/styles.css").toExternalForm());
 		dialogPane.getStyleClass().add("dialog-pane");
 		/*
 		 * attribute ends
