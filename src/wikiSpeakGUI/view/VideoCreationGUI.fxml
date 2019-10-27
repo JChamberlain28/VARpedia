@@ -63,6 +63,10 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
+            <AnchorPane layoutX="578.0" layoutY="448.0" prefHeight="133.0" prefWidth="310.0" style="-fx-background-color: rgba(000,000,000, 0.58); -fx-background-radius: 60px;" />
+            <AnchorPane layoutX="901.0" layoutY="440.0" prefHeight="165.0" prefWidth="301.0" style="-fx-background-color: rgba(000,000,000, 0.58); -fx-background-radius: 60px;" />
+            <AnchorPane layoutX="193.0" layoutY="702.0" prefHeight="71.0" prefWidth="332.0" style="-fx-background-color: rgba(000,000,000, 0.58); -fx-background-radius: 60px;" />
+            <AnchorPane layoutX="429.0" layoutY="268.0" prefHeight="142.0" prefWidth="385.0" style="-fx-background-color: rgba(000,000,000, 0.58); -fx-background-radius: 60px;" />
             <Text fill="WHITE" layoutX="478.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image Selection Area:" textAlignment="CENTER">
                <font>
                   <Font size="26.0" />
