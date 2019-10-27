@@ -123,6 +123,12 @@ public class AppGUIController {
 
 	@FXML
 	private ComboBox<String> sortBy;
+	
+	@FXML
+	private AnchorPane helpPanePD;
+	
+	@FXML
+	private AnchorPane helpPaneCreate;
 
 
 
@@ -518,7 +524,27 @@ public class AppGUIController {
 		
 	}
 
+	
+	
+	@FXML
+	private void handlePlayDelHelpButton(ActionEvent event) {
+		helpPanePD.setVisible(true);
+	}
+	
+	@FXML
+	private void handlePlayDelHelpExitButton(ActionEvent event) {
+		helpPanePD.setVisible(false);
+	}
 
+	@FXML
+	private void handleCreateHelpButton(ActionEvent event) {
+		helpPaneCreate.setVisible(true);
+	}
+	
+	@FXML
+	private void handleCreateHelpExitButton(ActionEvent event) {
+		helpPaneCreate.setVisible(false);
+	}
 
 
 }

@@ -148,7 +148,9 @@ public class AudioCreationController {
 		// however have not found effective alternative for halting image download
 		// without throwing unwanted file not found exception.
 		if(downloadInProgress) {
-			getTermImages.stop();
+			if (getTermImages != null) {
+				getTermImages.stop();
+			}
 		}
 		// if speech playback is happening, stop its process
 		if ((speakButton.getText().equals("Stop")) || (previewButton.getText().equals("Stop"))) {

@@ -23,13 +23,18 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="533.0" prefWidth="1029.0" style="-fx-background-color: rgb(027, 031, 034);">
                      <children>
+                      <Button layoutX="1167.0" layoutY="10.0" mnemonicParsing="false" onAction="#handlePlayDelHelpButton" prefHeight="49.0" prefWidth="49.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px; -fx-background-radius: 30px; -fx-border-radius: 30px;" text="?" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
                         <AnchorPane fx:id="fiveDayKey" layoutX="712.0" layoutY="22.0" prefHeight="26.0" prefWidth="29.0" style="-fx-background-color: red;" visible="false" />
                         <Text fill="WHITE" layoutX="27.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select creation to play / delete:" wrappingWidth="534.7294921875">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Text>
-                        <Button fx:id="playButton" layoutX="454.0" layoutY="672.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePlayButton" prefHeight="43.0" prefWidth="209.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Play Creation" textFill="WHITE">
+                        <Button fx:id="playButton" layoutX="409.0" layoutY="671.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePlayButton" prefHeight="43.0" prefWidth="209.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Play Creation" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font></Button>
@@ -38,7 +43,7 @@
                               <Font size="22.0" />
                            </font>
                         </Text>
-                        <Button fx:id="deleteButton" layoutX="670.0" layoutY="672.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="43.0" prefWidth="209.0" style="-fx-background-color: rgb(256,050,080); -fx-border-width: 2px; -fx-border-color: white;" text="Delete Creation" textFill="WHITE">
+                        <Button fx:id="deleteButton" layoutX="625.0" layoutY="671.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="43.0" prefWidth="209.0" style="-fx-background-color: rgb(256,050,080); -fx-border-width: 2px; -fx-border-color: white;" text="Delete Creation" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font></Button>
@@ -67,6 +72,59 @@
                            </font>
                         </Text>
                         <ComboBox fx:id="sortBy" layoutX="123.0" layoutY="673.0" onAction="#sortByChange" prefHeight="41.0" prefWidth="193.0" />
+                        <AnchorPane fx:id="helpPanePD" prefHeight="749.0" prefWidth="1243.0" style="-fx-background-color: rgba(027, 031, 034, 0.47);" stylesheets="@styles.css" visible="false">
+                           <children>
+                              <AnchorPane layoutX="397.0" layoutY="526.0" prefHeight="90.0" prefWidth="266.0" style="-fx-background-color: rgba(000,000,000, 0.58); -fx-background-radius: 60px;" />
+                              <AnchorPane layoutX="760.0" layoutY="557.0" prefHeight="59.0" prefWidth="391.0" style="-fx-background-color: rgba(000,000,000, 0.58); -fx-background-radius: 60px;" />
+                              <AnchorPane layoutX="20.0" layoutY="561.0" prefHeight="51.0" prefWidth="345.0" style="-fx-background-color: rgba(000,000,000, 0.58); -fx-background-radius: 60px;" />
+                              <AnchorPane layoutX="445.0" layoutY="307.0" prefHeight="136.0" prefWidth="387.0" style="-fx-background-color: rgba(000,000,000, 0.58); -fx-background-radius: 60px;" />
+                              <Text fill="WHITE" layoutX="465.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Displays the current creations you have made" textAlignment="CENTER" wrappingWidth="347.36468505859375">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" layoutX="546.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creation List:" wrappingWidth="185.3647274747491">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Text>
+                              <Button layoutX="1167.0" layoutY="10.0" mnemonicParsing="false" onAction="#handlePlayDelHelpExitButton" prefHeight="49.0" prefWidth="49.0" style="-fx-background-color: rgb(256,050,080); -fx-border-color: white; -fx-border-width: 2px; -fx-background-radius: 30px; -fx-border-radius: 30px;" text="×" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Button>
+                              <Text fill="WHITE" layoutX="37.0" layoutY="596.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sort creations in the list" wrappingWidth="328.3647155761719">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" layoutX="779.0" layoutY="596.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete a selected creation" wrappingWidth="404.00000859797">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Text>
+                              <ImageView fitHeight="37.0" fitWidth="76.0" layoutX="502.0" layoutY="623.0" pickOnBounds="true" preserveRatio="true" rotate="51.0">
+                                 <image>
+                                    <Image url="@arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="37.0" fitWidth="77.0" layoutX="778.0" layoutY="623.0" pickOnBounds="true" preserveRatio="true" rotate="121.0">
+                                 <image>
+                                    <Image url="@arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="61.0" fitWidth="62.0" layoutX="162.0" layoutY="625.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                                 <image>
+                                    <Image url="@arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <Text fill="WHITE" layoutX="417.0" layoutY="565.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Play an existing creation" textAlignment="CENTER" wrappingWidth="225.36471557617188">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -74,15 +132,20 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: rgb(027, 031, 034);">
                      <children>
-                        <Button fx:id="wikitButton" layoutX="678.0" layoutY="62.0" mnemonicParsing="false" onAction="#handleWikiSearch" prefHeight="43.0" prefWidth="235.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Search Wikipedia" textFill="WHITE">
+                        <Button layoutX="1167.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCreateHelpButton" prefHeight="49.0" prefWidth="49.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px; -fx-background-radius: 30px; -fx-border-radius: 30px;" text="?" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="wikitButton" layoutX="678.0" layoutY="72.0" mnemonicParsing="false" onAction="#handleWikiSearch" prefHeight="43.0" prefWidth="235.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Search Wikipedia" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font></Button>
-                        <TextField fx:id="wikitInput" layoutX="29.0" layoutY="63.0" prefHeight="41.0" prefWidth="636.0" AnchorPane.leftAnchor="28.0">
+                        <TextField fx:id="wikitInput" layoutX="28.0" layoutY="73.0" prefHeight="41.0" prefWidth="636.0" AnchorPane.leftAnchor="28.0">
                            <font>
                               <Font size="22.0" />
                            </font></TextField>
-                        <Text fill="WHITE" layoutX="29.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter a term for your creation to be about" wrappingWidth="534.7294921875" AnchorPane.leftAnchor="28.0">
+                        <Text fill="WHITE" layoutX="28.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter a term for your creation to be about" wrappingWidth="534.7294921875" AnchorPane.leftAnchor="28.0">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -104,7 +167,7 @@
                               <Image url="@loading.gif" />
                            </image>
                         </ImageView>
-                        <Button fx:id="favButton" layoutX="921.0" layoutY="62.0" mnemonicParsing="false" onAction="#handleFavSearch" prefHeight="43.0" prefWidth="294.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Search from Favorites" textFill="WHITE">
+                        <Button fx:id="favButton" layoutX="921.0" layoutY="72.0" mnemonicParsing="false" onAction="#handleFavSearch" prefHeight="43.0" prefWidth="294.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Search from Favorites" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -114,6 +177,73 @@
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </CheckBox>
+                              <AnchorPane fx:id="helpPaneCreate" layoutY="-1.0" prefHeight="749.0" prefWidth="1243.0" style="-fx-background-color: rgba(027, 031, 034, 0.47);" stylesheets="@styles.css" visible="false">
+         <children>
+            <AnchorPane layoutX="157.0" layoutY="660.0" prefHeight="75.0" prefWidth="373.0" style="-fx-background-color: rgba(000,000,000, 0.58); -fx-background-radius: 60px;">
+               <children>
+                  <Text fill="WHITE" layoutX="10.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Continue to audio selection" textAlignment="CENTER" wrappingWidth="352.3647155761719">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="766.0" layoutY="567.0" prefHeight="75.0" prefWidth="410.0" style="-fx-background-color: rgba(000,000,000, 0.58); -fx-background-radius: 60px;" />
+            <AnchorPane layoutX="801.0" layoutY="156.0" prefHeight="77.0" prefWidth="404.0" style="-fx-background-color: rgba(000,000,000, 0.58); -fx-background-radius: 60px;" />
+            <AnchorPane layoutX="90.0" layoutY="144.0" prefHeight="51.0" prefWidth="514.0" style="-fx-background-color: rgba(000,000,000, 0.58); -fx-background-radius: 60px;" />
+            <AnchorPane layoutX="440.0" layoutY="307.0" prefHeight="136.0" prefWidth="364.0" style="-fx-background-color: rgba(000,000,000, 0.58); -fx-background-radius: 60px;" />
+            <Text fill="WHITE" layoutX="448.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Displays the Wikipedia article searched" textAlignment="CENTER" wrappingWidth="347.36468505859375">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="472.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wikipedia page result:" wrappingWidth="299.3647274747491">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Text>
+            <Button layoutX="1167.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleCreateHelpExitButton" prefHeight="49.0" prefWidth="49.0" style="-fx-background-color: rgb(256,050,080); -fx-border-color: white; -fx-border-width: 2px; -fx-background-radius: 30px; -fx-border-radius: 30px;" text="×" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <Text fill="WHITE" layoutX="111.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter a term to search Wikipedia for" wrappingWidth="528.3647155761719">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="781.0" layoutY="598.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add search term to favorites to search again later" wrappingWidth="404.00000859797">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="801.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search from favorites or delete a favorites" textAlignment="CENTER" wrappingWidth="404.00000859797">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="37.0" fitWidth="76.0" layoutX="482.0" layoutY="686.0" pickOnBounds="true" preserveRatio="true" rotate="8.7">
+               <image>
+                  <Image url="@arrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="37.0" fitWidth="77.0" layoutX="765.0" layoutY="655.0" pickOnBounds="true" preserveRatio="true" rotate="121.0">
+               <image>
+                  <Image url="@arrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="61.0" fitWidth="62.0" layoutX="154.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+               <image>
+                  <Image url="@arrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="59.0" layoutX="1036.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true" rotate="-69.1">
+               <image>
+                  <Image url="@arrow.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
                      </children>
                   </AnchorPane>
                </content>
