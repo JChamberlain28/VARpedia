@@ -3,7 +3,7 @@ package wikiSpeakGUI.controller;
 import java.io.File;
 import java.io.IOException;
 
-import com.sun.tools.javac.launcher.Main;
+import wikiSpeakGUI.Main;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
