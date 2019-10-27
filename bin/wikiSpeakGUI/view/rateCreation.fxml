@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="255.0" prefWidth="461.0" style="-fx-background-color: rgb(027, 031, 034);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.controller.rateCreationController">
+   <children>
+      <Text fill="WHITE" layoutX="41.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How confident are you?">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Text>
+      <Button fx:id="rateB" layoutX="338.0" layoutY="197.0" mnemonicParsing="false" onAction="#ratePress" prefHeight="43.0" prefWidth="95.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Rate" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></Button>
+      <Button fx:id="cancelButton" layoutX="29.0" layoutY="197.0" mnemonicParsing="false" onAction="#cancelPress" prefHeight="43.0" prefWidth="117.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Cancel" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></Button>
+      <Slider fx:id="rating" blockIncrement="1.0" layoutX="29.0" layoutY="71.0" majorTickUnit="1.0" max="5.0" minorTickCount="0" prefHeight="114.0" prefWidth="404.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" stylesheets="@styles.css" />
+   </children>
+</AnchorPane>
