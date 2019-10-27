@@ -33,7 +33,7 @@ public class AudioCreationController {
 	private static String savedText;
 	private SceneSwitcher ss = new SceneSwitcher();
 	private int count=savedAudio.size();
-	private Thread _threadToPassToVidController = null;
+	private Thread _getTermImages = null;
 
 
 
@@ -117,11 +117,10 @@ public class AudioCreationController {
 
 	// Allows other AppGUIController to pass info to this controller
 	// and display the text in the create scene.
-	public void passInfo(String numberedText, String tempDir, String wikitTerm, Thread thread) {
+	public void passInfo(String numberedText, String tempDir, String wikitTerm) {
 		_numberedText = numberedText;
 		_tempDir = tempDir;
 		_wikitTerm = wikitTerm;
-		_threadToPassToVidController = thread;
 		
 		passInfoDependents();
 
@@ -211,7 +210,7 @@ public class AudioCreationController {
 					combineAudioLoading.setVisible(false);
 					//changes scene when audio finished generating
 					VideoCreationController videoCreationController = (VideoCreationController)ss.newScene("VideoCreationGUI.fxml", event);
-					videoCreationController.passInfo(_wikitTerm, _tempDir, audioGenResult, _threadToPassToVidController);
+					videoCreationController.passInfo(_wikitTerm, _tempDir, audioGenResult, _getTermImages);
 				});
 
 			});
@@ -463,8 +462,8 @@ public class AudioCreationController {
 		downButton.setDisable(true);
 		
 		// start downloading images for creation in background
-		getTermImages = new Thread(new GetImagesTask(_wikitTerm, _tempDir));
-		getTermImages.start();
+		_getTermImages = new Thread(new GetImagesTask(_wikitTerm, _tempDir));
+		_getTermImages.start();
 	}
 	
 	private void alert(String title, String header, String content) {

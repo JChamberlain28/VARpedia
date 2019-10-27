@@ -53,7 +53,6 @@ public class AppGUIController {
 	private SceneSwitcher ss = new SceneSwitcher();
 	private String searchTerm = null;
 	private BooleanBinding bb = null;
-	private Thread GetTermImages = null;
 	CommandFactory cf = new CommandFactory();
 
 
@@ -323,7 +322,7 @@ public class AppGUIController {
 		AudioCreationController createController = (AudioCreationController)ss.newScene("AudioCreationGUI.fxml", event);
 
 		// pass formatted description to be displayed in create view
-		createController.passInfo(descriptionOutput.get(0), tempFolder, searchTerm, GetTermImages);
+		createController.passInfo(descriptionOutput.get(0), tempFolder, searchTerm);
 
 
 		// adds search term to favorites list if selected
