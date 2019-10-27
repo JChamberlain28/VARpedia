@@ -30,7 +30,7 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="playPauseB" layoutX="590.0" layoutY="722.0" mnemonicParsing="false" onAction="#pausePress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="❚❚" textFill="WHITE" AnchorPane.leftAnchor="590.0">
+            <Button fx:id="playPauseB" layoutX="590.0" layoutY="722.0" mnemonicParsing="false" onAction="#pausePress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="❚❚" textFill="WHITE" AnchorPane.leftAnchor="590.0" AnchorPane.rightAnchor="587.0">
                <font>
                   <Font size="20.0" />
                </font>

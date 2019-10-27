@@ -32,7 +32,12 @@
          <font>
             <Font name="System Bold" size="20.0" />
          </font></Button>
-      <TableView fx:id="imageView" layoutX="31.0" layoutY="62.0" prefHeight="616.0" prefWidth="1165.0" AnchorPane.leftAnchor="39.0" AnchorPane.rightAnchor="39.0">
+      <Button layoutX="1170.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleHelpButton" prefHeight="49.0" prefWidth="49.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px; -fx-background-radius: 30px; -fx-border-radius: 30px;" text="?" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <TableView fx:id="imageView" layoutX="31.0" layoutY="62.0" prefHeight="616.0" prefWidth="1165.0" AnchorPane.leftAnchor="39.0">
         <columns>
           <TableColumn fx:id="imageCol" prefWidth="1163.999984741211" text="Images" />
         </columns>
@@ -49,6 +54,60 @@
                   <Font size="38.0" />
                </font>
             </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="helpView" layoutX="10.0" maxHeight="780.0" maxWidth="1243.0" prefHeight="780.0" prefWidth="1233.0" style="-fx-background-color: rgba(027, 031, 034, 0.47);" visible="false">
+         <children>
+            <Button layoutX="1160.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleHelpExitButton" prefHeight="49.0" prefWidth="49.0" style="-fx-background-color: rgb(256,050,080); -fx-border-color: white; -fx-border-width: 2px; -fx-background-radius: 30px; -fx-border-radius: 30px;" text="×" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <Text fill="WHITE" layoutX="478.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image Selection Area:" textAlignment="CENTER">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="489.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="442.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Use tick boxes to select the images for this creation" textAlignment="CENTER" wrappingWidth="359.40625">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="216.0" layoutY="731.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select this to go back to audio selection" textAlignment="CENTER" wrappingWidth="286.93945130705833">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="593.0" layoutY="478.0" strokeType="OUTSIDE" strokeWidth="0.0" text="After selecting images, enter a name for your creation to be saved as" textAlignment="CENTER" wrappingWidth="286.93945130705833">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="908.0" layoutY="471.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Once you have selected your images and supplied a name, click here to generate your creation" textAlignment="CENTER" wrappingWidth="286.93945130705833">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="56.0" fitWidth="105.0" layoutX="99.0" layoutY="710.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@arrowLeft.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="105.0" fitWidth="56.0" layoutX="1037.0" layoutY="612.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@arrowDown.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="105.0" fitWidth="56.0" layoutX="736.0" layoutY="585.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@arrowDown.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>

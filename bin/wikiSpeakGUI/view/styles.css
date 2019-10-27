@@ -96,9 +96,12 @@
 }
 
 
-/* attribute */
+/* Code adapted by Jack Chamberlain
+ * Original Author: José Pereda
+ * Source: https://stackoverflow.com/questions/28417140/styling-default-javafx-dialogs/28421229#28421229
+*/
 .dialog-pane{
 
     -fx-font-size: 20px;
 }
-/* attribute */
+/* Code attribute ends */

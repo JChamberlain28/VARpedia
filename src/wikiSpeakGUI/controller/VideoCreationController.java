@@ -43,7 +43,7 @@ public class VideoCreationController {
 	private List<String> _audioGenResult;
 	private SceneSwitcher ss = new SceneSwitcher();
 	private BooleanBinding bb = null;
-
+	private Thread _imageDownloadThread = null;
 	
 
 	// stores creations that have not finished generating, to prevent another creation with
@@ -70,7 +70,10 @@ public class VideoCreationController {
 	@FXML
 	private Button backButton;
 	
-	private Thread _imageDownloadThread = null;
+	@FXML
+	private AnchorPane helpView;
+	
+	
 
 	
 
@@ -136,7 +139,15 @@ public class VideoCreationController {
 
 
 
-
+	@FXML
+	private void handleHelpButton(ActionEvent event) {
+		helpView.setVisible(true);
+	}
+	
+	@FXML
+	private void handleHelpExitButton(ActionEvent event) {
+		helpView.setVisible(false);
+	}
 
 
 	@FXML
