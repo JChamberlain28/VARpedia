@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="780.0" prefWidth="1243.0" style="-fx-background-color: rgb(027, 031, 034);" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.controller.AudioCreationController">
+<AnchorPane prefHeight="780.0" prefWidth="1243.0" style="-fx-background-color: rgb(027, 031, 034);" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wikiSpeakGUI.controller.AudioCreationController">
    <children>
       <Button fx:id="nextButton" layoutX="1144.0" layoutY="723.0" mnemonicParsing="false" onAction="#handleNextButton" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Next" textFill="WHITE">
          <font>
@@ -53,6 +53,11 @@
          <font>
             <Font name="System Bold" size="20.0" />
          </font></Button>
+      <Button layoutX="1170.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleHelpButton" prefHeight="49.0" prefWidth="49.0" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px; -fx-background-radius: 30px; -fx-border-radius: 30px;" text="?" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
       <Text fill="WHITE" layoutX="28.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Highlight text and click speak to hear" wrappingWidth="441.7294921875">
          <font>
             <Font size="22.0" />
@@ -76,5 +81,119 @@
          <font>
             <Font name="System Bold" size="20.0" />
          </font></CheckBox>
+      <AnchorPane fx:id="helpPane" layoutX="10.0" layoutY="10.0" opacity="0.8" prefHeight="780.0" prefWidth="1243.0" style="-fx-background-color: rgb(027, 031, 034);" stylesheets="@styles.css" visible="false">
+         <children>
+            <Text fill="WHITE" layoutX="51.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Text to convert to audio here:" wrappingWidth="576.3647155761719">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Text>
+            <Button layoutX="1162.0" layoutY="-4.0" mnemonicParsing="false" onAction="#handleHelpExitButton" prefHeight="49.0" prefWidth="49.0" style="-fx-background-color: rgb(256,050,080); -fx-border-color: white; -fx-border-width: 2px; -fx-background-radius: 30px; -fx-border-radius: 30px;" text="×" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <Text fill="WHITE" layoutX="80.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Highlight text chunks that are less then 40 words" wrappingWidth="392.36468505859375">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="753.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Audio Files Here" wrappingWidth="352.3647155761719">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="72.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Different Voices" wrappingWidth="352.3647155761719">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="6.0" layoutY="671.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return back to main menu" wrappingWidth="384.3647155761719">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="335.0" layoutY="614.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add highlighted chuck to audio list" wrappingWidth="352.3647155761719">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="735.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete seleted audio file" wrappingWidth="377.6980895996094">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="716.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reorder the audio files " wrappingWidth="352.3647155761719">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="356.0" layoutY="725.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tick to add music to creation" wrappingWidth="352.3647155761719">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="864.0" layoutY="675.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move to Image selection" wrappingWidth="404.3647155761719">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="920.0" layoutY="561.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preview all audio files" wrappingWidth="352.3647155761719">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="364.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press to hear how the selected text will sound" wrappingWidth="352.3647155761719">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="37.0" fitWidth="76.0" layoutX="625.0" layoutY="603.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@arrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="37.0" fitWidth="76.0" layoutX="1070.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@arrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="37.0" fitWidth="76.0" layoutX="639.0" layoutY="719.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@arrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="63.0" fitWidth="37.0" layoutX="833.0" layoutY="522.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@arrowDown.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="37.0" fitWidth="18.0" layoutX="1030.0" layoutY="571.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@arrowDown.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="47.0" fitWidth="25.0" layoutX="1161.0" layoutY="680.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@arrowDown.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="47.0" fitWidth="25.0" layoutX="60.0" layoutY="680.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@arrowDown.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="35.0" fitWidth="19.0" layoutX="127.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@arrowDown.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="26.0" fitWidth="52.0" layoutX="313.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@arrowLeft.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

@@ -14,6 +14,7 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import wikiSpeakGUI.CommandFactory;
 import wikiSpeakGUI.Main;
 import wikiSpeakGUI.SceneSwitcher;
@@ -74,6 +75,9 @@ public class AudioCreationController {
 
 	@FXML
 	private ListView<String> selectedAudio;
+	
+	@FXML
+	private AnchorPane helpPane;
 
 	@FXML
 	private ImageView combineAudioLoading;
@@ -124,6 +128,16 @@ public class AudioCreationController {
 		
 		passInfoDependents();
 
+	}
+	
+	@FXML
+	private void handleHelpButton(ActionEvent event) {
+		helpPane.setVisible(true);
+	}
+	
+	@FXML
+	private void handleHelpExitButton(ActionEvent event) {
+		helpPane.setVisible(false);
 	}
 
 	@FXML
