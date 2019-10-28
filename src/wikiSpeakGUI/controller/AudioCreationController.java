@@ -508,7 +508,8 @@ public class AudioCreationController {
 
 
 
-	// helper function to change alert font size. (repeated in each class that uses alerts)
+	// helper function to change alert font size. ((repeated in each class that uses alerts, this comment is
+	// also repeated to ensure it is seen)
 	// repetition required as it did not make sense for all controllers to extend a class containing it.
 	// It also didn't make sense to have a separate class just for this function
 	public void setBigFont(Alert popup) {

@@ -39,7 +39,7 @@ public class GenerateVideoTask extends Task<Void>  {
 	@Override
 	protected Void call() {
 
-
+		// adds to list of currently generating creations
 		VideoCreationController.getCurrentlyGenerating().add(_creationName);
 
 		Platform.runLater(new Runnable() {
@@ -58,12 +58,12 @@ public class GenerateVideoTask extends Task<Void>  {
 		for (int i = 0; i <_imageTable.getItems().size(); i++) {
 			CellPane cellPane = _imageTable.getItems().get(i);
 			CheckBox selectImageBox = (CheckBox)cellPane.getPane().getChildren().get(1);
-			
+
 			// if check box not ticked, associated image path is retrieved and deleted
 			if (selectImageBox.isSelected() == false) {
 				ImageView imageView = (ImageView) cellPane.getPane().getChildren().get(0);
 				TrackedImage image = (TrackedImage)imageView.getImage();
-				
+
 				// format string in correct way for bash rm command
 				String[] urlForDeletion = image.getURL().split("TempCreation");
 				generationScript.sendCommand("rm -f ./TempCreation" + urlForDeletion[1], false);
@@ -80,11 +80,12 @@ public class GenerateVideoTask extends Task<Void>  {
 
 		generationScript.sendCommand("./generateVid.sh \"" + _creationName + "\" " + _tempDir + " \"" + _wikitTerm + "\" " + audioTime, false);
 		generationScript.sendCommand("mkdir -p \"creations/metadata/" + _creationName + "\"", false);
+		
 		// get current date as creation date
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = new Date();
-		
-		// store creation date
+
+		// store creation date, default confidence rating and when it was last viewed (never at this stage)
 		generationScript.sendCommand("echo " + dateFormat.format(date) + "> \"creations/metadata/" + _creationName + "/creationDate.txt\"", false);
 		generationScript.sendCommand("echo 0/5 > \"creations/metadata/" + _creationName + "/confidenceRating.txt\"", false);
 		generationScript.sendCommand("echo Never Viewed > \"creations/metadata/" + _creationName + "/lastViewed.txt\"", false);
@@ -94,9 +95,8 @@ public class GenerateVideoTask extends Task<Void>  {
 
 	@Override
 	protected void done() {
-
+		//removes from list of currently generating 
 		VideoCreationController.getCurrentlyGenerating().remove(VideoCreationController.getCurrentlyGenerating().indexOf(_creationName));
-
 
 		Platform.runLater(new Runnable() {
 

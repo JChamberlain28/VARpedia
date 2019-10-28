@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import javafx.application.Platform;
+
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -123,17 +123,27 @@ public class AppGUIController {
 
 	@FXML
 	private ComboBox<String> sortBy;
-	
+
 	@FXML
 	private AnchorPane helpPanePD;
-	
+
 	@FXML
 	private AnchorPane helpPaneCreate;
 
 
 
 
+	/*
 
+	 *
+	 *@return void
+	 * 
+	 * This method initialises GUI elements by setting their css style and states.
+	 * It sets custom row / cell factories required for the Table View.
+	 * It also initialises a boolean binding for the wiki search box and edits the sorting behaviour
+	 * of the lastViewed column of the TableView. Furthermore, it prevents invalid characters being entered
+	 * in the wiki search box.
+	 */
 	@FXML
 	private void initialize() {
 
@@ -147,7 +157,7 @@ public class AppGUIController {
 				+ "-fx-text-fill: rgb(255,255,255); -fx-focus-color: rgb(255,255,255);");
 		sortBy.getItems().addAll("Date Viewed", "Confidence");
 		sortBy.getSelectionModel().select(0);
-		sortByChange(new Event(null));
+
 
 		wikitResult.setStyle("-fx-control-inner-background: rgb(049,055,060); "
 				+ "-fx-text-fill: rgb(255,255,255); -fx-focus-color: rgb(255,255,255);");
@@ -227,7 +237,7 @@ public class AppGUIController {
 
 
 
-
+		// sets rule for binding a disabled property to the wiki search field
 		bb = new BooleanBinding() {
 			{
 				super.bind(wikitInput.textProperty());
@@ -267,7 +277,10 @@ public class AppGUIController {
 
 
 
-	// allows user to change the sort order of creations via a ComboBox
+	/*
+	 * This event handler allows user to change the sort order of creations via a
+	 * ComboBox that triggers it. It switches the sorting order of the TableView
+	 */
 	@FXML
 	public void sortByChange(Event event) {
 		if (creationList.getItems().size() != 0) {
@@ -287,7 +300,9 @@ public class AppGUIController {
 
 
 
-	// sets TableView to default selection when triggered (first item)
+	/*
+	 * This event handler sets TableView to default selection when triggered (first item)
+	 */
 	@FXML
 	private void creationListDefaultSelect(Event event) {
 		creationList.getSelectionModel().select(0);
@@ -298,7 +313,10 @@ public class AppGUIController {
 
 
 
-	// Changes scene to create scene
+	/*
+	 * This event handler creates required text file for storing wiki output, adds the search term
+	 * to favorites if required and switches to the audio selection scene.
+	 */
 	@FXML
 	private void handleContinueButton(ActionEvent event) {
 
@@ -347,7 +365,10 @@ public class AppGUIController {
 
 
 
-
+	/*
+	 * This event handler is triggered upon clicking the "Search from Favorites" button.
+	 * It shows the favorites window.
+	 */
 	@FXML
 	private void handleFavSearch(ActionEvent event) { 
 		try {
@@ -370,12 +391,23 @@ public class AppGUIController {
 	}
 
 
-	// is called from favorites screen to search the selected favorites term
+	/*
+	 * @param search  - search term from favorites to search wikipedia for (String)
+	 * 
+	 * @return void
+	 * 
+	 * This method is called from favorites screen to search the selected favorites term
+	 */
 	public void Search(String search) { 
 		wikitInput.setText(search);
 		wikitButton.fire();
 	}
 
+	
+	/*
+	 * This event handler initiates the wikit search thread and disables buttons that would
+	 * cause faults during the process (such as continue button)
+	 */
 	@FXML
 	private void handleWikiSearch(ActionEvent event) { 
 
@@ -390,7 +422,11 @@ public class AppGUIController {
 
 	}
 
-
+	/*
+	 * This event handler checks if a creation is generating before proceeding.
+	 * It switches to the media player scene for playing the selected creation.
+	 * It also records the date at the time it was clicked as the last viewed date.
+	 */
 	@FXML
 	private void handlePlayButton(Event event) {
 
@@ -428,7 +464,11 @@ public class AppGUIController {
 
 
 
-
+	/*
+	 * This handler checks a creation is not generating before proceeding.
+	 * It then asks the user to confirm the deletion and then deletes the selected creation
+	 * if confirmation is given.
+	 */
 	@FXML
 	private void handleDeleteButton(Event event) { 
 
@@ -464,7 +504,7 @@ public class AppGUIController {
 			Optional<ButtonType> result = popup.showAndWait();
 			if (result.get() == buttonTypeYes){
 
-
+				// deletes creation and associated metadata
 				cf.sendCommand("rm \"creations/" + selection + ".mp4\"", false);
 				cf.sendCommand("rm -rf \"creations/metadata/" + selection + "\"", false);
 
@@ -508,8 +548,8 @@ public class AppGUIController {
 	// repetition required as it did not make sense for all controllers to extend a class containing it.
 	// It also didn't make sense to have a separate class just for this function
 	public void setBigFont(Alert popup) {
-		
-		
+
+
 		/* Code adapted by Jack Chamberlain
 		 * Original Author: José Pereda
 		 * Source: https://stackoverflow.com/questions/28417140/styling-default-javafx-dialogs/28421229#28421229
@@ -521,17 +561,17 @@ public class AppGUIController {
 		/*
 		 * attribute ends
 		 */
-		
-		
+
+
 	}
 
-	
-	
+
+
 	@FXML
 	private void handlePlayDelHelpButton(ActionEvent event) {
 		helpPanePD.setVisible(true);
 	}
-	
+
 	@FXML
 	private void handlePlayDelHelpExitButton(ActionEvent event) {
 		helpPanePD.setVisible(false);
@@ -541,7 +581,7 @@ public class AppGUIController {
 	private void handleCreateHelpButton(ActionEvent event) {
 		helpPaneCreate.setVisible(true);
 	}
-	
+
 	@FXML
 	private void handleCreateHelpExitButton(ActionEvent event) {
 		helpPaneCreate.setVisible(false);

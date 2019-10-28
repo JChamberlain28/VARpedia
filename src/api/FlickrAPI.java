@@ -12,6 +12,12 @@ import javax.imageio.ImageIO;
 import com.flickr4java.flickr.*;
 import com.flickr4java.flickr.photos.*;
 
+
+
+/* Code adapted by Jack Chamberlain
+ * Original Author: Nasser Giacaman
+ * Source: The University of Auckland ACP SE206
+ */
 public class FlickrAPI {
 
 	public static String getAPIKey(String key) {
@@ -25,8 +31,8 @@ public class FlickrAPI {
 		BufferedReader br;
 		try {
 			br = new BufferedReader(new FileReader(file));
-			
-			
+
+
 			String line;
 			try {
 				while ( (line = br.readLine()) != null ) {
@@ -37,20 +43,31 @@ public class FlickrAPI {
 				}
 				br.close();
 				throw new RuntimeException("Couldn't find " + key +" in config file "+file.getName());
-			
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-	
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} 
 		return null;
-}
+	}
 
+
+	/*
+	 *@param query  - the term to search flicker for (String)
+	 *@param tempDir  - temporary directory to download to. Is the same as the 
+	 *					temp directory for creating a creation. (String)
+	 *@param numOfImages - number of images to download (int)
+	 *
+	 *@return void
+	 * 
+	 * Method initiates image downloading via flickrAPI.
+	 */
 	public static void downloadImages(String query, String tempDir, int numOfImages) {
 		try {
-			String apiKey = getAPIKey("apiKey"); //replace with real keys?
+			String apiKey = getAPIKey("apiKey"); 
 			String sharedSecret = getAPIKey("sharedSecret");
 
 			Flickr flickr = new Flickr(apiKey, sharedSecret, new REST());
@@ -71,8 +88,7 @@ public class FlickrAPI {
 				BufferedImage image = photos.getImage(photo,Size.LARGE);
 				String filename = photo.getId()+".jpg";
 				File outputfile = new File(tempDir,filename);
-				ImageIO.write(image, "jpg", outputfile); // Causing exceptions!! ##
-				// clicked next very quick and empty list appeared, not (downloading images) ####
+				ImageIO.write(image, "jpg", outputfile);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -80,4 +96,8 @@ public class FlickrAPI {
 
 
 	}
+
 }
+/*
+ * attribute ends
+ */

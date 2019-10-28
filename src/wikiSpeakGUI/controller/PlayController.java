@@ -21,7 +21,7 @@ import javafx.util.Duration;
 import wikiSpeakGUI.SceneSwitcher;
 
 public class PlayController {
-	
+
 	private static String creation;
 	private static String _filePath ="";
 	File fileUrl = new File(_filePath).getAbsoluteFile(); 
@@ -34,13 +34,13 @@ public class PlayController {
 	private MediaPlayer mp;
 	private Media media;
 	SceneSwitcher ss = new SceneSwitcher();
-	
+
 	public void initialize(){
 		playPauseB.setMinWidth(40);
 		start();
-		
+
 	}
-	
+
 	/* Code adapted by Jack Chamberlain and Gurpreet Singh
 	 * Original Author: Nasser Giacaman
 	 * Source: The University of Auckland ACP SE206
@@ -51,20 +51,20 @@ public class PlayController {
 		mv.setMediaPlayer(mp);
 		mp.setAutoPlay(true);
 		mp.setVolume(100);
-		
-		
-		
+
+
+
 		// return media to start once played
 		mp.setOnEndOfMedia(new Runnable() {
-		    @Override
-		    public void run() {
-		    	mp.seek(Duration.ZERO);
+			@Override
+			public void run() {
+				mp.seek(Duration.ZERO);
 				playPauseB.setText("▶");
 				mp.pause();
-		    }
+			}
 		});
 	}
-	
+
 	@FXML
 	private void pausePress(ActionEvent event) {
 		if (mp.getStatus() == Status.PLAYING) {
@@ -75,12 +75,12 @@ public class PlayController {
 			mp.play();
 		}
 	}
-	
+
 	@FXML
 	private void forwardPress(ActionEvent event) {
 		mp.seek( mp.getCurrentTime().add( Duration.seconds(3)) );
 	}
-	
+
 	@FXML
 	private void backwardsPress(ActionEvent event) {
 		mp.seek( mp.getCurrentTime().add( Duration.seconds(-3)) );
@@ -88,24 +88,24 @@ public class PlayController {
 	/*
 	 * attribute ends
 	 */
-	
-	
-	
+
+
+
 	// pass the selected creation from the AppGUIController to the PlayController
 	public void passInfo(String nameOfCreation) {
 		_filePath = "creations/"+ nameOfCreation + ".mp4"; 
 		creation = nameOfCreation;
 
 	}
-	
-	
+
+
 	@FXML
 	// Changes scene to main scene
 	private void handleBackToMainView(ActionEvent event) {
 		mp.stop();
 		ss.newScene("AppGUI.fxml", event);
 	}
-	
+
 	@FXML
 	// Changes scene to main scene
 	private void ratePressed(ActionEvent event) {
@@ -123,5 +123,5 @@ public class PlayController {
 			e.printStackTrace();
 		}
 	}
-	
+
 }

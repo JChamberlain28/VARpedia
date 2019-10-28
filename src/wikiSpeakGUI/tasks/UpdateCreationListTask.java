@@ -84,31 +84,31 @@ public class UpdateCreationListTask extends Task<Void> {
 					generatingList.add(creation);					
 				}
 
-				
-				
-				
-				
-				
+
+
+
+
+
 
 				for (String i : lines) {
 					// prevents (No creations currently exist) being a creation
 					if (!(i.equals("(No creations currently exist)"))) {
 						CommandFactory cf = new CommandFactory();
-						
-						
+
+						// Retrieves creation metadata from files
 						List<String> ratingFileRead = cf.sendCommand("cat \"creations/metadata/" + i + "/confidenceRating.txt\"", false);
 
-						
+
 						List<String> dateFileRead = cf.sendCommand("cat \"creations/metadata/" + i + "/creationDate.txt\"", false);
 
-						
+
 						List<String> lastViewedRead = cf.sendCommand("cat \"creations/metadata/" + i + "/lastViewed.txt\"", false);
 
-						
-						
+
+
 						Creation creation = new Creation(i, ratingFileRead.get(0), dateFileRead.get(0), lastViewedRead.get(0));
 						creationList.add(creation);
-						
+
 
 
 					}
@@ -124,7 +124,7 @@ public class UpdateCreationListTask extends Task<Void> {
 
 				creationList.addAll(generatingList);
 				_listToUpdate.setItems(creationList);
-				
+
 
 				// update number of creations Text
 				int noOfCreations;
@@ -139,7 +139,7 @@ public class UpdateCreationListTask extends Task<Void> {
 				// auto selects the first item in the table (default selection)
 				if (creationList.size() != 0) {
 					_listToUpdate.getSelectionModel().select(0);
-					
+
 					_delButton.setDisable(false);
 					_playButton.setDisable(false);
 

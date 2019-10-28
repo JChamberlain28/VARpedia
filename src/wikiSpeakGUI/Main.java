@@ -11,11 +11,9 @@ import javafx.application.Platform;
 import javafx.event.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DialogPane;
+
 import javafx.stage.*;
-import wikiSpeakGUI.controller.AppGUIController;
-import wikiSpeakGUI.controller.VideoCreationController;
+
 
 
 public class Main extends Application{
@@ -23,7 +21,15 @@ public class Main extends Application{
 
 	static String _jarDir;
 
-
+	/*
+	 *@param args  - arguments that the JVM can pass in (String[])
+	 *
+	 *@return void
+	 * 
+	 * This method obtains the current working directory of the jar file (assuming this
+	 * this is packaged into a runnable jar) to prevent this program looking in another default
+	 * location on the users system. It also ensures all bash scritps are executable
+	 */
 	public static void main(String[] args) {
 
 		// get directory of jar
@@ -74,7 +80,9 @@ public class Main extends Application{
 		primaryStage.setResizable(false);
 
 
-		// remove .description.txt upon closing application to prevent left over files
+		// removes .description.txt upon closing application to prevent left over files
+		// it also removes all temporary creation folders and destroys any bash pricesses still
+		// running.
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
 			public void handle(WindowEvent e) {

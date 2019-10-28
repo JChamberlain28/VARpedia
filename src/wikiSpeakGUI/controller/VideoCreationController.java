@@ -44,13 +44,13 @@ public class VideoCreationController {
 	private SceneSwitcher ss = new SceneSwitcher();
 	private BooleanBinding bb = null;
 	private Thread _imageDownloadThread = null;
-	
+
 
 	// stores creations that have not finished generating, to prevent another creation with
 	// the same name being created in the meantime
 	private static List<String> generationList = new ArrayList<String>();
 
-	
+
 	@FXML
 	private AnchorPane loadingPane;
 	@FXML
@@ -69,22 +69,30 @@ public class VideoCreationController {
 
 	@FXML
 	private Button backButton;
-	
+
 	@FXML
 	private AnchorPane helpView;
-	
-	
-
-	
 
 
 
 
 
 
+
+
+
+	/*
+
+	 *
+	 *@return void
+	 * 
+	 * This method initialises GUI elements by setting their css style and states.
+	 * It also initialises a boolean binding for the creation name text field and blocks certain
+	 * characters from said field.
+	 */
 	@FXML
 	private void initialize() {
-		
+
 		imageCol.setStyle( "-fx-alignment: CENTER;");
 		nameInput.setStyle("-fx-control-inner-background: rgb(049,055,060); "
 				+ "-fx-text-fill: rgb(255,255,255); -fx-focus-color: rgb(255,255,255);");
@@ -93,7 +101,7 @@ public class VideoCreationController {
 
 		imageView.setPlaceholder(new Label("No images to display"));
 
-		// removes characters that cause hidden file creation 
+		// blocks characters that cause hidden file creation 
 		nameInput.textProperty().addListener(new ChangeListener<String>() {
 
 			@Override
@@ -103,32 +111,45 @@ public class VideoCreationController {
 				}
 			}
 		});
-		
+
 		// disable submit button and make booleanBinding linked to name text field available.
 		// this binding is only bound to the button when at least one image is selected, as to prevent
-		// no images being included
+		// no images being included in a creation.
 		submitCreationButton.setDisable(true);
-		
+
 		bb = new BooleanBinding() {
-		    {
+			{
 
-		        super.bind(nameInput.textProperty());
+				super.bind(nameInput.textProperty());
 
-		    }
+			}
 
-		    @Override
-		    protected boolean computeValue() {
-		    	
-		        return (nameInput.getText().trim().isEmpty());
-		    }
+			@Override
+			protected boolean computeValue() {
+
+				return (nameInput.getText().trim().isEmpty());
+			}
 		};
 
 
-		
-		
+
+
 
 	}
 
+	
+	/*
+
+	 *@param wikitTerm  - searched wikipedia term (String)
+	 *@param tempDir  - temp creation directory (String)
+	 *@param audioGenResult  - used in GenerateVideoTask instantiated in this class (List<String>)
+	 *@param imageDownloadThread  - thread for background image download that must be checked. Only when
+	 *								it is finished should the image list be displayed
+	 *
+	 *@return void
+	 * 
+	 * This method obtains info from AudioCreationController required by methods and objects in this class
+	 */
 	public void passInfo(String wikitTerm, String tempDir, List<String> audioGenResult, Thread imageDownloadThread) {
 		_wikitTerm = wikitTerm;
 		_tempDir = tempDir;
@@ -138,24 +159,35 @@ public class VideoCreationController {
 	}
 
 
-
+	/*
+	 * This method handler shows the help view
+	 */
 	@FXML
 	private void handleHelpButton(ActionEvent event) {
 		helpView.setVisible(true);
 	}
-	
+
+	/*
+	 * This method handler hides the help view
+	 */
 	@FXML
 	private void handleHelpExitButton(ActionEvent event) {
 		helpView.setVisible(false);
 	}
 
 
+	/*
+	 * This method handler switches back to the audio selection screen
+	 */
 	@FXML
 	private void handleBackButton(ActionEvent event) {
 		ss.newScene("AudioCreationGUI.fxml", event);
 	}
 
-
+	/*
+	 * This method checks for an existing creation with the same name, before
+	 * proceeding to create a GenerateVideo task that creates the creation
+	 */
 	@FXML
 	private void handleSubmitCreation(ActionEvent event) {
 
@@ -190,7 +222,7 @@ public class VideoCreationController {
 
 			popup.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
 			setBigFont(popup);
-			
+
 			Optional<ButtonType> result = popup.showAndWait();
 
 			// deletes file so the new creation can be made
@@ -218,9 +250,9 @@ public class VideoCreationController {
 
 		// start creation generation in the background and return to main app GUI
 		if (!abort) {
-			
 
-			
+
+
 
 			AppGUIController appGUIController = (AppGUIController)ss.newScene("AppGUI.fxml", event);
 
@@ -232,27 +264,32 @@ public class VideoCreationController {
 
 		}
 	}
-	
+
 	// helper method to allow methods from other classes access the names of currently generating creations
 	public static List<String> getCurrentlyGenerating(){
 		return generationList;
 	}
+
+
 	
-	
+	/*
+	 * This method runs code that requires variables passed in via the passInfo method
+	 */
 	private void runTasksWaitingOnInfo(){
 		Thread updateImageListThread = new Thread(new UpdateImageListTask(_imageDownloadThread, loadingPane, imageView,
 				imageCol, _tempDir, bb, submitCreationButton));
 		updateImageListThread.setDaemon(true);
 		updateImageListThread.start();
 	}
-	
-	
-	// helper function to change alert font size. (repeated in each class that uses alerts)
+
+
+	// helper function to change alert font size. (repeated in each class that uses alerts, this comment is
+	// also repeated to ensure it is seen)
 	// repetition required as it did not make sense for all controllers to extend a class containing it.
 	// It also didn't make sense to have a separate class just for this function
 	public void setBigFont(Alert popup) {
-		
-		
+
+
 		/* Code adapted by Jack Chamberlain
 		 * Original Author: José Pereda
 		 * Source: https://stackoverflow.com/questions/28417140/styling-default-javafx-dialogs/28421229#28421229
@@ -264,7 +301,7 @@ public class VideoCreationController {
 		/*
 		 * attribute ends
 		 */
-		
-		
+
+
 	}
 }

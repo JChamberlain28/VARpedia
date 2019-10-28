@@ -1,7 +1,12 @@
 package wikiSpeakGUI;
 
+
+/*
+ *This class contains all information related to a creation. Each field corresponds
+ *to a column in the creation TableView
+ */
 public class Creation {
-	
+
 	private String name;
 	private String rating;
 	private String creationDate;
@@ -29,6 +34,6 @@ public class Creation {
 	public String getLastViewed() {
 		return lastViewed;
 	}
-	
-	
+
+
 }

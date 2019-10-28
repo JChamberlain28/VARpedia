@@ -4,7 +4,7 @@ import javafx.concurrent.Task;
 import wikiSpeakGUI.CommandFactory;
 
 public class RemoveDirTask  extends Task<Void> {
-	
+
 	private String _dir;
 
 	public RemoveDirTask(String dir) {
@@ -18,6 +18,6 @@ public class RemoveDirTask  extends Task<Void> {
 		return null;
 	}
 
-	
-	
+
+
 }

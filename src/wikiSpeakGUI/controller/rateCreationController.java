@@ -9,12 +9,12 @@ import javafx.stage.Stage;
 import wikiSpeakGUI.CommandFactory;
 
 public class rateCreationController {
-	
+
 	@FXML private Button cancelButton;
 	@FXML private Button rateB;
 	@FXML private Slider rating;
 	private static String creation;
-	
+
 	@FXML
 	private void initialize() {
 		CommandFactory command = new CommandFactory();
@@ -22,18 +22,18 @@ public class rateCreationController {
 		int rate = Integer.parseInt(output.substring(0,1));
 		rating.setValue(rate);
 	}
-	
+
 	@FXML
 	private void cancelPress(ActionEvent event) {
 		Stage stage = (Stage) cancelButton.getScene().getWindow();
 		stage.close();
 	}
-	
+
 	public void passInfo(String nameOfCreation) {
 		creation = nameOfCreation;
 
 	}
-	
+
 	@FXML
 	// Changes scene to main scene
 	private void ratePress(ActionEvent event) {
@@ -44,5 +44,5 @@ public class rateCreationController {
 		Stage stage = (Stage) cancelButton.getScene().getWindow();
 		stage.close();
 	}
-	
+
 }

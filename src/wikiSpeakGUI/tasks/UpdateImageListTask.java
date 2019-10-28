@@ -59,7 +59,7 @@ public class UpdateImageListTask extends Task<Void>{
 
 
 		CommandFactory command = new CommandFactory();
-		
+
 		// waits until download images thread has finished (as it needs the images to populate TableView)
 		if (_threadToWaitOn != null) {
 			while (_threadToWaitOn.isAlive()) {
@@ -96,40 +96,41 @@ public class UpdateImageListTask extends Task<Void>{
 					// instantiates custom layout pane class used for setting TableView cell value type
 					CheckBox checkBox = new CheckBox();
 					HBox hbox = new HBox(50, imageView, checkBox);
-					
-					
+
+
 					// runs check to see if any image is selected upon changing state of a checkBox 
 					// (for greying out submit button when no images selected)
 					checkBox.setOnAction(new EventHandler<ActionEvent>() {
-					    @Override public void handle(ActionEvent e) {
-					    	boolean atLeastOneSel = false;
-					    	
-					    	for (CellPane cell : imageItems) {
-					    		CheckBox currentCheckBox = (CheckBox) cell.getPane().getChildren().get(1);
-					    		if (currentCheckBox.isSelected()) {
-					    			atLeastOneSel = true;
-					    		}
-					    	}
-					    	if (!atLeastOneSel) {
-					        _submit.disableProperty().unbind();
-					        _submit.setDisable(true);
-					    	}
-					        else {
-					        	_submit.disableProperty().bind(_submitBinder);
-					        }
-					    }
+						@Override public void handle(ActionEvent e) {
+							boolean atLeastOneSel = false;
+
+							for (CellPane cell : imageItems) {
+								CheckBox currentCheckBox = (CheckBox) cell.getPane().getChildren().get(1);
+								if (currentCheckBox.isSelected()) {
+									atLeastOneSel = true;
+								}
+							}
+							if (!atLeastOneSel) {
+								_submit.disableProperty().unbind();
+								_submit.setDisable(true);
+							}
+							else {
+								_submit.disableProperty().bind(_submitBinder);
+							}
+						}
 					});
-					
+
 					hbox.setAlignment(Pos.CENTER);
 					CellPane cell = new CellPane(hbox);
 
-					
+
 					imageItems.addAll(cell);
 
 
 
 				}
-
+				
+				// sets cell value factory to the pane that will show the image and check box
 				_colForUpdate.setCellValueFactory(new PropertyValueFactory<CellPane, HBox>("pane"));
 				_imageView.setItems(imageItems);
 				_itemToHide.setVisible(false);

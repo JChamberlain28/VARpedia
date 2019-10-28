@@ -20,7 +20,7 @@ public class WikitSearchTask extends Task<Void> {
 	private TextArea _resultField;
 	private String _searchTerm;
 	private Button _wikitContinue;
-	
+
 
 	List<String> output;
 	private ImageView _wikitLoading;
@@ -37,7 +37,7 @@ public class WikitSearchTask extends Task<Void> {
 		_wikitContinue = wikitContinue;
 		_wikitLoading = wikitLoading;
 		_bb = bb;
-		
+
 	}
 
 	@Override
@@ -70,13 +70,13 @@ public class WikitSearchTask extends Task<Void> {
 					popup.setHeaderText("Please try another term"); 
 					setBigFont(popup);
 					popup.show();
-					
+
 
 				} else { 
-				_wikitButton.setDisable(false); 
-				_resultField.setText(output.get(0));
-				_wikitContinue.setDisable(false);
-				_favButton.setDisable(false);
+					_wikitButton.setDisable(false); 
+					_resultField.setText(output.get(0));
+					_wikitContinue.setDisable(false);
+					_favButton.setDisable(false);
 
 				}
 				_wikitButton.disableProperty().bind(_bb);
@@ -87,26 +87,27 @@ public class WikitSearchTask extends Task<Void> {
 
 		});
 	}
-	
-	// helper function to change alert font size. (repeated in each class that uses alerts)
-		// repetition required as it did not make sense for all controllers to extend a class containing it.
-		// It also didn't make sense to have a separate class just for this function
-		public void setBigFont(Alert popup) {
-			
-			
-			/* Code adapted by Jack Chamberlain
-			 * Original Author: José Pereda
-			 * Source: https://stackoverflow.com/questions/28417140/styling-default-javafx-dialogs/28421229#28421229
-			 */
-			DialogPane dialogPane = popup.getDialogPane();
-			dialogPane.getStylesheets().add(
-					Main.class.getResource("/wikiSpeakGUI/view/styles.css").toExternalForm());
-			dialogPane.getStyleClass().add("dialog-pane");
-			/*
-			 * attribute ends
-			 */
-			
-			
-		}
+
+	// helper function to change alert font size. (repeated in each class that uses alerts, this 
+	// comment is repeated to ensure it is seen)
+	// repetition required as it did not make sense for all controllers to extend a class containing it.
+	// It also didn't make sense to have a separate class just for this function
+	public void setBigFont(Alert popup) {
+
+
+		/* Code adapted by Jack Chamberlain
+		 * Original Author: José Pereda
+		 * Source: https://stackoverflow.com/questions/28417140/styling-default-javafx-dialogs/28421229#28421229
+		 */
+		DialogPane dialogPane = popup.getDialogPane();
+		dialogPane.getStylesheets().add(
+				Main.class.getResource("/wikiSpeakGUI/view/styles.css").toExternalForm());
+		dialogPane.getStyleClass().add("dialog-pane");
+		/*
+		 * attribute ends
+		 */
+
+
+	}
 
 }

@@ -10,20 +10,20 @@ import javafx.stage.Stage;
 import wikiSpeakGUI.CommandFactory;
 
 public class favSelectionController {
-	
+
 
 	@FXML private Button searchB;
 	@FXML private Button delB;
 	@FXML private Button cancelB;
 	@FXML private ListView<String> favourites;
 	private static AppGUIController parent;
-	
+
 	public void initialize(){
-		
+
 		favourites.setStyle("-fx-control-inner-background: rgb(049,055,060); "
 				+ "-fx-text-fill: rgb(255,255,255); -fx-focus-color: rgb(255,255,255);");
-		
-		
+
+
 		CommandFactory command = new CommandFactory();
 		List<String> output = command.sendCommand("cat favourites.txt" , false);
 		String[] split = output.get(0).split("_");
@@ -33,15 +33,15 @@ public class favSelectionController {
 			searchB.setDisable(true);
 			delB.setDisable(true);
 		}
-		
+
 	}
-	
+
 	public void setParent(AppGUIController p){
 		parent = p;
 	}
-	
 
-	
+
+
 	@FXML
 	private void delPress(ActionEvent event) {
 		favourites.getItems().remove(favourites.getSelectionModel().getSelectedIndex());
@@ -55,9 +55,9 @@ public class favSelectionController {
 		for(int i=0; i< favourites.getItems().size();i++) {
 			command.sendCommand("echo \""+ favourites.getItems().get(i)+"_\" >> favourites.txt", false);
 		}
-		
+
 	}
-	
+
 	@FXML
 	// Changes scene to main scene and searches for term selected
 	private void searchPress(ActionEvent event) {
@@ -65,12 +65,12 @@ public class favSelectionController {
 		stage.close();
 		parent.Search(favourites.getSelectionModel().getSelectedItem());
 	}
-	
+
 	@FXML
 	// Changes scene to main scene
 	private void cancelPress(ActionEvent event) {
 		Stage stage = (Stage) searchB.getScene().getWindow();
 		stage.close();
 	}
-	
+
 }
