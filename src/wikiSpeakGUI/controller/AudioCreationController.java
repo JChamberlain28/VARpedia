@@ -201,25 +201,25 @@ public class AudioCreationController {
 				command.sendCommand("echo \""+savedText+"\" > "+_tempDir+"/description.txt" , false);
 				audioGenResult = command.sendCommand("echo $(soxi -D "+_tempDir+"/audio.wav)" , false);
 				if (music.isSelected()) {
-					double length=Double.valueOf(command.sendCommand("echo $(soxi -D tempMusic0.wav)" , false).get(0));
+					double length=Double.valueOf(command.sendCommand("echo $(soxi -D BackgroundTrack0.wav)" , false).get(0));
 					int counter=0;
 					while (Double.valueOf(audioGenResult.get(0))>length) {
-						command.sendCommand("sox tempMusic"+counter+".wav tempMusic"+counter+".wav tempMusic"+(counter+1)+".wav", false);
+						command.sendCommand("sox BackgroundTrack"+counter+".wav BackgroundTrack"+counter+".wav BackgroundTrack"+(counter+1)+".wav", false);
 						if(counter != 0){
-							command.sendCommand("rm tempMusic"+counter+".wav" , false);
+							command.sendCommand("rm BackgroundTrack"+counter+".wav" , false);
 						}
 						counter++;
-						length=Double.valueOf(command.sendCommand("echo $(soxi -D tempMusic"+counter+".wav)" , false).get(0));
+						length=Double.valueOf(command.sendCommand("echo $(soxi -D BackgroundTrack"+counter+".wav)" , false).get(0));
 					}
-					command.sendCommand("sox tempMusic"+counter+".wav "+_tempDir +"/finalMusic.wav trim 0 "+ audioGenResult.get(0), false);
+					command.sendCommand("sox BackgroundTrack"+counter+".wav "+_tempDir +"/finalMusic.wav trim 0 "+ audioGenResult.get(0), false);
 					if(counter != 0){
-						command.sendCommand("rm tempMusic"+counter+".wav" , false);
+						command.sendCommand("rm BackgroundTrack"+counter+".wav" , false);
 					}
 					command.sendCommand("sox -M " + _tempDir + "/finalMusic.wav " +_tempDir + "/audio.wav " +_tempDir +"/withMusic.wav", false);
 					command.sendCommand("rm "+ _tempDir +"/finalMusic.wav" , false);
 					command.sendCommand("sox "+_tempDir + "/withMusic.wav -c 1 "+_tempDir + "/audioLow.wav ", false);
 					command.sendCommand("rm "+ _tempDir +"/audio.wav" , false);
-					command.sendCommand("sox "+_tempDir + "/audioLow.wav "+_tempDir + "/audio.wav vol 10 dB 2>/dev/null", false);
+					command.sendCommand("sox "+_tempDir + "/audioLow.wav "+_tempDir + "/audio.wav vol 11 dB 2>/dev/null", false);
 				}
 				
 				nextButton.setDisable(false);
