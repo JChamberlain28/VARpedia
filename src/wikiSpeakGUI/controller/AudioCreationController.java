@@ -41,7 +41,7 @@ public class AudioCreationController {
 
 	@FXML
 	private Button cancelButton;
-	
+
 	@FXML
 	private CheckBox music;
 
@@ -75,7 +75,7 @@ public class AudioCreationController {
 
 	@FXML
 	private ListView<String> selectedAudio;
-	
+
 	@FXML
 	private AnchorPane helpPane;
 
@@ -87,8 +87,8 @@ public class AudioCreationController {
 
 	@FXML
 	private void initialize() {
-		
-		
+
+
 		//formats the TextArea
 		combineAudioLoading.setVisible(false);
 		numberedTextArea.setWrapText(true);
@@ -104,7 +104,7 @@ public class AudioCreationController {
 		voiceSelect.getItems().add("Default Voice");
 		voiceSelect.getItems().add("Akl_NZ(male) Voice");
 		voiceSelect.getSelectionModel().selectFirst();
-		
+
 		numberedTextArea.setText(savedText);
 
 		//loads saved audio chunks
@@ -125,16 +125,16 @@ public class AudioCreationController {
 		_numberedText = numberedText;
 		_tempDir = tempDir;
 		_wikitTerm = wikitTerm;
-		
+
 		passInfoDependents();
 
 	}
-	
+
 	@FXML
 	private void handleHelpButton(ActionEvent event) {
 		helpPane.setVisible(true);
 	}
-	
+
 	@FXML
 	private void handleHelpExitButton(ActionEvent event) {
 		helpPane.setVisible(false);
@@ -143,7 +143,7 @@ public class AudioCreationController {
 	@FXML
 	// Changes scene to main scene
 	private void handleBackToMainView(ActionEvent event) {
-		
+
 		// stop method deprecated,
 		// however have not found effective alternative for halting image download
 		// without throwing unwanted file not found exception.
@@ -151,14 +151,14 @@ public class AudioCreationController {
 		if (_getImagesThread != null) {
 			if(_getImagesThread.isAlive()) {
 				_getImagesThread.stop();
-		}
+			}
 		}
 
 		// if speech playback is happening, stop its process
 		if ((speakButton.getText().equals("Stop")) || (previewButton.getText().equals("Stop"))) {
 			speakCmd.killCurrentProcess();
 		}
-		
+
 		//removes the temp directory
 		audioSentences.clear();
 		Thread delDir = new Thread(new RemoveDirTask(_tempDir));
@@ -187,7 +187,7 @@ public class AudioCreationController {
 				order = order + _tempDir + "/audio" + audioSentences.indexOf(selectedAudio.getItems().get(i)) + ".wav ";
 				savedAudio.add(selectedAudio.getItems().get(i));
 			}
-			
+
 			String cmd = "sox "+order+" "+ _tempDir +"/audio.wav";
 			savedText=numberedTextArea.getText();
 
@@ -196,7 +196,7 @@ public class AudioCreationController {
 				nextButton.setDisable(true);
 
 				command.sendCommand("rm " +_tempDir + "/audio.wav" , false);
-				
+
 				command.sendCommand(cmd , false);
 				command.sendCommand("echo \""+savedText+"\" > "+_tempDir+"/description.txt" , false);
 				audioGenResult = command.sendCommand("echo $(soxi -D "+_tempDir+"/audio.wav)" , false);
@@ -221,7 +221,7 @@ public class AudioCreationController {
 					command.sendCommand("rm "+ _tempDir +"/audio.wav" , false);
 					command.sendCommand("sox "+_tempDir + "/audioLow.wav "+_tempDir + "/audio.wav vol 11 dB 2>/dev/null", false);
 				}
-				
+
 				nextButton.setDisable(false);
 
 				Platform.runLater(() -> {
@@ -286,6 +286,9 @@ public class AudioCreationController {
 					}
 					speakCmd.sendCommand("rm " + _tempDir +"/speakAudio.wav" , false);
 					speakCmd.sendCommand("rm selectedText.txt" , false);
+					Platform.runLater(()-> {
+						speakButton.setText("Speak");
+					});
 
 
 
@@ -303,8 +306,8 @@ public class AudioCreationController {
 			speakCmd.killCurrentProcess();
 			speakButton.setText("Speak");
 		}
-		
-		
+
+
 	}
 
 	@FXML
@@ -317,7 +320,7 @@ public class AudioCreationController {
 		} else if (words.length > 40) {
 			alert("Too many words selected", "Please selected between 1-40 words", "");
 		}else {
-			
+
 			//if selected text is same as a previous one adds white space to it to help distinguish 
 			while (selectedAudio.getItems().contains(selected)) {
 				selected = selected + " ";
@@ -410,7 +413,7 @@ public class AudioCreationController {
 
 	@FXML
 	private void previewPress(ActionEvent event){ 
-		
+
 		//thread that plays all audio files in the audio list to preview creation
 		if(previewButton.getText().equals("Preview All")) {
 			Thread preview = new Thread(() -> {
@@ -434,6 +437,10 @@ public class AudioCreationController {
 					speakCmd.sendCommand(cmd , false);
 
 				}
+				Platform.runLater(()-> {
+					previewButton.setText("Preview All");
+				});
+
 				//enable buttons 
 				speakButton.setDisable(false);
 				addButton.setDisable(false);
@@ -447,8 +454,9 @@ public class AudioCreationController {
 		}else {
 			speakCmd.killCurrentProcess();
 			previewButton.setText("Preview All");
+
 		}
-		
+
 	}
 
 	private String getVoice() {
@@ -460,9 +468,9 @@ public class AudioCreationController {
 			return "-eval \"(voice_akl_nz_jdt_diphone)\"";
 		}
 	}
-	
-	
-	
+
+
+
 	// calls code dependent on variables set in passInfo. Therefore run
 	// once these variables are available.
 	private void passInfoDependents() {
@@ -472,20 +480,20 @@ public class AudioCreationController {
 		savedAudio.clear();
 		count=0;
 
-		
+
 		previewButton.setDisable(true);
 		nextButton.setDisable(true);
 		delButton.setDisable(true);
 		upButton.setDisable(true);
 		downButton.setDisable(true);
-		
+
 		// start downloading images for creation in background
 		//if (cancelClicked) {
-			_getImagesThread = new Thread(new GetImagesTask(_wikitTerm, _tempDir));
-			_getImagesThread.start();
+		_getImagesThread = new Thread(new GetImagesTask(_wikitTerm, _tempDir));
+		_getImagesThread.start();
 		//}
 	}
-	
+
 	private void alert(String title, String header, String content) {
 		Alert popup = new Alert(AlertType.INFORMATION);
 		popup.setTitle(title);
@@ -494,18 +502,18 @@ public class AudioCreationController {
 		setBigFont(popup);
 		popup.show();
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	// helper function to change alert font size. (repeated in each class that uses alerts)
 	// repetition required as it did not make sense for all controllers to extend a class containing it.
 	// It also didn't make sense to have a separate class just for this function
 	public void setBigFont(Alert popup) {
-		
-		
+
+
 		/* Code adapted by Jack Chamberlain
 		 * Original Author: José Pereda
 		 * Source: https://stackoverflow.com/questions/28417140/styling-default-javafx-dialogs/28421229#28421229
@@ -517,8 +525,8 @@ public class AudioCreationController {
 		/*
 		 * attribute ends
 		 */
-		
-		
+
+
 	}
 
 }

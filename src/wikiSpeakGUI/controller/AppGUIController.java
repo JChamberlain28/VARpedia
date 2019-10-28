@@ -164,8 +164,8 @@ public class AppGUIController {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				if (!newValue.matches("[^\\\\&;\'\"]*")) {
-					wikitInput.setText(newValue.replaceAll("[\\\\&;\'\"]", ""));
+				if (!newValue.matches("[^\\\\&;\'\"#*()]*")) {
+					wikitInput.setText(newValue.replaceAll("[\\\\&;\'\"#*()]", ""));
 				}
 			}
 		});
@@ -384,6 +384,7 @@ public class AppGUIController {
 		wikitButton.disableProperty().unbind();
 		wikitButton.setDisable(true);
 		favButton.setDisable(true);
+		continueButton.setDisable(true);
 		Thread wikiSearchThread = new Thread(new WikitSearchTask(wikitButton, continueButton, favButton, searchTerm, wikitResult, wikitLoading, bb));
 		wikiSearchThread.start();
 

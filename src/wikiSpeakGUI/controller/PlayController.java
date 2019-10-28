@@ -41,6 +41,10 @@ public class PlayController {
 		
 	}
 	
+	/* Code adapted by Jack Chamberlain and Gurpreet Singh
+	 * Original Author: Nasser Giacaman
+	 * Source: The University of Auckland ACP SE206
+	 */
 	public void start(){
 		media= new Media(fileUrl.toURI().toString());
 		mp= new MediaPlayer(media);
@@ -81,6 +85,11 @@ public class PlayController {
 	private void backwardsPress(ActionEvent event) {
 		mp.seek( mp.getCurrentTime().add( Duration.seconds(-3)) );
 	}
+	/*
+	 * attribute ends
+	 */
+	
+	
 	
 	// pass the selected creation from the AppGUIController to the PlayController
 	public void passInfo(String nameOfCreation) {
