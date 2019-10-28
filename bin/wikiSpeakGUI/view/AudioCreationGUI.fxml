@@ -25,7 +25,7 @@
          <font>
             <Font size="22.0" />
          </font></TextArea>
-      <Button fx:id="speakButton" layoutX="314.0" layoutY="71.0" mnemonicParsing="false" onAction="#handleSpeakPress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Speak" textFill="WHITE">
+      <Button fx:id="speakButton" layoutX="314.0" layoutY="71.0" mnemonicParsing="false" onAction="#handleSpeakPress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Speak" textFill="WHITE" AnchorPane.leftAnchor="314.0" AnchorPane.rightAnchor="827.0">
          <font>
             <Font name="System Bold" size="20.0" />
          </font></Button>
@@ -49,7 +49,7 @@
          </font>
       </Button>
       <ComboBox fx:id="voiceSelect" layoutX="28.0" layoutY="72.0" prefHeight="41.0" prefWidth="273.0" />
-      <Button fx:id="previewButton" layoutX="972.0" layoutY="614.0" mnemonicParsing="false" onAction="#previewPress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Preview All" textFill="WHITE">
+      <Button fx:id="previewButton" layoutX="972.0" layoutY="614.0" mnemonicParsing="false" onAction="#previewPress" style="-fx-background-color: rgb(069,075,080); -fx-border-color: white; -fx-border-width: 2px;" text="Preview All" textFill="WHITE" AnchorPane.leftAnchor="972.0" AnchorPane.rightAnchor="112.0">
          <font>
             <Font name="System Bold" size="20.0" />
          </font></Button>
@@ -62,7 +62,7 @@
          <font>
             <Font size="22.0" />
          </font></Text>
-      <Text fill="WHITE" layoutX="28.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit:" wrappingWidth="345.7294921875">
+      <Text fill="WHITE" layoutX="28.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit / Select:" wrappingWidth="345.7294921875">
          <font>
             <Font size="22.0" />
          </font>
@@ -83,7 +83,7 @@
          </font></CheckBox>
       <AnchorPane fx:id="helpPane" layoutX="10.0" layoutY="10.0" prefHeight="769.0" prefWidth="1233.0" style="-fx-background-color: rgba(027, 031, 034, 0.47);" stylesheets="@styles.css" visible="false">
          <children>
-            <AnchorPane layoutX="106.0" layoutY="185.0" prefHeight="200.0" prefWidth="411.0" style="-fx-background-color: rgba(000,000,000, 0.58); -fx-background-radius: 60px;" />
+            <AnchorPane layoutX="106.0" layoutY="185.0" prefHeight="263.0" prefWidth="411.0" style="-fx-background-color: rgba(000,000,000, 0.58); -fx-background-radius: 60px;" />
             <AnchorPane layoutX="14.0" layoutY="611.0" prefHeight="61.0" prefWidth="210.0" style="-fx-background-color: rgba(000,000,000, 0.58); -fx-background-radius: 60px;" />
             <AnchorPane layoutX="176.0" layoutY="677.0" prefHeight="75.0" prefWidth="459.0" style="-fx-background-color: rgba(000,000,000, 0.58); -fx-background-radius: 60px;" />
             <AnchorPane layoutX="284.0" layoutY="566.0" prefHeight="75.0" prefWidth="373.0" style="-fx-background-color: rgba(000,000,000, 0.58); -fx-background-radius: 60px;">
@@ -112,7 +112,7 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <Text fill="WHITE" layoutX="119.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Highlight text to hear or add to creation (less than 40 words at a time)" textAlignment="CENTER" wrappingWidth="392.36468505859375">
+            <Text fill="WHITE" layoutX="119.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Highlight text to hear or add to creation (less than 40 words at a time). You may also edit the text displayed here." textAlignment="CENTER" wrappingWidth="392.36468505859375">
                <font>
                   <Font size="26.0" />
                </font>
