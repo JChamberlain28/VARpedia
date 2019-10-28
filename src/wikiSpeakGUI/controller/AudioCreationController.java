@@ -34,7 +34,7 @@ public class AudioCreationController {
 	private static String savedText;
 	private SceneSwitcher ss = new SceneSwitcher();
 	private int count=savedAudio.size();
-	private Thread _getTermImages = null;
+
 
 
 
@@ -81,8 +81,8 @@ public class AudioCreationController {
 
 	@FXML
 	private ImageView combineAudioLoading;
-	private static Boolean downloadInProgress;
-	private Thread getTermImages;
+
+	private Thread _getImagesThread;
 	private CommandFactory speakCmd= new CommandFactory();
 
 	@FXML
@@ -147,11 +147,13 @@ public class AudioCreationController {
 		// stop method deprecated,
 		// however have not found effective alternative for halting image download
 		// without throwing unwanted file not found exception.
-		if(downloadInProgress) {
-			if (getTermImages != null) {
-				getTermImages.stop();
-			}
+
+		if (_getImagesThread != null) {
+			if(_getImagesThread.isAlive()) {
+				_getImagesThread.stop();
 		}
+		}
+
 		// if speech playback is happening, stop its process
 		if ((speakButton.getText().equals("Stop")) || (previewButton.getText().equals("Stop"))) {
 			speakCmd.killCurrentProcess();
@@ -221,12 +223,12 @@ public class AudioCreationController {
 				}
 				
 				nextButton.setDisable(false);
-				downloadInProgress=false;
+
 				Platform.runLater(() -> {
 					combineAudioLoading.setVisible(false);
 					//changes scene when audio finished generating
 					VideoCreationController videoCreationController = (VideoCreationController)ss.newScene("VideoCreationGUI.fxml", event);
-					videoCreationController.passInfo(_wikitTerm, _tempDir, audioGenResult, _getTermImages);
+					videoCreationController.passInfo(_wikitTerm, _tempDir, audioGenResult, _getImagesThread);
 				});
 
 			});
@@ -469,7 +471,7 @@ public class AudioCreationController {
 		audioSentences.clear();
 		savedAudio.clear();
 		count=0;
-		downloadInProgress=true;
+
 		
 		previewButton.setDisable(true);
 		nextButton.setDisable(true);
@@ -478,8 +480,10 @@ public class AudioCreationController {
 		downButton.setDisable(true);
 		
 		// start downloading images for creation in background
-		_getTermImages = new Thread(new GetImagesTask(_wikitTerm, _tempDir));
-		_getTermImages.start();
+		//if (cancelClicked) {
+			_getImagesThread = new Thread(new GetImagesTask(_wikitTerm, _tempDir));
+			_getImagesThread.start();
+		//}
 	}
 	
 	private void alert(String title, String header, String content) {
