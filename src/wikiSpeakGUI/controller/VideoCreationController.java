@@ -4,20 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javafx.beans.Observable;
-import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -81,8 +74,7 @@ public class VideoCreationController {
 
 
 
-	/*
-
+	/**
 	 *
 	 *@return void
 	 * 
@@ -138,8 +130,7 @@ public class VideoCreationController {
 	}
 
 	
-	/*
-
+	/**
 	 *@param wikitTerm  - searched wikipedia term (String)
 	 *@param tempDir  - temp creation directory (String)
 	 *@param audioGenResult  - used in GenerateVideoTask instantiated in this class (List<String>)
@@ -158,35 +149,37 @@ public class VideoCreationController {
 		runTasksWaitingOnInfo();
 	}
 
-
-	/*
+	/**
 	 * This method handler shows the help view
+	 * @param event
 	 */
 	@FXML
 	private void handleHelpButton(ActionEvent event) {
 		helpView.setVisible(true);
 	}
 
-	/*
+	/**
 	 * This method handler hides the help view
+	 * @param event
 	 */
 	@FXML
 	private void handleHelpExitButton(ActionEvent event) {
 		helpView.setVisible(false);
 	}
 
-
-	/*
+	/**
 	 * This method handler switches back to the audio selection screen
+	 * @param event
 	 */
 	@FXML
 	private void handleBackButton(ActionEvent event) {
 		ss.newScene("AudioCreationGUI.fxml", event);
 	}
 
-	/*
+	/**
 	 * This method checks for an existing creation with the same name, before
 	 * proceeding to create a GenerateVideo task that creates the creation
+	 * @param event
 	 */
 	@FXML
 	private void handleSubmitCreation(ActionEvent event) {

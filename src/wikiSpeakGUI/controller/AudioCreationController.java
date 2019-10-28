@@ -34,10 +34,8 @@ public class AudioCreationController {
 	private static String savedText;
 	private SceneSwitcher ss = new SceneSwitcher();
 	private int count=savedAudio.size();
-
-
-
-
+	private Thread _getImagesThread;
+	private CommandFactory speakCmd= new CommandFactory();
 
 	@FXML
 	private Button cancelButton;
@@ -56,7 +54,6 @@ public class AudioCreationController {
 
 	@FXML
 	private TextArea numberedTextArea;
-
 
 	@FXML
 	private Button speakButton;
@@ -82,12 +79,14 @@ public class AudioCreationController {
 	@FXML
 	private ImageView combineAudioLoading;
 
-	private Thread _getImagesThread;
-	private CommandFactory speakCmd= new CommandFactory();
-
+	
+	/**
+	 * This method is called when the scene switches to Audio creation, it formats all the 
+	 * GUI components and disables/enables some buttons, it also loads the prrevious chnages if
+	 * backed from video creation
+	 */
 	@FXML
 	private void initialize() {
-
 
 		//formats the TextArea
 		combineAudioLoading.setVisible(false);
@@ -119,8 +118,13 @@ public class AudioCreationController {
 
 
 
-	// Allows other AppGUIController to pass info to this controller
-	// and display the text in the create scene.
+	/**
+	 * Allows other AppGUIController to pass info to this controller
+	 * and display the text in the create scene.
+	 * @param numberedText
+	 * @param tempDir
+	 * @param wikitTerm
+	 */
 	public void passInfo(String numberedText, String tempDir, String wikitTerm) {
 		_numberedText = numberedText;
 		_tempDir = tempDir;
@@ -130,16 +134,30 @@ public class AudioCreationController {
 
 	}
 
+	/**
+	 * Displays the instructions on screen when help button is pressed
+	 * @param event
+	 */
 	@FXML
 	private void handleHelpButton(ActionEvent event) {
 		helpPane.setVisible(true);
 	}
 
+	/**
+	 * Removes the instructions on screen when the Exit button is pressed
+	 * @param event
+	 */
 	@FXML
 	private void handleHelpExitButton(ActionEvent event) {
 		helpPane.setVisible(false);
 	}
 
+	/**
+	 * Kills every active thread in the audio creation, removes the temporary folder
+	 * and switches the scene back to the main menu when the back button is pressed
+	 * @param event
+	 */
+	@SuppressWarnings("deprecation")
 	@FXML
 	// Changes scene to main scene
 	private void handleBackToMainView(ActionEvent event) {
@@ -167,7 +185,12 @@ public class AudioCreationController {
 	}
 
 
-
+	/**
+	 * When next button pressed, Combines all the audio files that the user has selected into a single audio file and
+	 * if music selected, creates a music file of the same length of and combines it with the
+	 * audio file. Passes on the length and the search term to the creation controller 
+	 * @param event
+	 */
 	@FXML
 	private void handleNextButton(ActionEvent event) {
 		combineAudioLoading.setVisible(true);
@@ -195,14 +218,16 @@ public class AudioCreationController {
 			Thread create = new Thread(() -> {
 				nextButton.setDisable(true);
 
+				//Combines all the selected audio files into one audio file
 				command.sendCommand("rm " +_tempDir + "/audio.wav" , false);
-
 				command.sendCommand(cmd , false);
 				command.sendCommand("echo \""+savedText+"\" > "+_tempDir+"/description.txt" , false);
 				audioGenResult = command.sendCommand("echo $(soxi -D "+_tempDir+"/audio.wav)" , false);
+				
 				if (music.isSelected()) {
 					double length=Double.valueOf(command.sendCommand("echo $(soxi -D BackgroundTrack0.wav)" , false).get(0));
 					int counter=0;
+					// creates a music file of the same length as the audio file
 					while (Double.valueOf(audioGenResult.get(0))>length) {
 						command.sendCommand("sox BackgroundTrack"+counter+".wav BackgroundTrack"+counter+".wav BackgroundTrack"+(counter+1)+".wav", false);
 						if(counter != 0){
@@ -215,6 +240,7 @@ public class AudioCreationController {
 					if(counter != 0){
 						command.sendCommand("rm BackgroundTrack"+counter+".wav" , false);
 					}
+					//combines the music and the audio files together and increases the volume of the audio
 					command.sendCommand("sox -M " + _tempDir + "/finalMusic.wav " +_tempDir + "/audio.wav " +_tempDir +"/withMusic.wav", false);
 					command.sendCommand("rm "+ _tempDir +"/finalMusic.wav" , false);
 					command.sendCommand("sox "+_tempDir + "/withMusic.wav -c 1 "+_tempDir + "/audioLow.wav ", false);
@@ -240,6 +266,12 @@ public class AudioCreationController {
 	}
 
 
+	/**
+	 * when the speak button pressed, this method creates a temporary audio file from the 
+	 * highlighted text and plays it. If the speak button is pressed while the audio 
+	 * is still playing then it stops it 
+	 * @param event
+	 */
 	@FXML
 	private void handleSpeakPress(ActionEvent event) { 
 		if(speakButton.getText().equals("Speak")) {
@@ -265,7 +297,6 @@ public class AudioCreationController {
 					nextButton.setDisable(true);
 					cancelButton.setDisable(true);
 
-
 					command.sendCommand(cmd , false);
 					//error handling in case selected text is not able to generate audio
 					List<String> fileCreateCheck = command.sendCommand("text2wave -o "+ _tempDir +"/speakAudio.wav selectedText.txt " + voice 
@@ -282,27 +313,26 @@ public class AudioCreationController {
 							cancelButton.setDisable(false);
 							speakButton.setText("Stop");
 						});
+						//plays the audio file using bash command
 						speakCmd.sendCommand("aplay "+ _tempDir +"/speakAudio.wav" , false);
 					}
+					//removes the file after finished playing
 					speakCmd.sendCommand("rm " + _tempDir +"/speakAudio.wav" , false);
 					speakCmd.sendCommand("rm selectedText.txt" , false);
 					Platform.runLater(()-> {
 						speakButton.setText("Speak");
 					});
 
-
-
 					if (selectedAudio.getItems().size() > 0) {
 						previewButton.setDisable(false);
 						nextButton.setDisable(false);
 					}
-
-
 				});
 				speak.setDaemon(true);
 				speak.start();
 			}
 		}else {
+			//stops the audio if it is playing
 			speakCmd.killCurrentProcess();
 			speakButton.setText("Speak");
 		}
@@ -310,6 +340,11 @@ public class AudioCreationController {
 
 	}
 
+	/**
+	 * When the add button is pressed this method generates an audio file from the selected text and stores it in
+	 * a temporary folder and also adds the selected text to the list view 
+	 * @param event
+	 */
 	@FXML
 	private void handleAddPress(ActionEvent event) { 
 		String selected = numberedTextArea.getSelectedText();
@@ -334,12 +369,14 @@ public class AudioCreationController {
 			count++;
 			String cmd = "echo \"" + selected + "\" > selectedText.txt";
 			String sel = selected;
+			//gets the selected voice
 			String voice = getVoice();
 			CommandFactory command = new CommandFactory();
 			//creates audio file of selected text in separate thread
 			Thread add = new Thread(() -> {
 				addButton.setDisable(true);
 
+				//creates an audio file and checks if file made successfully
 				command.sendCommand(cmd , false);
 				List<String> fileCreateCheck = command.sendCommand("text2wave -o " + _tempDir + "/" + name + ".wav selectedText.txt " 
 						+ voice + " && " + "file " + _tempDir +"/"+ name + ".wav" ,false);
@@ -349,6 +386,7 @@ public class AudioCreationController {
 					if(fileCreateCheck.get(0).equals(_tempDir + "/" + name+".wav: empty")) {
 						alert("Voice Error", "Voice cannot pronounce the selected text", "Please try another voice or text selection");
 					}else {
+						//adds selected text to list view and enables all buttons
 						selectedAudio.getItems().add(sel);
 						selectedAudio.getSelectionModel().selectFirst();
 						previewButton.setDisable(false);
@@ -358,7 +396,7 @@ public class AudioCreationController {
 						downButton.setDisable(false);
 					}
 				});
-
+				//removes unnecessary file
 				command.sendCommand("rm selectedText.txt" , false);
 				addButton.setDisable(false);
 
@@ -368,11 +406,16 @@ public class AudioCreationController {
 		}
 	}
 
+	/**
+	 * removes the selected text from the list view when delete button pressed 
+	 * @param event
+	 */
 	@FXML
 	private void handleDelPress(ActionEvent event) { 
 		//removes selected audio from the audio list
 		String sel=selectedAudio.getSelectionModel().getSelectedItem();
 		selectedAudio.getItems().remove(sel);
+		//Disables buttons if the deleted text was the only text in the list view
 		if(selectedAudio.getItems().isEmpty()) {
 			previewButton.setDisable(true);
 			nextButton.setDisable(true);
@@ -382,6 +425,11 @@ public class AudioCreationController {
 		}
 	}
 
+	/**
+	 * Moves the selected item in the list view up by swapping its position with the item above it
+	 * when the up button pressed
+	 * @param event
+	 */
 	@FXML
 	private void upPress(ActionEvent event) { 
 		int order = selectedAudio.getSelectionModel().getSelectedIndex();
@@ -397,6 +445,11 @@ public class AudioCreationController {
 
 	}
 
+	/**
+	 * Moves the selected item in the list view down by swapping its position with the item below it
+	 * when the down button pressed
+	 * @param event
+	 */
 	@FXML
 	private void downPress(ActionEvent event){ 
 		int order = selectedAudio.getSelectionModel().getSelectedIndex();
@@ -411,6 +464,11 @@ public class AudioCreationController {
 		}
 	}
 
+	/**
+	 * Goes through the list view and plays the audio associated with each of the items in the list view 
+	 * in order when preview button pressed, if button pressed while audio is playing then stops the audio
+	 * @param event
+	 */
 	@FXML
 	private void previewPress(ActionEvent event){ 
 
@@ -429,6 +487,7 @@ public class AudioCreationController {
 				//loops through all audio files and plays them
 				for(int i=0; i<selectedAudio.getItems().size();i++) {
 					String cmd = "aplay "+ _tempDir + "/audio" + audioSentences.indexOf(selectedAudio.getItems().get(i)) + ".wav";
+					//disable buttons while playing
 					Platform.runLater(() -> {
 						previewButton.setDisable(false);
 						cancelButton.setDisable(false);
@@ -441,7 +500,7 @@ public class AudioCreationController {
 					previewButton.setText("Preview All");
 				});
 
-				//enable buttons 
+				//enable buttons after audio has finished
 				speakButton.setDisable(false);
 				addButton.setDisable(false);
 				nextButton.setDisable(false);
@@ -452,6 +511,7 @@ public class AudioCreationController {
 			preview.setDaemon(true);
 			preview.start();
 		}else {
+			//stops the audio if playing
 			speakCmd.killCurrentProcess();
 			previewButton.setText("Preview All");
 
@@ -459,6 +519,11 @@ public class AudioCreationController {
 
 	}
 
+	/**
+	 * Method that just returns the command to change the voice 
+	 * to the one selected in the drop down box
+	 * @return
+	 */
 	private String getVoice() {
 		//gets the voice selected and returns the code for that voice
 		String selected = voiceSelect.getSelectionModel().getSelectedItem();
@@ -471,16 +536,19 @@ public class AudioCreationController {
 
 
 
-	// calls code dependent on variables set in passInfo. Therefore run
-	// once these variables are available.
+	/**
+	 * calls code dependent on variables set in passInfo. Therefore run
+	 * once these variables are available.
+	 */
 	private void passInfoDependents() {
+		//clears all saved info when new creation is being created
 		numberedTextArea.setText(_numberedText);
 		selectedAudio.getItems().clear();
 		audioSentences.clear();
 		savedAudio.clear();
 		count=0;
 
-
+		//disables buttons 
 		previewButton.setDisable(true);
 		nextButton.setDisable(true);
 		delButton.setDisable(true);
@@ -494,7 +562,15 @@ public class AudioCreationController {
 		//}
 	}
 
+	/**
+	 * method that is used to make a alert window appear, used to notify the
+	 * user when illegal inputs selected
+	 * @param title
+	 * @param header
+	 * @param content
+	 */
 	private void alert(String title, String header, String content) {
+		//creates a new Alert object and sets all the values
 		Alert popup = new Alert(AlertType.INFORMATION);
 		popup.setTitle(title);
 		popup.setHeaderText(header);
@@ -504,17 +580,14 @@ public class AudioCreationController {
 	}
 
 
-
-
-
-
-	// helper function to change alert font size. ((repeated in each class that uses alerts, this comment is
-	// also repeated to ensure it is seen)
-	// repetition required as it did not make sense for all controllers to extend a class containing it.
-	// It also didn't make sense to have a separate class just for this function
+	/**
+	 * helper function to change alert font size. ((repeated in each class that uses alerts, this comment is
+	 * also repeated to ensure it is seen)
+	 * repetition required as it did not make sense for all controllers to extend a class containing it.
+	 * It also didn't make sense to have a separate class just for this function
+	 * @param popup
+	 */
 	public void setBigFont(Alert popup) {
-
-
 		/* Code adapted by Jack Chamberlain
 		 * Original Author: José Pereda
 		 * Source: https://stackoverflow.com/questions/28417140/styling-default-javafx-dialogs/28421229#28421229
@@ -526,8 +599,6 @@ public class AudioCreationController {
 		/*
 		 * attribute ends
 		 */
-
-
 	}
 
 }

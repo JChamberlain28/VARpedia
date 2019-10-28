@@ -41,7 +41,8 @@ public class PlayController {
 
 	}
 
-	/* Code adapted by Jack Chamberlain and Gurpreet Singh
+	/**
+	 * Code adapted by Jack Chamberlain and Gurpreet Singh
 	 * Original Author: Nasser Giacaman
 	 * Source: The University of Auckland ACP SE206
 	 */

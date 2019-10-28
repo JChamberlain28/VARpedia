@@ -21,7 +21,7 @@ public class Main extends Application{
 
 	static String _jarDir;
 
-	/*
+	/**
 	 *@param args  - arguments that the JVM can pass in (String[])
 	 *
 	 *@return void

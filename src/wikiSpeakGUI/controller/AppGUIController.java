@@ -133,11 +133,7 @@ public class AppGUIController {
 
 
 
-	/*
-
-	 *
-	 *@return void
-	 * 
+	/**
 	 * This method initialises GUI elements by setting their css style and states.
 	 * It sets custom row / cell factories required for the Table View.
 	 * It also initialises a boolean binding for the wiki search box and edits the sorting behaviour
@@ -275,11 +271,10 @@ public class AppGUIController {
 
 	// event handling
 
-
-
-	/*
+	/**
 	 * This event handler allows user to change the sort order of creations via a
 	 * ComboBox that triggers it. It switches the sorting order of the TableView
+	 * @param event
 	 */
 	@FXML
 	public void sortByChange(Event event) {
@@ -296,12 +291,9 @@ public class AppGUIController {
 		}
 	}
 
-
-
-
-
-	/*
+	/**
 	 * This event handler sets TableView to default selection when triggered (first item)
+	 * @param event
 	 */
 	@FXML
 	private void creationListDefaultSelect(Event event) {
@@ -310,12 +302,10 @@ public class AppGUIController {
 	}
 
 
-
-
-
-	/*
+	/**
 	 * This event handler creates required text file for storing wiki output, adds the search term
 	 * to favorites if required and switches to the audio selection scene.
+	 * @param event
 	 */
 	@FXML
 	private void handleContinueButton(ActionEvent event) {
@@ -362,12 +352,10 @@ public class AppGUIController {
 	}
 
 
-
-
-
-	/*
+	/**
 	 * This event handler is triggered upon clicking the "Search from Favorites" button.
 	 * It shows the favorites window.
+	 * @param event
 	 */
 	@FXML
 	private void handleFavSearch(ActionEvent event) { 
@@ -391,22 +379,19 @@ public class AppGUIController {
 	}
 
 
-	/*
-	 * @param search  - search term from favorites to search wikipedia for (String)
-	 * 
-	 * @return void
-	 * 
+	/**
 	 * This method is called from favorites screen to search the selected favorites term
+	 * @param search  - search term from favorites to search wikipedia for (String)
 	 */
 	public void Search(String search) { 
 		wikitInput.setText(search);
 		wikitButton.fire();
 	}
 
-	
-	/*
+	/**
 	 * This event handler initiates the wikit search thread and disables buttons that would
 	 * cause faults during the process (such as continue button)
+	 * @param event
 	 */
 	@FXML
 	private void handleWikiSearch(ActionEvent event) { 
@@ -422,10 +407,11 @@ public class AppGUIController {
 
 	}
 
-	/*
+	/**
 	 * This event handler checks if a creation is generating before proceeding.
 	 * It switches to the media player scene for playing the selected creation.
 	 * It also records the date at the time it was clicked as the last viewed date.
+	 * @param event
 	 */
 	@FXML
 	private void handlePlayButton(Event event) {
@@ -461,13 +447,11 @@ public class AppGUIController {
 
 	}
 
-
-
-
-	/*
+	/**
 	 * This handler checks a creation is not generating before proceeding.
 	 * It then asks the user to confirm the deletion and then deletes the selected creation
 	 * if confirmation is given.
+	 * @param event
 	 */
 	@FXML
 	private void handleDeleteButton(Event event) { 

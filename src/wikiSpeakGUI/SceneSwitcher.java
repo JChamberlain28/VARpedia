@@ -17,7 +17,7 @@ public class SceneSwitcher {
 	}
 
 
-	/*
+	/**
 	 *@param FXML  - name of fxml file to load as a JavaFX scene (String)
 	 *@param Event  - event that is responsible for switching scenes
 	 *
