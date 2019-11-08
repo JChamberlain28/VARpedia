@@ -1,4 +1,4 @@
-# VARpedia-JavaFX-Group42
+# SE206A4
 This project is a collaboration between JChamberlain28 and gsin387. It is a continuation of "SE206A3" which is in turn a continuation of "Wiki-Speak-JavaFX-GUI".
 
 VARpedia is a JavaFX program that aids the creation of video about a specified Wikipedia term.
