@@ -1,5 +1,6 @@
 # VARpedia-JavaFX-Group42
-This project is a collaboration between JChamberlain28 and gsin387.
+This project is a collaboration between JChamberlain28 and gsin387. It is a continuation of "SE206A3" which is in turn a continuation of "Wiki-Speak-JavaFX-GUI".
+
 VARpedia is a JavaFX program that aids the creation of video about a specified Wikipedia term.
 The video contains the term name, a slideshow of images and computer generated audio speaking about it (using Festival).
 This program was created for the target audience of elderly users. It features a dark, high contrast theme with large elements. 
